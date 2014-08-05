@@ -87,7 +87,7 @@ public class cadfuncionarioframe extends javax.swing.JFrame {
 
         jLabel2.setText("Nome :");
 
-        jLabel3.setText("CPF/CNPJ :");
+        jLabel3.setText("CPF :");
 
         jLabel4.setText("Rua :");
 
