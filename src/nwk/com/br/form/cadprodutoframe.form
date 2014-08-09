@@ -90,31 +90,31 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="codproCadProduto" min="-2" pref="157" max="-2" attributes="0"/>
+                              <Component id="jFieldcodproCadProduto" min="-2" pref="157" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="codfabCadProduto" pref="76" max="32767" attributes="0"/>
+                              <Component id="jFieldcodfabCadProduto" pref="76" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="descCadProduto" max="32767" attributes="0"/>
+                          <Component id="jFielddescCadProduto" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="porcenCadProduto" alignment="0" pref="201" max="32767" attributes="0"/>
-                                  <Component id="vlcompCadProduto" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="similarCadProduto" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldporcenCadProduto" alignment="0" pref="201" max="32767" attributes="0"/>
+                                  <Component id="jFieldvlcompCadProduto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldsimilarCadProduto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldjTextField4" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="familiaCadProduto" max="32767" attributes="0"/>
+                                      <Component id="jFieldfamiliaCadProduto" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="dtCadProduto" max="32767" attributes="0"/>
+                                      <Component id="jFielddtCadProduto" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -129,40 +129,40 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="codproCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldcodproCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="codfabCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldcodfabCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="descCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFielddescCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldjTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="familiaCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldfamiliaCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="similarCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldsimilarCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dtCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFielddtCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="vlcompCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldvlcompCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="porcenCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldporcenCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
@@ -205,38 +205,38 @@
                 <Property name="text" type="java.lang.String" value="Porcentagem :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="codproCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldcodproCadProduto">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Codigo Produto Pelo Fabricante :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="codfabCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldcodfabCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="descCadProduto">
+            <Component class="javax.swing.JTextField" name="jFielddescCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
+            <Component class="javax.swing.JTextField" name="jFieldjTextField4">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Familia :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="familiaCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldfamiliaCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="similarCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldsimilarCadProduto">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data de Cadastro :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="dtCadProduto">
+            <Component class="javax.swing.JTextField" name="jFielddtCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="vlcompCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldvlcompCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="porcenCadProduto">
+            <Component class="javax.swing.JTextField" name="jFieldporcenCadProduto">
             </Component>
           </SubComponents>
         </Container>
