@@ -50,6 +50,7 @@ public class cadprodutoframe extends javax.swing.JFrame {
         jFielddtCadProduto = new javax.swing.JTextField();
         jFieldvlcompCadProduto = new javax.swing.JTextField();
         jFieldporcenCadProduto = new javax.swing.JTextField();
+        jFieldvlvendaCadProduto = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -76,6 +77,12 @@ public class cadprodutoframe extends javax.swing.JFrame {
 
         jLabel8.setText("Codigo Produto Pelo Fabricante :");
 
+        jFieldcodfabCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFieldcodfabCadProdutoActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Familia :");
 
         jLabel10.setText("Data de Cadastro :");
@@ -97,14 +104,16 @@ public class cadprodutoframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jFieldcodproCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jFieldcodproCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFieldcodfabCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+                        .addComponent(jFieldcodfabCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                        .addGap(107, 107, 107))
                     .addComponent(jFielddescCadProduto)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jFieldvlvendaCadProduto, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFieldporcenCadProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                             .addComponent(jFieldvlcompCadProduto, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFieldsimilarCadProduto, javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +160,9 @@ public class cadprodutoframe extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jFieldvlcompCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jFieldvlvendaCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -176,7 +187,7 @@ public class cadprodutoframe extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Obs", jPanel2);
@@ -211,6 +222,10 @@ public class cadprodutoframe extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jFieldcodfabCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldcodfabCadProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFieldcodfabCadProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +274,7 @@ public class cadprodutoframe extends javax.swing.JFrame {
     private javax.swing.JTextField jFieldporcenCadProduto;
     private javax.swing.JTextField jFieldsimilarCadProduto;
     private javax.swing.JTextField jFieldvlcompCadProduto;
+    private javax.swing.JTextField jFieldvlvendaCadProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

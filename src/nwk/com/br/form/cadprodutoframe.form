@@ -90,15 +90,17 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jFieldcodproCadProduto" min="-2" pref="157" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jFieldcodproCadProduto" min="-2" pref="58" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jFieldcodfabCadProduto" pref="76" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jFielddescCadProduto" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jFieldvlvendaCadProduto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jFieldporcenCadProduto" alignment="0" pref="201" max="32767" attributes="0"/>
                                   <Component id="jFieldvlcompCadProduto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jFieldsimilarCadProduto" alignment="0" max="32767" attributes="0"/>
@@ -158,7 +160,10 @@
                           <Component id="jFieldvlcompCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldvlvendaCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -213,6 +218,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jFieldcodfabCadProduto">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFieldcodfabCadProdutoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jFielddescCadProduto">
             </Component>
@@ -237,6 +245,8 @@
             <Component class="javax.swing.JTextField" name="jFieldvlcompCadProduto">
             </Component>
             <Component class="javax.swing.JTextField" name="jFieldporcenCadProduto">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldvlvendaCadProduto">
             </Component>
           </SubComponents>
         </Container>
@@ -265,7 +275,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="232" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="238" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
