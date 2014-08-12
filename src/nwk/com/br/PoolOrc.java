@@ -6,7 +6,7 @@
 
 package nwk.com.br;
 
-import nwk.com.br.model.mainframe;
+import nwk.com.br.form.mainframe;
 
 /**
  *
