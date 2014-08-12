@@ -322,6 +322,11 @@ public class cadclienteframe extends javax.swing.JFrame {
         jButton2.setText("SALVAR");
 
         jButton1.setText("CANCELAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -365,6 +370,10 @@ public class cadclienteframe extends javax.swing.JFrame {
     private void jFieldemailCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldemailCadClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldemailCadClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

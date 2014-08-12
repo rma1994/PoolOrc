@@ -56,6 +56,7 @@ public class mainframe extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PoolOrc");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
 
@@ -254,24 +255,28 @@ public class mainframe extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
         funcionarioframe.setVisible(true);
+        funcionarioframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cadclienteframe clienteframe = new cadclienteframe();
         clienteframe.setVisible(true);
+        clienteframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         cadorcamentoframe orcamenteframe = new cadorcamentoframe();
         orcamenteframe.setVisible(true);
+        orcamenteframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         cadprodutoframe produtoframe = new cadprodutoframe();
         produtoframe.setVisible(true);
+        produtoframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

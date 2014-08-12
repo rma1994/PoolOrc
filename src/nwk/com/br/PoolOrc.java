@@ -20,6 +20,7 @@ public class PoolOrc {
     public static void main(String[] args) {
         mainframe frame = new mainframe();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
     
 }

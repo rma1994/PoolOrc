@@ -77,6 +77,7 @@ public class cadfuncionarioframe extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Funcionarios");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Funcionario"));
 

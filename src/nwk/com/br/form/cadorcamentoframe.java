@@ -69,6 +69,7 @@ public class cadorcamentoframe extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Orçamento");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Orçamento"));
 
