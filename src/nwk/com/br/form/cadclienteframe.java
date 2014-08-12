@@ -6,12 +6,17 @@
 
 package nwk.com.br.form;
 
+import nwk.com.br.dao.ClienteDAO;
+import nwk.com.br.model.Cliente;
+import nwk.com.br.enums.StatusRepository;
 /**
  *
  * @author RMA
  */
 public class cadclienteframe extends javax.swing.JFrame {
-
+    
+    Cliente cliente = new Cliente();
+    ClienteDAO clienteDAO = new ClienteDAO();
     /**
      * Creates new form cadclienteframe
      */
@@ -49,8 +54,8 @@ public class cadclienteframe extends javax.swing.JFrame {
         jFieldcepCadCliente = new javax.swing.JTextField();
         jFieldtelCadCliente = new javax.swing.JTextField();
         jFieldemailCadCliente = new javax.swing.JTextField();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButtonFisica = new javax.swing.JRadioButton();
+        jRadioButtonJuridica = new javax.swing.JRadioButton();
         jComboBox1ClienteAtivo = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jFieldnumeroCadCliente = new javax.swing.JTextField();
@@ -59,7 +64,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jFieldcidadeCadCliente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxEstado = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
         jFieldcelCadCliente = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -68,7 +73,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jFieldobsCadCliente = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        jButtonSalvarCliente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,11 +114,16 @@ public class cadclienteframe extends javax.swing.JFrame {
             }
         });
 
-        fisico_juridico.add(jRadioButton3);
-        jRadioButton3.setText("Fisica");
+        fisico_juridico.add(jRadioButtonFisica);
+        jRadioButtonFisica.setText("Fisica");
+        jRadioButtonFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFisicaActionPerformed(evt);
+            }
+        });
 
-        fisico_juridico.add(jRadioButton4);
-        jRadioButton4.setText("Juridica");
+        fisico_juridico.add(jRadioButtonJuridica);
+        jRadioButtonJuridica.setText("Juridica");
 
         jComboBox1ClienteAtivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATIVO", "INATIVO" }));
         jComboBox1ClienteAtivo.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +140,12 @@ public class cadclienteframe extends javax.swing.JFrame {
 
         jLabel14.setText("Estado :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jComboBoxEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEstadoActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Celular :");
 
@@ -173,7 +188,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -182,9 +197,9 @@ public class cadclienteframe extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton3)
+                                .addComponent(jRadioButtonFisica)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton4)
+                                .addComponent(jRadioButtonJuridica)
                                 .addGap(53, 53, 53)
                                 .addComponent(jLabel17)
                                 .addGap(18, 18, 18)
@@ -220,8 +235,8 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jFieldidCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButtonFisica)
+                    .addComponent(jRadioButtonJuridica)
                     .addComponent(jComboBox1ClienteAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
@@ -250,7 +265,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jFieldcidadeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -319,7 +334,12 @@ public class cadclienteframe extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Obs", jPanel2);
 
-        jButton2.setText("SALVAR");
+        jButtonSalvarCliente.setText("SALVAR");
+        jButtonSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarClienteActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("CANCELAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +357,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButtonSalvarCliente)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -347,7 +367,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonSalvarCliente)
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -374,6 +394,41 @@ public class cadclienteframe extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonFisicaActionPerformed
+
+    private void jButtonSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteActionPerformed
+        // TODO add your handling code here:
+        
+        if(jRadioButtonFisica.isSelected()){
+            cliente.setTipoCliente("Fisica");
+        }else if(jRadioButtonJuridica.isSelected()){
+            cliente.setTipoCliente("Juridica");
+        };
+        
+        cliente.setNome(jFieldnomeCadCliente.getText());
+        cliente.setCpf_cnpj(jFieldcnpjcpfCadCliente.getText());
+        cliente.setRua(jFieldruaCadCliente.getText());
+        cliente.setBairro(jFieldbairroCadCliente.getText());
+        cliente.setNumero(jFieldnumeroCadCliente.getText());
+        cliente.setComplemento(jFieldcomplemCadCliente.getText());
+        cliente.setCep(jFieldcepCadCliente.getText());
+        cliente.setCidade(jFieldcidadeCadCliente.getText());
+        cliente.setEstado(jComboBoxEstado.getSelectedItem().toString());
+        cliente.setTelefone(jFieldtelCadCliente.getText());
+        cliente.setCelular(jFieldcelCadCliente.getText());
+        cliente.setEmail(jFieldemailCadCliente.getText());
+        cliente.setStatus(StatusRepository.valueOf(jComboBox1ClienteAtivo.getSelectedItem().toString()));
+        cliente.setObservacoes(jFieldobsCadCliente.getText());
+        
+        clienteDAO.inserir(cliente);
+    }//GEN-LAST:event_jButtonSalvarClienteActionPerformed
+
+    private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,9 +468,9 @@ public class cadclienteframe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup fisico_juridico;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButtonSalvarCliente;
     private javax.swing.JComboBox jComboBox1ClienteAtivo;
+    private javax.swing.JComboBox jComboBoxEstado;
     private javax.swing.JTextField jFieldbairroCadCliente;
     private javax.swing.JTextField jFieldcelCadCliente;
     private javax.swing.JTextField jFieldcepCadCliente;
@@ -448,8 +503,8 @@ public class cadclienteframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButtonFisica;
+    private javax.swing.JRadioButton jRadioButtonJuridica;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.ButtonGroup sexo;
