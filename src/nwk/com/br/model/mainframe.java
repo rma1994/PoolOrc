@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package nwk.com.br.form;
+package nwk.com.br.model;
 
 
 /**
