@@ -341,7 +341,11 @@ public class mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        // TODO add your handling code here:
+        consultaframe cconsultaframe = new consultaframe();
+        cconsultaframe.setVisible(true);
+        cconsultaframe.setLocationRelativeTo(null);
+        
+// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -365,6 +369,9 @@ public class mainframe extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        consultaframe cconsultaframe = new consultaframe();
+        cconsultaframe.setVisible(true);
+        cconsultaframe.setLocationRelativeTo(null);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
