@@ -29,7 +29,23 @@ public class Cliente {
     private String celular;
     private String email;
     private String observacoes;
+    
+    private String mensagemerroCliente = new String("Campos em branco: \n");
+    private boolean valida = true;
 
+    public void setMensagemerroCliente(String mensagemerroCliente) {
+        this.mensagemerroCliente = mensagemerroCliente;
+    }
+
+    public String getMensagemerroCliente() {
+        return mensagemerroCliente;
+    }
+
+    public boolean isValida() {
+        return valida;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -43,7 +59,12 @@ public class Cliente {
     }
 
     public void setTipoCliente(String tipoCliente) {
+        if(tipoCliente.equals("") || tipoCliente.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Tipo Cliente\n";
+        } else {
         this.tipoCliente = tipoCliente;
+        }
     }
 
     public StatusRepository getStatus() {
@@ -59,7 +80,12 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
+        if(nome.equals("") || nome.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Nome\n";
+        } else {
         this.nome = nome;
+        }
     }
 
     public String getCpf_cnpj() {
@@ -67,7 +93,12 @@ public class Cliente {
     }
 
     public void setCpf_cnpj(String cpf_cnpj) {
+        if(cpf_cnpj.equals("") || cpf_cnpj.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"CPF/CNPJ\n";
+        } else {
         this.cpf_cnpj = cpf_cnpj;
+        }
     }
 
     public String getRua() {
@@ -75,7 +106,12 @@ public class Cliente {
     }
 
     public void setRua(String rua) {
+        if(rua.equals("") || rua.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Rua\n";
+        } else {
         this.rua = rua;
+        }
     }
 
     public String getNumero() {
@@ -83,7 +119,12 @@ public class Cliente {
     }
 
     public void setNumero(String numero) {
+        if(numero.equals("") || numero.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Numero\n";
+        } else {
         this.numero = numero;
+        }
     }
 
     public String getBairro() {
@@ -91,7 +132,12 @@ public class Cliente {
     }
 
     public void setBairro(String bairro) {
+        if(bairro.equals("") || bairro.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Bairro\n";
+        } else {
         this.bairro = bairro;
+        }
     }
 
     public String getComplemento() {
@@ -107,7 +153,12 @@ public class Cliente {
     }
 
     public void setCep(String cep) {
+        if(cep.equals("") || cep.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"CEP\n";
+        } else {
         this.cep = cep;
+        }
     }
 
     public String getCidade() {
@@ -115,7 +166,12 @@ public class Cliente {
     }
 
     public void setCidade(String cidade) {
+        if(cidade.equals("") || cidade.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Cidade\n";
+        } else {
         this.cidade = cidade;
+        }
     }
 
     public String getEstado() {
@@ -123,7 +179,12 @@ public class Cliente {
     }
 
     public void setEstado(String estado) {
+        if(estado.equals("") || estado.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Estado\n";
+        } else {
         this.estado = estado;
+        }
     }
 
     public String getTelefone() {
@@ -131,7 +192,12 @@ public class Cliente {
     }
 
     public void setTelefone(String telefone) {
+        if(telefone.equals("") || telefone.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"Telefone\n";
+        } else {
         this.telefone = telefone;
+        }
     }
 
     public String getCelular() {
@@ -147,7 +213,12 @@ public class Cliente {
     }
 
     public void setEmail(String email) {
+        if(email.equals("") || email.equals(null)){
+            this.valida = false;
+            this.mensagemerroCliente = mensagemerroCliente+"E-mail\n";
+        } else {
         this.email = email;
+        }
     }
 
     public String getObservacoes() {
@@ -157,6 +228,5 @@ public class Cliente {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-    
     
 }

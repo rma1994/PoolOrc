@@ -6,6 +6,11 @@
 
 package nwk.com.br.form;
 
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.enums.StatusRepository;
@@ -15,8 +20,10 @@ import nwk.com.br.enums.StatusRepository;
  */
 public class cadclienteframe extends javax.swing.JFrame {
     
+    //Declaração das Variaveis
     Cliente cliente = new Cliente();
     ClienteDAO clienteDAO = new ClienteDAO();
+    
     /**
      * Creates new form cadclienteframe
      */
@@ -48,7 +55,6 @@ public class cadclienteframe extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jFieldidCadCliente = new javax.swing.JTextField();
         jFieldnomeCadCliente = new javax.swing.JTextField();
-        jFieldcnpjcpfCadCliente = new javax.swing.JTextField();
         jFieldruaCadCliente = new javax.swing.JTextField();
         jFieldbairroCadCliente = new javax.swing.JTextField();
         jFieldcepCadCliente = new javax.swing.JTextField();
@@ -69,6 +75,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jFieldcelCadCliente = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jFieldcnpjcpfCadCliente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -76,7 +83,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jButtonSalvarCliente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Clientes"));
 
@@ -124,6 +131,11 @@ public class cadclienteframe extends javax.swing.JFrame {
 
         fisico_juridico.add(jRadioButtonJuridica);
         jRadioButtonJuridica.setText("Juridica");
+        jRadioButtonJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonJuridicaActionPerformed(evt);
+            }
+        });
 
         jComboBox1ClienteAtivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATIVO", "INATIVO" }));
         jComboBox1ClienteAtivo.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +165,17 @@ public class cadclienteframe extends javax.swing.JFrame {
 
         jLabel17.setText("Cliente Ativo :");
 
+        try {
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("Tipo Pessoa Nulo")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFieldcnpjcpfCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFieldcnpjcpfCadClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -170,16 +193,6 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jFieldemailCadCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jFieldtelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFieldcelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jFieldcepCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13)
@@ -190,9 +203,9 @@ public class cadclienteframe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jFieldidCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16)
@@ -203,30 +216,36 @@ public class cadclienteframe extends javax.swing.JFrame {
                                 .addGap(53, 53, 53)
                                 .addComponent(jLabel17)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1ClienteAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jFieldnomeCadCliente)
-                                    .addComponent(jFieldruaCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
+                                .addComponent(jComboBox1ClienteAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jFieldruaCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFieldnumeroCadCliente))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFieldcnpjcpfCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jFieldnumeroCadCliente))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jFieldbairroCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFieldcomplemCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18))))
+                                .addComponent(jFieldcomplemCadCliente))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jFieldemailCadCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jFieldtelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jFieldcelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jFieldnomeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFieldcnpjcpfCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,8 +263,8 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jFieldnomeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFieldcnpjcpfCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jFieldcnpjcpfCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -276,7 +295,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jFieldemailCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -293,7 +312,7 @@ public class cadclienteframe extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados", jPanel1);
@@ -308,7 +327,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +388,7 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvarCliente)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -396,18 +415,30 @@ public class cadclienteframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
-        // TODO add your handling code here:
+        // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cpf
+         try {   
+            MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");  
+  
+            jFieldcnpjcpfCadCliente.setValue(null);
+            /*if (jRadioButtonFisica.isSelected()){*/
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
+            //}
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }
     }//GEN-LAST:event_jRadioButtonFisicaActionPerformed
 
     private void jButtonSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteActionPerformed
-        // TODO add your handling code here:
-        
+        //Verifica qual radio button esta selecionado e da a ele o respectivo valor
         if(jRadioButtonFisica.isSelected()){
             cliente.setTipoCliente("Fisica");
         }else if(jRadioButtonJuridica.isSelected()){
             cliente.setTipoCliente("Juridica");
         };
         
+        
+        
+        //Recebe os valores dos campos do formulario
         cliente.setNome(jFieldnomeCadCliente.getText());
         cliente.setCpf_cnpj(jFieldcnpjcpfCadCliente.getText());
         cliente.setRua(jFieldruaCadCliente.getText());
@@ -423,12 +454,43 @@ public class cadclienteframe extends javax.swing.JFrame {
         cliente.setStatus(StatusRepository.valueOf(jComboBox1ClienteAtivo.getSelectedItem().toString()));
         cliente.setObservacoes(jFieldobsCadCliente.getText());
         
-        clienteDAO.inserir(cliente);
+        //Verifica se existe campos obrigatorios em branco ou nulos
+        if(cliente.isValida() == true){
+        //Tenta inserir os dados pelo formulario no banco de dados
+            try{
+                clienteDAO.inserir(cliente);
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
+        
+        }else {
+            //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
+            JOptionPane.showMessageDialog(null, cliente.getMensagemerroCliente());
+            cliente.setMensagemerroCliente("Campos em branco: \n");
+        }
     }//GEN-LAST:event_jButtonSalvarClienteActionPerformed
 
     private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoActionPerformed
+
+    private void jFieldcnpjcpfCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldcnpjcpfCadClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFieldcnpjcpfCadClienteActionPerformed
+
+    private void jRadioButtonJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonJuridicaActionPerformed
+        // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cnpj
+        try {  
+            MaskFormatter mascaraCNPJ = new MaskFormatter("##.###.###/####-##");  
+  
+            jFieldcnpjcpfCadCliente.setValue(null);
+            //if (jRadioButtonFisica.isSelected()){
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCNPJ));
+            //}
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }
+    }//GEN-LAST:event_jRadioButtonJuridicaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,7 +537,7 @@ public class cadclienteframe extends javax.swing.JFrame {
     private javax.swing.JTextField jFieldcelCadCliente;
     private javax.swing.JTextField jFieldcepCadCliente;
     private javax.swing.JTextField jFieldcidadeCadCliente;
-    private javax.swing.JTextField jFieldcnpjcpfCadCliente;
+    private javax.swing.JFormattedTextField jFieldcnpjcpfCadCliente;
     private javax.swing.JTextField jFieldcomplemCadCliente;
     private javax.swing.JTextField jFieldemailCadCliente;
     private javax.swing.JTextField jFieldidCadCliente;
