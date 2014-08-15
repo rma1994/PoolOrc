@@ -23,12 +23,19 @@ public class cadclienteframe extends javax.swing.JFrame {
     //Declaração das Variaveis
     Cliente cliente = new Cliente();
     ClienteDAO clienteDAO = new ClienteDAO();
+    String id;
+    int clienteID;
     
     /**
      * Creates new form cadclienteframe
      */
     public cadclienteframe() {
         initComponents();
+        jRadioButtonFisica.setSelected(true);
+        
+        clienteID = (clienteDAO.checarID());
+        id = Integer.toString(clienteID);
+        jFieldidCadCliente.setText(id);
     }
 
     /**
@@ -57,7 +64,6 @@ public class cadclienteframe extends javax.swing.JFrame {
         jFieldnomeCadCliente = new javax.swing.JTextField();
         jFieldruaCadCliente = new javax.swing.JTextField();
         jFieldbairroCadCliente = new javax.swing.JTextField();
-        jFieldcepCadCliente = new javax.swing.JTextField();
         jFieldtelCadCliente = new javax.swing.JTextField();
         jFieldemailCadCliente = new javax.swing.JTextField();
         jRadioButtonFisica = new javax.swing.JRadioButton();
@@ -76,14 +82,17 @@ public class cadclienteframe extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jFieldcnpjcpfCadCliente = new javax.swing.JFormattedTextField();
+        jFieldcepCadCliente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jFieldobsCadCliente = new javax.swing.JTextArea();
         jButtonSalvarCliente = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Cliente");
+        setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Clientes"));
 
@@ -103,15 +112,10 @@ public class cadclienteframe extends javax.swing.JFrame {
 
         jLabel8.setText("E-Mail :");
 
+        jFieldidCadCliente.setEditable(false);
         jFieldidCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFieldidCadClienteActionPerformed(evt);
-            }
-        });
-
-        jFieldcepCadCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFieldcepCadClienteActionPerformed(evt);
             }
         });
 
@@ -166,7 +170,7 @@ public class cadclienteframe extends javax.swing.JFrame {
         jLabel17.setText("Cliente Ativo :");
 
         try {
-            jFieldcnpjcpfCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("Tipo Pessoa Nulo")));
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -175,6 +179,12 @@ public class cadclienteframe extends javax.swing.JFrame {
                 jFieldcnpjcpfCadClienteActionPerformed(evt);
             }
         });
+
+        try {
+            jFieldcepCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -193,8 +203,8 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jFieldcepCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFieldcepCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFieldcidadeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,11 +290,11 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFieldcepCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jFieldcidadeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFieldcepCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -360,10 +370,10 @@ public class cadclienteframe extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("CANCELAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setText("CANCELAR");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -374,7 +384,7 @@ public class cadclienteframe extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonCancelar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSalvarCliente)
                 .addContainerGap())
@@ -387,13 +397,13 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvarCliente)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonCancelar))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jFieldidCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldidCadClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldidCadClienteActionPerformed
@@ -402,17 +412,16 @@ public class cadclienteframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ClienteAtivoActionPerformed
 
-    private void jFieldcepCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldcepCadClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFieldcepCadClienteActionPerformed
-
     private void jFieldemailCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldemailCadClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldemailCadClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cadclienteframe.this.setVisible(false);
+        cadclienteframe.this.dispose();
+        
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
         // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cpf
@@ -456,13 +465,11 @@ public class cadclienteframe extends javax.swing.JFrame {
         
         //Verifica se existe campos obrigatorios em branco ou nulos
         if(cliente.isValida() == true){
-        //Tenta inserir os dados pelo formulario no banco de dados
-            try{
-                clienteDAO.inserir(cliente);
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            //Tenta inserir os dados pelo formulario no banco de dados
+            boolean clienteresult = clienteDAO.inserir(cliente);
+            if(clienteresult == true){
+            JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
             }
-        
         }else {
             //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
             JOptionPane.showMessageDialog(null, cliente.getMensagemerroCliente());
@@ -529,13 +536,13 @@ public class cadclienteframe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup fisico_juridico;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSalvarCliente;
     private javax.swing.JComboBox jComboBox1ClienteAtivo;
     private javax.swing.JComboBox jComboBoxEstado;
     private javax.swing.JTextField jFieldbairroCadCliente;
     private javax.swing.JTextField jFieldcelCadCliente;
-    private javax.swing.JTextField jFieldcepCadCliente;
+    private javax.swing.JFormattedTextField jFieldcepCadCliente;
     private javax.swing.JTextField jFieldcidadeCadCliente;
     private javax.swing.JFormattedTextField jFieldcnpjcpfCadCliente;
     private javax.swing.JTextField jFieldcomplemCadCliente;

@@ -6,13 +6,18 @@
 
 package nwk.com.br.form;
 
+import nwk.com.br.model.Cliente;
+import nwk.com.br.dao.ClienteDAO;
+
 
 /**
  *
  * @author RMA
  */
 public class mainframe extends javax.swing.JFrame {
-
+    
+    /*Cliente cliente = new Cliente();
+    ClienteDAO clientedao = new ClienteDAO();*/
     /**
      * Creates new form mainframe
      */
@@ -61,6 +66,7 @@ public class mainframe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PoolOrc");
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
 

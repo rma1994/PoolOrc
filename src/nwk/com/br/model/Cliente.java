@@ -93,7 +93,7 @@ public class Cliente {
     }
 
     public void setCpf_cnpj(String cpf_cnpj) {
-        if(cpf_cnpj.equals("") || cpf_cnpj.equals(null) || cpf_cnpj.equals("Tipo Pessoa Nulo")){
+        if(cpf_cnpj.equals("") || cpf_cnpj.equals(null) || cpf_cnpj.equals("   .   .   -  ") || cpf_cnpj.equals("  .   .   /    -  ")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"CPF/CNPJ\n";
         } else {
@@ -156,11 +156,12 @@ public class Cliente {
     }
 
     public void setCep(String cep) {
-        if(cep.equals("") || cep.equals(null)){
+        if(cep.equals("") || cep.equals(null) || cep.equals("     -   ")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"CEP\n";
         } else {
-        this.cep = cep;
+            cep = cep.replace("-", "");
+            this.cep = cep;
         }
     }
 
