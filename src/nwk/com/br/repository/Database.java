@@ -17,8 +17,8 @@ import java.sql.SQLException;
 public class Database {
     
     private final String DATABASE = "xe";
-    private final String HOST = "jdbc:oracle:thin:@//25.176.118.32:1521/" + DATABASE;
-    //private final String HOST = "jdbc:oracle:thin:@//localhost:1521/" + DATABASE;
+    //private final String HOST = "jdbc:oracle:thin:@//25.176.118.32:1521/" + DATABASE;
+    private final String HOST = "jdbc:oracle:thin:@//localhost:1521/" + DATABASE;
     private final String USER = "PoolOrc";
     private final String PASSWORD = "PoolOrcNWK";
     private Connection connection;
