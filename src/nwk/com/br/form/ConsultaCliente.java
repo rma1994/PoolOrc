@@ -126,7 +126,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        CadClienteFrame cadclienteframe = new CadClienteFrame();
+        cadclienteframe cadclienteframe = new cadclienteframe();
         cadclienteframe.setVisible(true);
         cadclienteframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -6,7 +6,7 @@
 
 package nwk.com.br;
 
-import nwk.com.br.form.MainFrame;
+import nwk.com.br.form.mainframe;
 
 /**
  *
@@ -18,7 +18,7 @@ public class PoolOrc {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
+        mainframe frame = new mainframe();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
