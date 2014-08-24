@@ -10,13 +10,14 @@ package nwk.com.br.form;
  *
  * @author RMA
  */
-public class cadprodutoframe extends javax.swing.JFrame {
+public class cadprodutoframe extends javax.swing.JDialog {
 
     /**
      * Creates new form cadprodutoframe
      */
     public cadprodutoframe() {
         initComponents();
+        this.setModal(true); 
     }
 
     /**
@@ -57,7 +58,7 @@ public class cadprodutoframe extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Produto"));

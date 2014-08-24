@@ -10,13 +10,14 @@ package nwk.com.br.form;
  *
  * @author RMA
  */
-public class cadfuncionarioframe extends javax.swing.JFrame {
+public class cadfuncionarioframe extends javax.swing.JDialog {
 
     /**
      * Creates new form cadclienteframe
      */
     public cadfuncionarioframe() {
         initComponents();
+        this.setModal(true); 
     }
 
     /**
@@ -78,8 +79,9 @@ public class cadfuncionarioframe extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Funcionarios");
+        setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Funcionario"));
 

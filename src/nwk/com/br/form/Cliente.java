@@ -28,61 +28,61 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
     @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
-    //@NamedQuery(name = "Cliente.findByTipoCliente", query = "SELECT c FROM Cliente c WHERE c.tipoCliente = :tipoCliente"),
+    @NamedQuery(name = "Cliente.findByTipoCliente", query = "SELECT c FROM Cliente c WHERE c.tipoCliente = :tipoCliente"),
     @NamedQuery(name = "Cliente.findByNomeCliente", query = "SELECT c FROM Cliente c WHERE c.nomeCliente = :nomeCliente"),
     @NamedQuery(name = "Cliente.findByCpfCnpjCliente", query = "SELECT c FROM Cliente c WHERE c.cpfCnpjCliente = :cpfCnpjCliente"),
-    //@NamedQuery(name = "Cliente.findByRuaCliente", query = "SELECT c FROM Cliente c WHERE c.ruaCliente = :ruaCliente"),
-    //@NamedQuery(name = "Cliente.findByBairroCliente", query = "SELECT c FROM Cliente c WHERE c.bairroCliente = :bairroCliente"),
-    //@NamedQuery(name = "Cliente.findByNumeroEndCliente", query = "SELECT c FROM Cliente c WHERE c.numeroEndCliente = :numeroEndCliente"),
-    //@NamedQuery(name = "Cliente.findByComplementoCliente", query = "SELECT c FROM Cliente c WHERE c.complementoCliente = :complementoCliente"),
-    //@NamedQuery(name = "Cliente.findByCepCliente", query = "SELECT c FROM Cliente c WHERE c.cepCliente = :cepCliente"),
-    //@NamedQuery(name = "Cliente.findByCidadeCliente", query = "SELECT c FROM Cliente c WHERE c.cidadeCliente = :cidadeCliente"),
-    //@NamedQuery(name = "Cliente.findByEstadoCliente", query = "SELECT c FROM Cliente c WHERE c.estadoCliente = :estadoCliente"),
+    @NamedQuery(name = "Cliente.findByRuaCliente", query = "SELECT c FROM Cliente c WHERE c.ruaCliente = :ruaCliente"),
+    @NamedQuery(name = "Cliente.findByBairroCliente", query = "SELECT c FROM Cliente c WHERE c.bairroCliente = :bairroCliente"),
+    @NamedQuery(name = "Cliente.findByNumeroEndCliente", query = "SELECT c FROM Cliente c WHERE c.numeroEndCliente = :numeroEndCliente"),
+    @NamedQuery(name = "Cliente.findByComplementoCliente", query = "SELECT c FROM Cliente c WHERE c.complementoCliente = :complementoCliente"),
+    @NamedQuery(name = "Cliente.findByCepCliente", query = "SELECT c FROM Cliente c WHERE c.cepCliente = :cepCliente"),
+    @NamedQuery(name = "Cliente.findByCidadeCliente", query = "SELECT c FROM Cliente c WHERE c.cidadeCliente = :cidadeCliente"),
+    @NamedQuery(name = "Cliente.findByEstadoCliente", query = "SELECT c FROM Cliente c WHERE c.estadoCliente = :estadoCliente"),
     @NamedQuery(name = "Cliente.findByTelefoneCliente", query = "SELECT c FROM Cliente c WHERE c.telefoneCliente = :telefoneCliente"),
-    //@NamedQuery(name = "Cliente.findByCelularCliente", query = "SELECT c FROM Cliente c WHERE c.celularCliente = :celularCliente"),
+    @NamedQuery(name = "Cliente.findByCelularCliente", query = "SELECT c FROM Cliente c WHERE c.celularCliente = :celularCliente"),
     @NamedQuery(name = "Cliente.findByEmailCliente", query = "SELECT c FROM Cliente c WHERE c.emailCliente = :emailCliente"),
-    //@NamedQuery(name = "Cliente.findByAtivoCliente", query = "SELECT c FROM Cliente c WHERE c.ativoCliente = :ativoCliente"),
-    /*@NamedQuery(name = "Cliente.findByObservacoesCliente", query = "SELECT c FROM Cliente c WHERE c.observacoesCliente = :observacoesCliente")*/})
+    @NamedQuery(name = "Cliente.findByAtivoCliente", query = "SELECT c FROM Cliente c WHERE c.ativoCliente = :ativoCliente"),
+    @NamedQuery(name = "Cliente.findByObservacoesCliente", query = "SELECT c FROM Cliente c WHERE c.observacoesCliente = :observacoesCliente")})
 public class Cliente implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?) @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_CLIENTE")
     private BigDecimal idCliente;
-    //@Column(name = "TIPO_CLIENTE")
-    //private String tipoCliente;
+    @Column(name = "TIPO_CLIENTE")
+    private String tipoCliente;
     @Column(name = "NOME_CLIENTE")
     private String nomeCliente;
     @Column(name = "CPF_CNPJ_CLIENTE")
     private String cpfCnpjCliente;
-    //@Column(name = "RUA_CLIENTE")
-    //private String ruaCliente;
-    //@Column(name = "BAIRRO_CLIENTE")
-    //private String bairroCliente;
-    //@Column(name = "NUMERO_END_CLIENTE")
-    //private String numeroEndCliente;
-    //@Column(name = "COMPLEMENTO_CLIENTE")
-    //private String complementoCliente;
-    //@Column(name = "CEP_CLIENTE")
-    //private String cepCliente;
-    //@Column(name = "CIDADE_CLIENTE")
-    //private String cidadeCliente;
-    //@Column(name = "ESTADO_CLIENTE")
-    //private String estadoCliente;
+    @Column(name = "RUA_CLIENTE")
+    private String ruaCliente;
+    @Column(name = "BAIRRO_CLIENTE")
+    private String bairroCliente;
+    @Column(name = "NUMERO_END_CLIENTE")
+    private String numeroEndCliente;
+    @Column(name = "COMPLEMENTO_CLIENTE")
+    private String complementoCliente;
+    @Column(name = "CEP_CLIENTE")
+    private String cepCliente;
+    @Column(name = "CIDADE_CLIENTE")
+    private String cidadeCliente;
+    @Column(name = "ESTADO_CLIENTE")
+    private String estadoCliente;
     @Column(name = "TELEFONE_CLIENTE")
     private String telefoneCliente;
-    //@Column(name = "CELULAR_CLIENTE")
-    //private String celularCliente;
+    @Column(name = "CELULAR_CLIENTE")
+    private String celularCliente;
     @Column(name = "EMAIL_CLIENTE")
     private String emailCliente;
-    //@Basic(optional = false)
-    //@Column(name = "ATIVO_CLIENTE")
-    //private Character ativoCliente;
-    //@Column(name = "OBSERVACOES_CLIENTE")
-    //private String observacoesCliente;
+    @Basic(optional = false)
+    @Column(name = "ATIVO_CLIENTE")
+    private Character ativoCliente;
+    @Column(name = "OBSERVACOES_CLIENTE")
+    private String observacoesCliente;
 
     public Cliente() {
     }
@@ -91,10 +91,10 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    /*public Cliente(BigDecimal idCliente, Character ativoCliente) {
+    public Cliente(BigDecimal idCliente, Character ativoCliente) {
         this.idCliente = idCliente;
         this.ativoCliente = ativoCliente;
-    }*/
+    }
 
     public BigDecimal getIdCliente() {
         return idCliente;
@@ -106,7 +106,7 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("idCliente", oldIdCliente, idCliente);
     }
 
-    /*public String getTipoCliente() {
+    public String getTipoCliente() {
         return tipoCliente;
     }
 
@@ -114,7 +114,7 @@ public class Cliente implements Serializable {
         String oldTipoCliente = this.tipoCliente;
         this.tipoCliente = tipoCliente;
         changeSupport.firePropertyChange("tipoCliente", oldTipoCliente, tipoCliente);
-    }*/
+    }
 
     public String getNomeCliente() {
         return nomeCliente;
@@ -136,7 +136,7 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("cpfCnpjCliente", oldCpfCnpjCliente, cpfCnpjCliente);
     }
 
-    /*public String getRuaCliente() {
+    public String getRuaCliente() {
         return ruaCliente;
     }
 
@@ -204,7 +204,7 @@ public class Cliente implements Serializable {
         String oldEstadoCliente = this.estadoCliente;
         this.estadoCliente = estadoCliente;
         changeSupport.firePropertyChange("estadoCliente", oldEstadoCliente, estadoCliente);
-    }*/
+    }
 
     public String getTelefoneCliente() {
         return telefoneCliente;
@@ -216,7 +216,7 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("telefoneCliente", oldTelefoneCliente, telefoneCliente);
     }
 
-    /*public String getCelularCliente() {
+    public String getCelularCliente() {
         return celularCliente;
     }
 
@@ -224,7 +224,7 @@ public class Cliente implements Serializable {
         String oldCelularCliente = this.celularCliente;
         this.celularCliente = celularCliente;
         changeSupport.firePropertyChange("celularCliente", oldCelularCliente, celularCliente);
-    }*/
+    }
 
     public String getEmailCliente() {
         return emailCliente;
@@ -236,7 +236,7 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("emailCliente", oldEmailCliente, emailCliente);
     }
 
-    /*public Character getAtivoCliente() {
+    public Character getAtivoCliente() {
         return ativoCliente;
     }
 
@@ -254,7 +254,7 @@ public class Cliente implements Serializable {
         String oldObservacoesCliente = this.observacoesCliente;
         this.observacoesCliente = observacoesCliente;
         changeSupport.firePropertyChange("observacoesCliente", oldObservacoesCliente, observacoesCliente);
-    }*/
+    }
 
     @Override
     public int hashCode() {

@@ -6,17 +6,20 @@
 
 package nwk.com.br.form;
 
+import javax.swing.JScrollPane;
+
 /**
  *
  * @author Richard Matheus
  */
-public class ConsultaCliente extends javax.swing.JFrame {
+public class ConsultaCliente extends javax.swing.JDialog {
 
     /**
      * Creates new form ConsultaCliente
      */
     public ConsultaCliente() {
         initComponents();
+        this.setModal(true); 
     }
 
     /**
@@ -34,11 +37,11 @@ public class ConsultaCliente extends javax.swing.JFrame {
         clienteList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableClientes = new javax.swing.JTable();
         jFieldPesquisa = new javax.swing.JTextField();
         jButtonPesquisar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBoxCampoPesquisa = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Clientes");
@@ -55,9 +58,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
             .addGap(0, 513, Short.MAX_VALUE)
         );
 
-        jTable1.setAutoCreateRowSorter(true);
+        jTableClientes.setAutoCreateRowSorter(true);
+        jTableClientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, jTableClientes);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idCliente}"));
         columnBinding.setColumnName("ID");
         columnBinding.setColumnClass(java.math.BigDecimal.class);
@@ -66,25 +70,78 @@ public class ConsultaCliente extends javax.swing.JFrame {
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${emailCliente}"));
+        columnBinding.setColumnName("e-mail");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${telefoneCliente}"));
         columnBinding.setColumnName("Telefone");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${emailCliente}"));
-        columnBinding.setColumnName("e-mail");
-        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpfCnpjCliente}"));
         columnBinding.setColumnName("CPF/CNPJ");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${celularCliente}"));
+        columnBinding.setColumnName("Celular");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipoCliente}"));
+        columnBinding.setColumnName("Tipo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ruaCliente}"));
+        columnBinding.setColumnName("Rua");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${numeroEndCliente}"));
+        columnBinding.setColumnName("Numero");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bairroCliente}"));
+        columnBinding.setColumnName("Bairro");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${complementoCliente}"));
+        columnBinding.setColumnName("Complemento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cidadeCliente}"));
+        columnBinding.setColumnName("Cidade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${estadoCliente}"));
+        columnBinding.setColumnName("Estado");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cepCliente}"));
+        columnBinding.setColumnName("CEP");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ativoCliente}"));
+        columnBinding.setColumnName("Ativo");
+        columnBinding.setColumnClass(Character.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${observacoesCliente}"));
+        columnBinding.setColumnName("Observações");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(6);
+        jScrollPane1.setViewportView(jTableClientes);
+        if (jTableClientes.getColumnModel().getColumnCount() > 0) {
+            jTableClientes.getColumnModel().getColumn(0).setMinWidth(35);
+            jTableClientes.getColumnModel().getColumn(0).setMaxWidth(35);
+            jTableClientes.getColumnModel().getColumn(1).setMinWidth(250);
+            jTableClientes.getColumnModel().getColumn(2).setMinWidth(150);
         }
 
         jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Inserir Cliente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +150,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome" }));
+        jComboBoxCampoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,13 +159,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -126,7 +183,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonPesquisar)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -140,9 +197,38 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cadclienteframe cadclienteframe = new cadclienteframe();
-        cadclienteframe.setVisible(true);
         cadclienteframe.setLocationRelativeTo(null);
+        cadclienteframe.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
+        // TODO add your handling code here:
+        String pesquisaTabela = jFieldPesquisa.getText();
+        String espacoTabela;
+        int c;
+        
+        pesquisaTabela = pesquisaTabela.toUpperCase();
+        
+        if(pesquisaTabela.length()>=1){
+            if(jComboBoxCampoPesquisa.getSelectedItem().toString() == "ID"){
+                c = 0;
+            }else{
+                c = 1;
+            }
+            
+            
+            for(int r=0;r<jTableClientes.getRowCount();r++){
+                
+                espacoTabela = jTableClientes.getValueAt(r, c).toString();
+                espacoTabela = espacoTabela.toUpperCase();
+                
+                if(espacoTabela.contains(pesquisaTabela)){
+                    jTableClientes.setColumnSelectionInterval(0, 2);  
+                    jTableClientes.setRowSelectionInterval(r, r);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,11 +271,11 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonPesquisar;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxCampoPesquisa;
     private javax.swing.JTextField jFieldPesquisa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableClientes;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

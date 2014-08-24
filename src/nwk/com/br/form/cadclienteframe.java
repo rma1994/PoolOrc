@@ -18,7 +18,7 @@ import nwk.com.br.enums.StatusRepository;
  *
  * @author RMA
  */
-public class cadclienteframe extends javax.swing.JFrame {
+public class cadclienteframe extends javax.swing.JDialog {
     
     //Declaração das Variaveis
     Cliente cliente = new Cliente();
@@ -31,6 +31,7 @@ public class cadclienteframe extends javax.swing.JFrame {
      */
     public cadclienteframe() {
         initComponents();
+        this.setModal(true); 
         jRadioButtonFisica.setSelected(true);
         
         clienteID = (clienteDAO.checarID());

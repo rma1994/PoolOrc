@@ -10,13 +10,14 @@ package nwk.com.br.form;
  *
  * @author RMA
  */
-public class cadorcamentoframe extends javax.swing.JFrame {
+public class cadorcamentoframe extends javax.swing.JDialog {
 
     /**
      * Creates new form cadorcamentoframe
      */
     public cadorcamentoframe() {
         initComponents();
+        this.setModal(true); 
     }
 
     /**
@@ -68,7 +69,7 @@ public class cadorcamentoframe extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Orçamento");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Orçamento"));
