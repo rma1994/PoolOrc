@@ -200,7 +200,10 @@ public class Cliente {
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Telefone\n";
         } else {
-        this.telefone = telefone;
+            telefone = telefone.replace("(","");
+            telefone = telefone.replace(")","");
+            telefone = telefone.replace("-","");
+            this.telefone = telefone;
         }
     }
 
@@ -209,6 +212,9 @@ public class Cliente {
     }
 
     public void setCelular(String celular) {
+        celular = celular.replace("(","");
+        celular = celular.replace(")","");
+        celular = celular.replace(" ","");
         this.celular = celular;
     }
 

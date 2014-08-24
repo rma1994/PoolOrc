@@ -64,7 +64,6 @@ public class cadclienteframe extends javax.swing.JFrame {
         jFieldnomeCadCliente = new javax.swing.JTextField();
         jFieldruaCadCliente = new javax.swing.JTextField();
         jFieldbairroCadCliente = new javax.swing.JTextField();
-        jFieldtelCadCliente = new javax.swing.JTextField();
         jFieldemailCadCliente = new javax.swing.JTextField();
         jRadioButtonFisica = new javax.swing.JRadioButton();
         jRadioButtonJuridica = new javax.swing.JRadioButton();
@@ -78,11 +77,12 @@ public class cadclienteframe extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jComboBoxEstado = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
-        jFieldcelCadCliente = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jFieldcnpjcpfCadCliente = new javax.swing.JFormattedTextField();
         jFieldcepCadCliente = new javax.swing.JFormattedTextField();
+        jFieldtelCadCliente = new javax.swing.JFormattedTextField();
+        jFieldcelCadCliente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -186,6 +186,19 @@ public class cadclienteframe extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        try {
+            jFieldtelCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFieldcelCadCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFieldcelCadCliente.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -240,14 +253,14 @@ public class cadclienteframe extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jFieldcomplemCadCliente))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jFieldemailCadCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jFieldemailCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jFieldtelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFieldcelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jFieldcelCadCliente)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jFieldnomeCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,8 +311,8 @@ public class cadclienteframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jFieldtelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
+                    .addComponent(jFieldtelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFieldcelCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -541,7 +554,7 @@ public class cadclienteframe extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1ClienteAtivo;
     private javax.swing.JComboBox jComboBoxEstado;
     private javax.swing.JTextField jFieldbairroCadCliente;
-    private javax.swing.JTextField jFieldcelCadCliente;
+    private javax.swing.JFormattedTextField jFieldcelCadCliente;
     private javax.swing.JFormattedTextField jFieldcepCadCliente;
     private javax.swing.JTextField jFieldcidadeCadCliente;
     private javax.swing.JFormattedTextField jFieldcnpjcpfCadCliente;
@@ -552,7 +565,7 @@ public class cadclienteframe extends javax.swing.JFrame {
     private javax.swing.JTextField jFieldnumeroCadCliente;
     private javax.swing.JTextArea jFieldobsCadCliente;
     private javax.swing.JTextField jFieldruaCadCliente;
-    private javax.swing.JTextField jFieldtelCadCliente;
+    private javax.swing.JFormattedTextField jFieldtelCadCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

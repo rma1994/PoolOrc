@@ -310,7 +310,7 @@ public class mainframe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadClienteFrame clienteframe = new CadClienteFrame ();
+        cadclienteframe clienteframe = new cadclienteframe ();
         clienteframe.setVisible (true);
         clienteframe.setLocationRelativeTo(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -320,7 +320,7 @@ public class mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CadFuncionarioFrame funcionarioframe = new CadFuncionarioFrame();
+        cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
         funcionarioframe.setVisible(true);
         funcionarioframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -334,14 +334,14 @@ public class mainframe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        CadOrcamentoFrame orcamenteframe = new CadOrcamentoFrame();
+        cadorcamentoframe orcamenteframe = new cadorcamentoframe();
         orcamenteframe.setVisible(true);
         orcamenteframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        CadProdutoFrame produtoframe = new CadProdutoFrame();
+        cadprodutoframe produtoframe = new cadprodutoframe();
         produtoframe.setVisible(true);
         produtoframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -355,20 +355,20 @@ public class mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        CadProdutoFrame produtoframe = new CadProdutoFrame ();
+        cadprodutoframe produtoframe = new cadprodutoframe ();
         produtoframe.setVisible (true);
         produtoframe.setLocationRelativeTo(null); // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        CadOrcamentoFrame orcamenteframe = new CadOrcamentoFrame();
+        cadorcamentoframe orcamenteframe = new cadorcamentoframe();
         orcamenteframe.setVisible(true);
         orcamenteframe.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        CadFuncionarioFrame funcionarioframe = new CadFuncionarioFrame();
+        cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
         funcionarioframe.setVisible(true);
         funcionarioframe.setLocationRelativeTo(null);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed

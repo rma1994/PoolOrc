@@ -158,14 +158,14 @@
                                           <Component id="jFieldcomplemCadCliente" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jFieldemailCadCliente" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jFieldemailCadCliente" min="-2" pref="424" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
                                                   <Component id="jFieldtelCadCliente" min="-2" pref="182" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jFieldcelCadCliente" min="-2" pref="182" max="-2" attributes="0"/>
+                                                  <Component id="jFieldcelCadCliente" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -230,8 +230,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFieldtelCadCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jFieldtelCadCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jFieldcelCadCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -298,8 +298,6 @@
                 <Component class="javax.swing.JTextField" name="jFieldruaCadCliente">
                 </Component>
                 <Component class="javax.swing.JTextField" name="jFieldbairroCadCliente">
-                </Component>
-                <Component class="javax.swing.JTextField" name="jFieldtelCadCliente">
                 </Component>
                 <Component class="javax.swing.JTextField" name="jFieldemailCadCliente">
                   <Events>
@@ -410,8 +408,6 @@
                     <Property name="text" type="java.lang.String" value="Celular :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jFieldcelCadCliente">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tipo de Pessoa :"/>
@@ -437,6 +433,21 @@
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                       <Format format="#####-###" subtype="-1" type="5"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="jFieldtelCadCliente">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                      <Format format="(##)####-####" subtype="-1" type="5"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="jFieldcelCadCliente">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                      <Format format="(##)#########" subtype="-1" type="5"/>
+                    </Property>
+                    <Property name="focusLostBehavior" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
