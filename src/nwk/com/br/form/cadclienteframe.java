@@ -484,10 +484,11 @@ public class cadclienteframe extends javax.swing.JDialog {
             if(clienteresult == true){
             JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
             }
-        }else {
+        }else if(cliente.isValida() == false){
             //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
             JOptionPane.showMessageDialog(null, cliente.getMensagemerroCliente());
             cliente.setMensagemerroCliente("Campos em branco: \n");
+            cliente.setIsValida(true);
         }
     }//GEN-LAST:event_jButtonSalvarClienteActionPerformed
 

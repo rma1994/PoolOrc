@@ -40,6 +40,10 @@ public class Cliente {
     public String getMensagemerroCliente() {
         return mensagemerroCliente;
     }
+    
+    public void setIsValida(boolean valida){
+        this.valida = valida;
+    }
 
     public boolean isValida() {
         return valida;
