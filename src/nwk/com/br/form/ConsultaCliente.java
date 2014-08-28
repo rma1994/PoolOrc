@@ -7,13 +7,17 @@
 package nwk.com.br.form;
 
 import javax.swing.JScrollPane;
+import nwk.com.br.enums.StatusRepository;
+import nwk.com.br.model.Cliente;
 
 /**
  *
  * @author Richard Matheus
  */
 public class ConsultaCliente extends javax.swing.JDialog {
-
+    
+    cadclienteframe cadclienteframe = new cadclienteframe();
+    Cliente cliente = new Cliente();
     /**
      * Creates new form ConsultaCliente
      */
@@ -128,6 +132,11 @@ public class ConsultaCliente extends javax.swing.JDialog {
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableClientes);
         if (jTableClientes.getColumnModel().getColumnCount() > 0) {
             jTableClientes.getColumnModel().getColumn(0).setMinWidth(35);
@@ -230,6 +239,41 @@ public class ConsultaCliente extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int linhaSelecionada;
+        
+        
+        linhaSelecionada = jTableClientes.getSelectedRow();
+        
+        cliente.setId(Integer.parseInt(jTableClientes.getValueAt(linhaSelecionada, 0).toString()));
+        cliente.setNome(jTableClientes.getValueAt(linhaSelecionada, 1).toString());
+        cliente.setEmail(jTableClientes.getValueAt(linhaSelecionada, 2).toString());
+        cliente.setTelefone(jTableClientes.getValueAt(linhaSelecionada, 3).toString());
+        cliente.setCpf_cnpj(jTableClientes.getValueAt(linhaSelecionada, 4).toString());
+        cliente.setCelular(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
+        cliente.setTipoCliente(jTableClientes.getValueAt(linhaSelecionada, 6).toString());
+        cliente.setRua(jTableClientes.getValueAt(linhaSelecionada, 7).toString());
+        cliente.setNumero(jTableClientes.getValueAt(linhaSelecionada, 8).toString());
+        cliente.setBairro(jTableClientes.getValueAt(linhaSelecionada, 9).toString());
+        cliente.setComplemento(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
+        cliente.setCidade(jTableClientes.getValueAt(linhaSelecionada, 11).toString());
+        cliente.setEstado(jTableClientes.getValueAt(linhaSelecionada, 12).toString());
+        cliente.setCep(jTableClientes.getValueAt(linhaSelecionada, 13).toString());
+        cliente.setStatus(StatusRepository.getByValue(jTableClientes.getValueAt(linhaSelecionada, 14).toString()));
+        
+        if(jTableClientes.getValueAt(linhaSelecionada, 15) == null){
+            cliente.setObservacoes(" ");
+        }else {
+            cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 15).toString());
+        }
+        cadclienteframe.setClienteForm(cliente);
+        cadclienteframe.setLocationRelativeTo(null);
+        cadclienteframe.setVisible(true);
+    }//GEN-LAST:event_jTableClientesMouseClicked
+  
+    
     /**
      * @param args the command line arguments
      */

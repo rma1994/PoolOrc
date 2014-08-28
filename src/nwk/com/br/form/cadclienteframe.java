@@ -38,6 +38,34 @@ public class cadclienteframe extends javax.swing.JDialog {
         id = Integer.toString(clienteID);
         jFieldidCadCliente.setText(id);
     }
+    
+   public void setClienteForm(Cliente cliente){
+       
+       //Seleciona o botão radio juridica ou fisica
+       if(cliente.getTipoCliente().equals("Fisica")){
+           jRadioButtonFisica.setSelected(true);
+       }else if (cliente.getTipoCliente().equals("Juridica")){
+           jRadioButtonJuridica.setSelected(true);
+       }
+       System.out.println(cliente.getTipoCliente());
+       
+       jComboBox1ClienteAtivo.setSelectedItem(cliente.getStatus().toString());
+       jComboBoxEstado.setSelectedItem(cliente.getEstado());
+       
+       jFieldidCadCliente.setText(Integer.toString(cliente.getId()));
+       jFieldnomeCadCliente.setText(cliente.getNome());
+       jFieldcnpjcpfCadCliente.setText(cliente.getCpf_cnpj());
+       jFieldruaCadCliente.setText(cliente.getRua());
+       jFieldnumeroCadCliente.setText(cliente.getNumero());
+       jFieldbairroCadCliente.setText(cliente.getBairro());
+       jFieldcomplemCadCliente.setText(cliente.getComplemento());
+       jFieldcepCadCliente.setText(cliente.getCep());
+       jFieldcidadeCadCliente.setText(cliente.getCidade());
+       jFieldtelCadCliente.setText(cliente.getTelefone());
+       jFieldcelCadCliente.setText(cliente.getCelular());
+       jFieldemailCadCliente.setText(cliente.getEmail());
+       jFieldobsCadCliente.setText(cliente.getObservacoes());
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -439,7 +467,8 @@ public class cadclienteframe extends javax.swing.JDialog {
 
     private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
         // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cpf
-         try {   
+        //Cria a Mascara de CPF 
+        try {   
             MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");  
   
             jFieldcnpjcpfCadCliente.setValue(null);
@@ -458,8 +487,6 @@ public class cadclienteframe extends javax.swing.JDialog {
         }else if(jRadioButtonJuridica.isSelected()){
             cliente.setTipoCliente("Juridica");
         };
-        
-        
         
         //Recebe os valores dos campos do formulario
         cliente.setNome(jFieldnomeCadCliente.getText());
@@ -548,7 +575,7 @@ public class cadclienteframe extends javax.swing.JDialog {
             }
         });
     }
-
+    //merda de github
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup fisico_juridico;
     private javax.swing.JButton jButtonCancelar;
