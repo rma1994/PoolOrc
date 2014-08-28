@@ -247,27 +247,47 @@ public class ConsultaCliente extends javax.swing.JDialog {
         
         linhaSelecionada = jTableClientes.getSelectedRow();
         
+        //Abaixo são setados os campos não obrigatorios
         cliente.setId(Integer.parseInt(jTableClientes.getValueAt(linhaSelecionada, 0).toString()));
         cliente.setNome(jTableClientes.getValueAt(linhaSelecionada, 1).toString());
         cliente.setEmail(jTableClientes.getValueAt(linhaSelecionada, 2).toString());
         cliente.setTelefone(jTableClientes.getValueAt(linhaSelecionada, 3).toString());
         cliente.setCpf_cnpj(jTableClientes.getValueAt(linhaSelecionada, 4).toString());
-        cliente.setCelular(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
+        //cliente.setCelular(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
         cliente.setTipoCliente(jTableClientes.getValueAt(linhaSelecionada, 6).toString());
         cliente.setRua(jTableClientes.getValueAt(linhaSelecionada, 7).toString());
         cliente.setNumero(jTableClientes.getValueAt(linhaSelecionada, 8).toString());
         cliente.setBairro(jTableClientes.getValueAt(linhaSelecionada, 9).toString());
-        cliente.setComplemento(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
+        //cliente.setComplemento(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
         cliente.setCidade(jTableClientes.getValueAt(linhaSelecionada, 11).toString());
         cliente.setEstado(jTableClientes.getValueAt(linhaSelecionada, 12).toString());
         cliente.setCep(jTableClientes.getValueAt(linhaSelecionada, 13).toString());
         cliente.setStatus(StatusRepository.getByValue(jTableClientes.getValueAt(linhaSelecionada, 14).toString()));
         
+        /*Uma vez que os campos obrigatorios podem ser nulos, 
+        é necessario checar se eles são, e caso sejam é preciso dar um valor mesmo que em branco para eles*/
+        
+        //Verifica se o campo Observações na tabela é nulo
         if(jTableClientes.getValueAt(linhaSelecionada, 15) == null){
-            cliente.setObservacoes(" ");
+            cliente.setObservacoes("");
         }else {
             cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 15).toString());
         }
+        
+        //Verifica se o campo celular na tabela é nulo
+        if(jTableClientes.getValueAt(linhaSelecionada, 5) == null){
+            cliente.setObservacoes("");
+        }else {
+            cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
+        }
+        
+        //Verifica se o campo complemento na tabela é nulo
+        if(jTableClientes.getValueAt(linhaSelecionada, 10) == null){
+            cliente.setObservacoes("");
+        }else {
+            cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
+        }
+        
         cadclienteframe.setClienteForm(cliente);
         cadclienteframe.setLocationRelativeTo(null);
         cadclienteframe.setVisible(true);
