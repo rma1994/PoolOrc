@@ -43,11 +43,13 @@ public class cadclienteframe extends javax.swing.JDialog {
        
        //Seleciona o botão radio juridica ou fisica
        if(cliente.getTipoCliente().equals("Fisica")){
+           this.setMascaraCPF();
            jRadioButtonFisica.setSelected(true);
        }else if (cliente.getTipoCliente().equals("Juridica")){
+           this.setMascaraCNPJ();
            jRadioButtonJuridica.setSelected(true);
        }
-       System.out.println(cliente.getTipoCliente());
+       //System.out.println(cliente.getTipoCliente());
        
        jComboBox1ClienteAtivo.setSelectedItem(cliente.getStatus().toString());
        jComboBoxEstado.setSelectedItem(cliente.getEstado());
@@ -65,7 +67,36 @@ public class cadclienteframe extends javax.swing.JDialog {
        jFieldcelCadCliente.setText(cliente.getCelular());
        jFieldemailCadCliente.setText(cliente.getEmail());
        jFieldobsCadCliente.setText(cliente.getObservacoes());
-   }
+    }
+    
+    //Função para setar a mascara de cpf
+    private void setMascaraCPF(){
+    //Cria a Mascara de CPF 
+        try {   
+            MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");  
+  
+            jFieldcnpjcpfCadCliente.setValue(null);
+            /*if (jRadioButtonFisica.isSelected()){*/
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
+            //}
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }
+    }
+    
+    //Função para setar a mascara de cnpf
+    private void setMascaraCNPJ(){
+        try {  
+            MaskFormatter mascaraCNPJ = new MaskFormatter("##.###.###/####-##");  
+  
+            jFieldcnpjcpfCadCliente.setValue(null);
+            //if (jRadioButtonFisica.isSelected()){
+            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCNPJ));
+            //}
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -467,17 +498,7 @@ public class cadclienteframe extends javax.swing.JDialog {
 
     private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
         // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cpf
-        //Cria a Mascara de CPF 
-        try {   
-            MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");  
-  
-            jFieldcnpjcpfCadCliente.setValue(null);
-            /*if (jRadioButtonFisica.isSelected()){*/
-            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
-            //}
-        } catch (ParseException e) {  
-            e.printStackTrace();  
-        }
+        this.setMascaraCPF();
     }//GEN-LAST:event_jRadioButtonFisicaActionPerformed
 
     private void jButtonSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteActionPerformed
@@ -529,16 +550,7 @@ public class cadclienteframe extends javax.swing.JDialog {
 
     private void jRadioButtonJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonJuridicaActionPerformed
         // Caso o radio button fisica seja selecionado, ele altera a mascara do campo jFieldcnpjcpfCadCliente para uma mascara de cnpj
-        try {  
-            MaskFormatter mascaraCNPJ = new MaskFormatter("##.###.###/####-##");  
-  
-            jFieldcnpjcpfCadCliente.setValue(null);
-            //if (jRadioButtonFisica.isSelected()){
-            jFieldcnpjcpfCadCliente.setFormatterFactory(new DefaultFormatterFactory(mascaraCNPJ));
-            //}
-        } catch (ParseException e) {  
-            e.printStackTrace();  
-        }
+        this.setMascaraCNPJ();
     }//GEN-LAST:event_jRadioButtonJuridicaActionPerformed
 
     /**
