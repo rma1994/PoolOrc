@@ -510,6 +510,7 @@ public class cadclienteframe extends javax.swing.JDialog {
         };
         
         //Recebe os valores dos campos do formulario
+        cliente.setId(Integer.parseInt(jFieldidCadCliente.getText()));
         cliente.setNome(jFieldnomeCadCliente.getText());
         cliente.setCpf_cnpj(jFieldcnpjcpfCadCliente.getText());
         cliente.setRua(jFieldruaCadCliente.getText());
@@ -524,13 +525,22 @@ public class cadclienteframe extends javax.swing.JDialog {
         cliente.setEmail(jFieldemailCadCliente.getText());
         cliente.setStatus(StatusRepository.valueOf(jComboBox1ClienteAtivo.getSelectedItem().toString()));
         cliente.setObservacoes(jFieldobsCadCliente.getText());
-        
+                
         //Verifica se existe campos obrigatorios em branco ou nulos
         if(cliente.isValida() == true){
-            //Tenta inserir os dados pelo formulario no banco de dados
-            boolean clienteresult = clienteDAO.inserir(cliente);
-            if(clienteresult == true){
-            JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
+            if(clienteDAO.existenciaCliente(cliente) == false){
+                //Tenta inserir os dados pelo formulario no banco de dados
+                boolean clienteresult = clienteDAO.inserir(cliente);
+                if(clienteresult == true){
+                    JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
+                }
+                
+            }else if(clienteDAO.existenciaCliente(cliente) == true){
+               //Tenta ATUALIZAR os dados pelo formulario no banco de dados
+                boolean clienteresult = clienteDAO.atualizar(cliente);
+                if(clienteresult == true){
+                    JOptionPane.showMessageDialog(null, "Cliente Atualizado Com Sucesso!");
+                } 
             }
         }else if(cliente.isValida() == false){
             //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
@@ -538,6 +548,7 @@ public class cadclienteframe extends javax.swing.JDialog {
             cliente.setMensagemerroCliente("Campos em branco: \n");
             cliente.setIsValida(true);
         }
+        
     }//GEN-LAST:event_jButtonSalvarClienteActionPerformed
 
     private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed

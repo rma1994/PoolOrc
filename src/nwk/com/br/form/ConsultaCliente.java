@@ -25,7 +25,9 @@ public class ConsultaCliente extends javax.swing.JDialog {
         initComponents();
         this.setModal(true); 
     }
-
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +46,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
         jTableClientes = new javax.swing.JTable();
         jFieldPesquisa = new javax.swing.JTextField();
         jButtonPesquisar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonInserir = new javax.swing.JButton();
         jComboBoxCampoPesquisa = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -152,10 +154,10 @@ public class ConsultaCliente extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Inserir Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInserir.setText("Inserir Cliente");
+        jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonInserirActionPerformed(evt);
             }
         });
 
@@ -175,7 +177,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
                         .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -187,7 +189,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,12 +205,12 @@ public class ConsultaCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         // TODO add your handling code here:
         cadclienteframe cadclienteframe = new cadclienteframe();
         cadclienteframe.setLocationRelativeTo(null);
         cadclienteframe.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonInserirActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
@@ -217,15 +219,14 @@ public class ConsultaCliente extends javax.swing.JDialog {
         int c;
         
         pesquisaTabela = pesquisaTabela.toUpperCase();
-        
+        //Pega o tamanho da tabela e a coluna que devera ser pesquisada
         if(pesquisaTabela.length()>=1){
             if(jComboBoxCampoPesquisa.getSelectedItem().toString() == "ID"){
                 c = 0;
             }else{
                 c = 1;
             }
-            
-            
+            //Percorre os campos da tabela e procura pelos itens que contenham os parametros de pesquisa em seu nome
             for(int r=0;r<jTableClientes.getRowCount();r++){
                 
                 espacoTabela = jTableClientes.getValueAt(r, c).toString();
@@ -235,6 +236,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
                     jTableClientes.setColumnSelectionInterval(0, 2);  
                     jTableClientes.setRowSelectionInterval(r, r);
                 }
+                break;
             }
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
@@ -333,7 +335,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
     private java.util.List<nwk.com.br.form.Cliente> clienteList;
     private javax.persistence.Query clienteQuery;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JComboBox jComboBoxCampoPesquisa;
     private javax.swing.JTextField jFieldPesquisa;

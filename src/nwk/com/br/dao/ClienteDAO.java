@@ -29,7 +29,7 @@ public class ClienteDAO {
     public ClienteDAO(){
       
     }
-    //select cliente_id.nextval from dual;
+    //Função para checar o ultimo ID cadastrado no DB
     public int checarID(){
         int result = 0;
         String sql = "SELECT MAX(id_cliente) id FROM cliente";
@@ -50,6 +50,29 @@ public class ClienteDAO {
         return result;
     }
     
+    public boolean existenciaCliente(Cliente cliente){
+        boolean result = false;
+        String sql = "SELECT id_cliente id FROM cliente WHERE id_cliente = " + cliente.getId();
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            //Checa se o valor ja existe
+            if(rs.isBeforeFirst() || rs.isAfterLast()){
+                result = true;
+            }else{
+                result = false;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
+    
+    //Função para inserir o cliente no banco de dados
     public boolean inserir(Cliente cliente){
         boolean result = false;
         
@@ -74,6 +97,39 @@ public class ClienteDAO {
             Statement stm = this.conn.createStatement();
             stm.executeUpdate(sql);
             System.out.println("Usuario inserido com sucesso!");
+            result = true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
+        return result;
+    }
+    
+    public boolean atualizar(Cliente cliente){
+        boolean result = false;
+        
+        String sql = "UPDATE cliente"
+                    + " SET tipo_cliente = '" + cliente.getTipoCliente() + "',"
+                    + "nome_cliente = '" + cliente.getNome() + "',"
+                    + "cpf_cnpj_cliente = '" + cliente.getCpf_cnpj() + "',"
+                    + "rua_cliente = '" + cliente.getRua() + "',"
+                    + "bairro_cliente = '" + cliente.getBairro() + "',"
+                    + "numero_end_cliente = '" + cliente.getNumero() + "',"
+                    + "complemento_cliente = '" + cliente.getComplemento() + "',"
+                    + "cep_cliente = '" + cliente.getCep() + "',"
+                    + "cidade_cliente = '" + cliente.getCidade() + "',"
+                    + "estado_cliente = '" + cliente.getEstado() + "',"
+                    + "telefone_cliente = '" + cliente.getTelefone() + "',"
+                    + "celular_cliente = '" + cliente.getCelular() + "',"
+                    + "email_cliente = '" + cliente.getEmail() + "',"
+                    + "ativo_cliente = '" + cliente.getStatus().getValue() + "',"
+                    + "observacoes_cliente = '" + cliente.getObservacoes() + "' "
+                + "WHERE id_cliente = " + cliente.getId();
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            stm.executeUpdate(sql);
+            System.out.println("Usuario Atualizado Com Sucesso!");
             result = true;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
