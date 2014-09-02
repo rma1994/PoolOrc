@@ -245,8 +245,8 @@ public class ConsultaCliente extends javax.swing.JDialog {
                 if(espacoTabela.contains(pesquisaTabela)){
                     jTableClientes.setColumnSelectionInterval(0, 2);  
                     jTableClientes.setRowSelectionInterval(r, r);
+                    break;
                 }
-                break;
             }
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
