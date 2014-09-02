@@ -6,6 +6,7 @@
 
 package nwk.com.br.form;
 
+import javax.swing.table.*;
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.dao.ClienteDAO;
@@ -212,6 +213,13 @@ public class ConsultaCliente extends javax.swing.JDialog {
         cadclienteframe cadclienteframe = new cadclienteframe();
         cadclienteframe.setLocationRelativeTo(null);
         cadclienteframe.setVisible(true);
+        dispose();
+        cadclienteframe.reabrir();
+        
+        //TableModel model = (TableModel) (jTableClientes.getModel());
+        //String [] valores = {Integer.toString(cliente.getId()),cliente.getNome()};
+        //model.
+        
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed

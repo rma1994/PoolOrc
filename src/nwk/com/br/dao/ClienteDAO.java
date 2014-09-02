@@ -45,12 +45,13 @@ public class ClienteDAO {
             result = cliente.getId();
             stm.close();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao tentar consultar o id \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
         return result;
     }
     
+    //Consulta para verificar se tal cliente ja esta cadastrado
     public boolean existenciaCliente(Cliente cliente){
         boolean result = false;
         String sql = "SELECT id_cliente id FROM cliente WHERE id_cliente = " + cliente.getId();
@@ -108,6 +109,7 @@ public class ClienteDAO {
         return result;
     }
     
+    //Atualiza o cliente ja cadastrao no banco de dados
     public boolean atualizar(Cliente cliente){
         boolean result = false;
         
@@ -142,9 +144,46 @@ public class ClienteDAO {
         return result;
     }
     
+    //Retorna todas as informações do cliente
     public Cliente select(int id){
         Cliente cliente = new Cliente();
         String sql = "SELECT * FROM cliente WHERE id_cliente = " + id;
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){        
+                cliente.setId(rs.getInt("id_cliente"));
+                cliente.setTipoCliente(rs.getString("tipo_cliente"));
+                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj_cliente"));
+                cliente.setRua(rs.getString("rua_cliente"));
+                cliente.setBairro(rs.getString("bairro_cliente"));
+                cliente.setNumero(rs.getString("numero_end_cliente"));
+                cliente.setComplemento(rs.getString("complemento_cliente"));
+                cliente.setCep(rs.getString("cep_cliente"));
+                cliente.setCidade(rs.getString("cidade_cliente"));
+                cliente.setEstado(rs.getString("estado_cliente"));
+                cliente.setTelefone(rs.getString("telefone_cliente"));
+                cliente.setCelular(rs.getString("celular_cliente"));
+                cliente.setEmail(rs.getString("celular_cliente"));
+                cliente.setStatus(StatusRepository.getByValue(rs.getString("ativo_cliente")));
+                cliente.setObservacoes(rs.getString("observacoes_cliente"));
+            }
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return cliente;
+    }
+    
+    //Retorna o ultimo cliente inserido no banco de dados.
+    public Cliente selectNovoCliente(){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT * FROM cliente WHERE id_cliente = (" + checarID() + ")";
         
         try{
             conn = Database.getInstance().getConnection();

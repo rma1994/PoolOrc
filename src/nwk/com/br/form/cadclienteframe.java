@@ -22,6 +22,7 @@ public class cadclienteframe extends javax.swing.JDialog {
     
     //Declaração das Variaveis
     Cliente cliente = new Cliente();
+    ConsultaCliente consultacliente;
     ClienteDAO clienteDAO = new ClienteDAO();
     String id;
     int clienteID;
@@ -38,6 +39,13 @@ public class cadclienteframe extends javax.swing.JDialog {
         id = Integer.toString(clienteID);
         jFieldidCadCliente.setText(id);
     }
+    
+   public void reabrir(){
+       ConsultaCliente a = new ConsultaCliente();
+       a.setLocationRelativeTo(null);
+       a.setVisible(true);
+       dispose();
+   }
     
    public void setClienteForm(Cliente cliente){
        
@@ -68,6 +76,7 @@ public class cadclienteframe extends javax.swing.JDialog {
        jFieldemailCadCliente.setText(cliente.getEmail());
        jFieldobsCadCliente.setText(cliente.getObservacoes());
     }
+   
     
     //Função para setar a mascara de cpf
     private void setMascaraCPF(){
