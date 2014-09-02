@@ -43,6 +43,7 @@ public class ClienteDAO {
             Cliente cliente = new Cliente();
             cliente.setId(rs.getInt("id")+1);
             result = cliente.getId();
+            stm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
@@ -65,6 +66,7 @@ public class ClienteDAO {
             }else{
                 result = false;
             }
+            stm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
@@ -98,6 +100,7 @@ public class ClienteDAO {
             stm.executeUpdate(sql);
             System.out.println("Usuario inserido com sucesso!");
             result = true;
+            stm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
@@ -131,6 +134,7 @@ public class ClienteDAO {
             stm.executeUpdate(sql);
             System.out.println("Usuario Atualizado Com Sucesso!");
             result = true;
+            stm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());

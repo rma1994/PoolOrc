@@ -294,6 +294,9 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableClientesMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ConsultaCliente_jTableClientes"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

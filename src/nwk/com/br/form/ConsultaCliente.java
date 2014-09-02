@@ -6,7 +6,6 @@
 
 package nwk.com.br.form;
 
-import javax.swing.JScrollPane;
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Cliente;
 
@@ -23,7 +22,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
      */
     public ConsultaCliente() {
         initComponents();
-        this.setModal(true); 
+        this.setModal(true);
     }
     
     
@@ -204,7 +203,9 @@ public class ConsultaCliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         // TODO add your handling code here:
         cadclienteframe cadclienteframe = new cadclienteframe();
@@ -278,16 +279,16 @@ public class ConsultaCliente extends javax.swing.JDialog {
         
         //Verifica se o campo celular na tabela é nulo
         if(jTableClientes.getValueAt(linhaSelecionada, 5) == null){
-            cliente.setObservacoes("");
+            cliente.setCelular("");
         }else {
-            cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
+            cliente.setCelular(jTableClientes.getValueAt(linhaSelecionada, 5).toString());
         }
         
         //Verifica se o campo complemento na tabela é nulo
         if(jTableClientes.getValueAt(linhaSelecionada, 10) == null){
-            cliente.setObservacoes("");
+            cliente.setComplemento("");
         }else {
-            cliente.setObservacoes(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
+            cliente.setComplemento(jTableClientes.getValueAt(linhaSelecionada, 10).toString());
         }
         
         cadclienteframe.setClienteForm(cliente);

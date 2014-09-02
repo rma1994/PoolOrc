@@ -533,6 +533,7 @@ public class cadclienteframe extends javax.swing.JDialog {
                 boolean clienteresult = clienteDAO.inserir(cliente);
                 if(clienteresult == true){
                     JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
+                    this.dispose();
                 }
                 
             }else if(clienteDAO.existenciaCliente(cliente) == true){
@@ -540,6 +541,7 @@ public class cadclienteframe extends javax.swing.JDialog {
                 boolean clienteresult = clienteDAO.atualizar(cliente);
                 if(clienteresult == true){
                     JOptionPane.showMessageDialog(null, "Cliente Atualizado Com Sucesso!");
+                    this.dispose();
                 } 
             }
         }else if(cliente.isValida() == false){
