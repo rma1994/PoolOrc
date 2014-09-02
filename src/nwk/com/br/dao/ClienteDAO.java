@@ -141,4 +141,39 @@ public class ClienteDAO {
         }
         return result;
     }
+    
+    public Cliente select(int id){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT * FROM cliente WHERE id_cliente = " + id;
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){        
+                cliente.setId(rs.getInt("id_cliente"));
+                cliente.setTipoCliente(rs.getString("tipo_cliente"));
+                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj_cliente"));
+                cliente.setRua(rs.getString("rua_cliente"));
+                cliente.setBairro(rs.getString("bairro_cliente"));
+                cliente.setNumero(rs.getString("numero_end_cliente"));
+                cliente.setComplemento(rs.getString("complemento_cliente"));
+                cliente.setCep(rs.getString("cep_cliente"));
+                cliente.setCidade(rs.getString("cidade_cliente"));
+                cliente.setEstado(rs.getString("estado_cliente"));
+                cliente.setTelefone(rs.getString("telefone_cliente"));
+                cliente.setCelular(rs.getString("celular_cliente"));
+                cliente.setEmail(rs.getString("celular_cliente"));
+                cliente.setStatus(StatusRepository.getByValue(rs.getString("ativo_cliente")));
+                cliente.setObservacoes(rs.getString("observacoes_cliente"));
+            }
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return cliente;
+    }
 }

@@ -8,7 +8,7 @@ package nwk.com.br.form;
 
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Cliente;
-
+import nwk.com.br.dao.ClienteDAO;
 /**
  *
  * @author Richard Matheus
@@ -17,6 +17,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
     
     cadclienteframe cadclienteframe = new cadclienteframe();
     Cliente cliente = new Cliente();
+    ClienteDAO clientedao = new ClienteDAO();
     /**
      * Creates new form ConsultaCliente
      */
@@ -294,7 +295,24 @@ public class ConsultaCliente extends javax.swing.JDialog {
         cadclienteframe.setClienteForm(cliente);
         cadclienteframe.setLocationRelativeTo(null);
         cadclienteframe.setVisible(true);
-        jTableClientes.setValueAt("Teste", linhaSelecionada, 1);
+        
+        //Pega os dados do banco de dados para atualizar a tabela
+        cliente = clientedao.select(cliente.getId());
+        jTableClientes.setValueAt(cliente.getNome(), linhaSelecionada, 1);
+        jTableClientes.setValueAt(cliente.getEmail(), linhaSelecionada, 2);
+        jTableClientes.setValueAt(cliente.getTelefone(), linhaSelecionada, 3);
+        jTableClientes.setValueAt(cliente.getCpf_cnpj(), linhaSelecionada, 4);
+        jTableClientes.setValueAt(cliente.getCelular(), linhaSelecionada, 5);
+        jTableClientes.setValueAt(cliente.getTipoCliente(), linhaSelecionada, 6);
+        jTableClientes.setValueAt(cliente.getRua(), linhaSelecionada, 7);
+        jTableClientes.setValueAt(cliente.getNumero(), linhaSelecionada, 8);
+        jTableClientes.setValueAt(cliente.getBairro(), linhaSelecionada, 9);
+        jTableClientes.setValueAt(cliente.getComplemento(), linhaSelecionada, 10);
+        jTableClientes.setValueAt(cliente.getCidade(), linhaSelecionada, 11);
+        jTableClientes.setValueAt(cliente.getEstado(), linhaSelecionada, 12);
+        jTableClientes.setValueAt(cliente.getCep(), linhaSelecionada, 13);
+        jTableClientes.setValueAt(cliente.getStatus().getValue(), linhaSelecionada, 14);
+        jTableClientes.setValueAt(cliente.getObservacoes(), linhaSelecionada, 15);
     }//GEN-LAST:event_jTableClientesMouseClicked
   
     
