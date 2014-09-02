@@ -294,6 +294,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
         cadclienteframe.setClienteForm(cliente);
         cadclienteframe.setLocationRelativeTo(null);
         cadclienteframe.setVisible(true);
+        jTableClientes.setValueAt("Teste", linhaSelecionada, 1);
     }//GEN-LAST:event_jTableClientesMouseClicked
   
     
