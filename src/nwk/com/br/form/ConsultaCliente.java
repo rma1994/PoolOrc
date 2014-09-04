@@ -6,7 +6,8 @@
 
 package nwk.com.br.form;
 
-import javax.swing.table.*;
+//import javax.swing.table.*;
+import javax.swing.JOptionPane;
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.dao.ClienteDAO;
@@ -227,6 +228,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
         String pesquisaTabela = jFieldPesquisa.getText();
         String espacoTabela;
         int c;
+        boolean encontrou = false;
         
         pesquisaTabela = pesquisaTabela.toUpperCase();
         //Pega o tamanho da tabela e a coluna que devera ser pesquisada
@@ -245,8 +247,12 @@ public class ConsultaCliente extends javax.swing.JDialog {
                 if(espacoTabela.contains(pesquisaTabela)){
                     jTableClientes.setColumnSelectionInterval(0, 2);  
                     jTableClientes.setRowSelectionInterval(r, r);
+                    encontrou = true;
                     break;
                 }
+            }
+            if(encontrou == false){
+                JOptionPane.showMessageDialog(null, "Resultado Não Encontrado!");
             }
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

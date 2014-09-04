@@ -9,11 +9,13 @@ package nwk.com.br.form;
 import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.enums.StatusRepository;
+import nwk.com.br.documents.ControleTexto;
 /**
  *
  * @author RMA
@@ -34,21 +36,24 @@ public class cadclienteframe extends javax.swing.JDialog {
         initComponents();
         this.setModal(true); 
         jRadioButtonFisica.setSelected(true);
+        setCamposTexto();
         
         clienteID = (clienteDAO.checarID());
         id = Integer.toString(clienteID);
         jFieldidCadCliente.setText(id);
     }
-    
-   public void reabrir(){
+   
+    //reabre o form ConsultaCliente para que ele atualize
+    public void reabrir(){
        ConsultaCliente a = new ConsultaCliente();
        a.setLocationRelativeTo(null);
        a.setVisible(true);
        dispose();
-   }
-    
+    }
+   
+   //Seta os campos desse frame, de acordo com os dados recebidos pelo frame
+   //ConsultaCliente
    public void setClienteForm(Cliente cliente){
-       
        //Seleciona o botão radio juridica ou fisica
        if(cliente.getTipoCliente().equals("Fisica")){
            this.setMascaraCPF();
@@ -77,7 +82,6 @@ public class cadclienteframe extends javax.swing.JDialog {
        jFieldobsCadCliente.setText(cliente.getObservacoes());
     }
    
-    
     //Função para setar a mascara de cpf
     private void setMascaraCPF(){
     //Cria a Mascara de CPF 
@@ -106,7 +110,19 @@ public class cadclienteframe extends javax.swing.JDialog {
             e.printStackTrace();  
         }
     }
-
+    
+    //Defini os caracteres validos nos campos de texto
+    private void setCamposTexto(){
+        jFieldnomeCadCliente.setDocument(new ControleTexto());
+        jFieldruaCadCliente.setDocument(new ControleTexto());
+        jFieldbairroCadCliente.setDocument(new ControleTexto());
+        jFieldnumeroCadCliente.setDocument(new ControleTexto());
+        jFieldcomplemCadCliente.setDocument(new ControleTexto());
+        jFieldcidadeCadCliente.setDocument(new ControleTexto());
+        jFieldemailCadCliente.setDocument(new ControleTexto());
+        jFieldobsCadCliente.setDocument(new ControleTexto());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -500,8 +516,19 @@ public class cadclienteframe extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-        cadclienteframe.this.setVisible(false);
-        cadclienteframe.this.dispose();
+        //Altera as mensagens da caixa de confirmação para Sim ou Não
+        UIManager.put("OptionPane.yesButtonText", "Sim");  
+        UIManager.put("OptionPane.noButtonText", "Não");
+        
+        //Mostra uma caixa de confirmação se o usuario deseja mesmo sair
+        switch(JOptionPane.showConfirmDialog(null, "Deseja Mesmo Sair?", "Confirma" ,JOptionPane.YES_NO_OPTION)){
+            case 0:
+                setVisible(false);
+                dispose();
+                break;
+            case 1:
+                break;
+        }
         
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
