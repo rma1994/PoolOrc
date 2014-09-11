@@ -251,9 +251,9 @@ public class ConsultaCliente extends javax.swing.JDialog {
                     break;
                 }
             }
-            if(encontrou == false){
-                JOptionPane.showMessageDialog(null, "Resultado Não Encontrado!");
-            }
+        }
+        if(encontrou == false){
+            JOptionPane.showMessageDialog(null, "Resultado Não Encontrado!");
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 

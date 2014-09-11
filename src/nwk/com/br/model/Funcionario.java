@@ -6,6 +6,7 @@
 
 package nwk.com.br.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import nwk.com.br.enums.StatusRepository;
 
@@ -16,7 +17,7 @@ import nwk.com.br.enums.StatusRepository;
 public class Funcionario {
     private int id;
     private String nome;
-    private String cpf_cnpj;
+    private String cpf;
     private String rua;
     private String numero;
     private String bairro;
@@ -33,6 +34,20 @@ public class Funcionario {
     private Date dhDemissao;
     private String numcarteiratrab;
     private String seriecarteiratrab;
+    private StatusRepository status;
+
+    public StatusRepository getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusRepository status) {
+        this.status = status;
+    }
+    
+    private String mensagemerroFuncionario = new String("Campos em branco: \n");
+    private boolean valida = true;
+    
+    SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
 
     public int getId() {
         return id;
@@ -50,12 +65,14 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public String getCpf_cnpj() {
-        return cpf_cnpj;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCpf_cnpj(String cpf_cnpj) {
-        this.cpf_cnpj = cpf_cnpj;
+    public void setCpf(String cpf) {
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+        this.cpf = cpf;
     }
 
     public String getRua() {
@@ -94,7 +111,8 @@ public class Funcionario {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public void setCep(String cep){
+        cep = cep.replace("-", "");
         this.cep = cep;
     }
 
@@ -150,24 +168,36 @@ public class Funcionario {
         return dhNascimento;
     }
 
-    public void setDhNascimento(Date dhNascimento) {
-        this.dhNascimento = dhNascimento;
+    public void setDhNascimento(String dhNascimento) {
+        try{
+            this.dhNascimento = sdf1.parse(dhNascimento);
+        }catch(Exception e){
+            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
     }
 
     public Date getDhContrato() {
         return dhContrato;
     }
 
-    public void setDhContrato(Date dhContrato) {
-        this.dhContrato = dhContrato;
+    public void setDhContrato(String dhContrato) {
+        try{
+            this.dhContrato = sdf1.parse(dhContrato);
+        }catch(Exception e){
+            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
     }
 
     public Date getDhDemissao() {
         return dhDemissao;
     }
 
-    public void setDhDemissao(Date dhDemissao) {
-        this.dhDemissao = dhDemissao;
+    public void setDhDemissao(String dhDemissao) {
+        try{
+            this.dhDemissao = sdf1.parse(dhDemissao);
+        }catch(Exception e){
+            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
     }
 
     public String getNumcarteiratrab() {

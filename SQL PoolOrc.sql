@@ -42,7 +42,11 @@ seriecarteiratrab_funcionario VARCHAR(7) NULL,
 datacontra_funcionario DATE NULL,
 datademiss_funcionario DATE NULL,
 observacoes_funcionario VARCHAR(500) NULL,
+ativo_funcionario CHAR(1) NOT NULL,
 CONSTRAINT PK_Funcionario_ID PRIMARY KEY(ID_Funcionario));
+/*Caso esteja com uma versao anterios do sql, usar o seguinte comando para alterar essa tabela:
+alter table funcionario
+add ativo_funcionario CHAR(1) NOT NULL;*/
 
 CREATE TABLE Produto(
 cod_prod VARCHAR(9) NOT NULL,
@@ -112,7 +116,7 @@ CREATE SEQUENCE orcamento_id
 START WITH 1
 INCREMENT BY 1;
 
-/*p2: Triggers*/
+/*p2: Triggers, criar um por vez*/
 
 CREATE OR REPLACE TRIGGER trigger_cliente
 BEFORE INSERT ON Cliente
@@ -159,6 +163,7 @@ BEGIN
 	FROM dual;
 END;
 
+/*Altera as sequences para um modelo sem cache*/
 ALTER SEQUENCE cliente_id NOCACHE;
 ALTER SEQUENCE familia_id NOCACHE;
 ALTER SEQUENCE funcionario_id NOCACHE;

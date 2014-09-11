@@ -29,6 +29,7 @@ public class ClienteDAO {
     public ClienteDAO(){
       
     }
+    
     //Função para checar o ultimo ID cadastrado no DB
     public int checarID(){
         int result = 0;

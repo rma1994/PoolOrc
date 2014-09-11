@@ -34,13 +34,13 @@ public class cadclienteframe extends javax.swing.JDialog {
      */
     public cadclienteframe() {
         initComponents();
-        this.setModal(true); 
-        jRadioButtonFisica.setSelected(true);
-        setCamposTexto();
+        this.setModal(true); //Torna essa janela um modal
+        jRadioButtonFisica.setSelected(true); //seleciona o botao Fisica
+        setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
         
-        clienteID = (clienteDAO.checarID());
-        id = Integer.toString(clienteID);
-        jFieldidCadCliente.setText(id);
+        clienteID = (clienteDAO.checarID()); //checa o ultimo ID do cliente
+        id = Integer.toString(clienteID); // transforma esse Id em String
+        jFieldidCadCliente.setText(id); //coloca esse id no campo jFieldidCadCliente
     }
    
     //reabre o form ConsultaCliente para que ele atualize
@@ -64,6 +64,7 @@ public class cadclienteframe extends javax.swing.JDialog {
        }
        //System.out.println(cliente.getTipoCliente());
        
+       //PEga os dados recebidos como parametro e seta nos campos do form.
        jComboBox1ClienteAtivo.setSelectedItem(cliente.getStatus().toString());
        jComboBoxEstado.setSelectedItem(cliente.getEstado());
        
@@ -111,7 +112,7 @@ public class cadclienteframe extends javax.swing.JDialog {
         }
     }
     
-    //Defini os caracteres validos nos campos de texto
+    //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
         jFieldnomeCadCliente.setDocument(new ControleTexto());
         jFieldruaCadCliente.setDocument(new ControleTexto());
@@ -515,7 +516,7 @@ public class cadclienteframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jFieldemailCadClienteActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        
         //Altera as mensagens da caixa de confirmação para Sim ou Não
         UIManager.put("OptionPane.yesButtonText", "Sim");  
         UIManager.put("OptionPane.noButtonText", "Não");
