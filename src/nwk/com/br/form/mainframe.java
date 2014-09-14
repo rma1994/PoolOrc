@@ -8,6 +8,8 @@ package nwk.com.br.form;
 
 import nwk.com.br.model.Cliente;
 import nwk.com.br.dao.ClienteDAO;
+import nwk.com.br.model.Funcionario;
+import nwk.com.br.dao.FuncionarioDAO;
 
 
 /**
@@ -320,9 +322,9 @@ public class mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
-        funcionarioframe.setLocationRelativeTo(null);
-        funcionarioframe.setVisible(true);
+        ConsultaFuncionario consultafuncionario = new ConsultaFuncionario(this, true);
+        consultafuncionario.setLocationRelativeTo(null);
+        consultafuncionario.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -35,7 +35,13 @@ public class Funcionario {
     private String numcarteiratrab;
     private String seriecarteiratrab;
     private StatusRepository status;
-
+    
+    private String mensagemerroFuncionario = new String("Campos em branco: \n");
+    private boolean valida = true;
+    
+    SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
+    
+    
     public StatusRepository getStatus() {
         return status;
     }
@@ -44,11 +50,6 @@ public class Funcionario {
         this.status = status;
     }
     
-    private String mensagemerroFuncionario = new String("Campos em branco: \n");
-    private boolean valida = true;
-    
-    SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
-
     public int getId() {
         return id;
     }

@@ -86,4 +86,49 @@ public class FuncionarioDAO {
         }
         return result;
     }
+    
+    public List<Funcionario> getTodosFuncionarios(){     
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        
+        List<Funcionario> result = new ArrayList<Funcionario>();
+        String sql = "SELECT * FROM funcionario";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+           
+            while(rs.next()){
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getInt("id_funcionario"));
+                funcionario.setNome(rs.getString("nome_funcionario"));
+                funcionario.setDhNascimento(formatDate.format(rs.getDate("datanasc_funcionario")).toString());
+                funcionario.setTelefone(rs.getString("telefone_funcionario"));
+                funcionario.setCelular(rs.getString("celular_funcionario"));
+                funcionario.setEmail(rs.getString("email_funcionario"));
+                funcionario.setRua(rs.getString("rua_funcionario"));
+                funcionario.setNumero(rs.getString("numero_funcionario"));
+                funcionario.setBairro(rs.getString("bairro_funcionario"));
+                funcionario.setComplemento(rs.getString("complemento_funcionario"));
+                funcionario.setCidade(rs.getString("cidade_funcionario"));
+                funcionario.setEstado(rs.getString("estado_funcionario"));
+                funcionario.setCep(rs.getString("cep_funcionario"));
+                funcionario.setNumcarteiratrab(rs.getString("numcarteiratrab_funcionario"));
+                funcionario.setSeriecarteiratrab(rs.getString("seriecarteiratrab_funcionario"));
+                funcionario.setDhContrato(formatDate.format(rs.getDate("datacontra_funcionario")).toString());
+                funcionario.setDhDemissao(formatDate.format(rs.getDate("datademiss_funcionario")).toString());
+                funcionario.setObservacoes(rs.getString("observacoes_funcionario"));
+                funcionario.setStatus(StatusRepository.getByValue(rs.getString("ativo_funcionario")));
+                
+                result.add(funcionario);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();  
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    
+    }
 }
