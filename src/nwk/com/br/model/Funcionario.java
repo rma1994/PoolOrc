@@ -63,7 +63,12 @@ public class Funcionario {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if(nome.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"E-mail\n";
+        } else {
+            this.nome = nome;
+        }
     }
 
     public String getCpf() {
@@ -73,7 +78,12 @@ public class Funcionario {
     public void setCpf(String cpf) {
         cpf = cpf.replace(".", "");
         cpf = cpf.replace("-", "");
-        this.cpf = cpf;
+        if(cpf.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"CPF\n";
+        } else {
+            this.cpf = cpf;
+        }
     }
 
     public String getRua() {
@@ -81,7 +91,12 @@ public class Funcionario {
     }
 
     public void setRua(String rua) {
-        this.rua = rua;
+        if(rua.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Rua\n";
+        } else {
+            this.rua = rua;
+        }
     }
 
     public String getNumero() {
@@ -89,7 +104,12 @@ public class Funcionario {
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        if(numero.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Numero\n";
+        } else {
+            this.numero = numero;
+        }
     }
 
     public String getBairro() {
@@ -97,7 +117,12 @@ public class Funcionario {
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        if(bairro.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Bairro\n";
+        } else {
+            this.bairro = bairro;
+        }
     }
 
     public String getComplemento() {
@@ -105,7 +130,12 @@ public class Funcionario {
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        if(complemento.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Complemento\n";
+        } else {
+            this.complemento = complemento;
+        }
     }
 
     public String getCep() {
@@ -114,7 +144,12 @@ public class Funcionario {
 
     public void setCep(String cep){
         cep = cep.replace("-", "");
-        this.cep = cep;
+        if(cep.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"CEP\n";
+        } else {
+            this.cep = cep;
+        }
     }
 
     public String getCidade() {
@@ -122,7 +157,12 @@ public class Funcionario {
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade;
+        if(cidade.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Cidade\n";
+        } else {
+            this.cidade = cidade;
+        }
     }
 
     public String getEstado() {
@@ -138,7 +178,12 @@ public class Funcionario {
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        if(telefone.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Telefone\n";
+        } else {
+            this.telefone = telefone;
+        }
     }
 
     public String getCelular() {
@@ -154,7 +199,12 @@ public class Funcionario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if(email.equals("")){
+            this.valida = false;
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"E-mail\n";
+        } else {
+            this.email = email;
+        }
     }
 
     public String getObservacoes() {

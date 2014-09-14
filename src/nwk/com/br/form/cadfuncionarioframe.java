@@ -6,6 +6,7 @@
 
 package nwk.com.br.form;
 
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.FuncionarioDAO;
@@ -49,6 +50,36 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
         jFieldemailCadFuncionario.setDocument(new ControleTexto());
         jFieldobsCadFuncionario.setDocument(new ControleTexto());
         jFieldcartCadFuncionario.setDocument(new ControleTexto());
+    }
+    
+    //Seta os campos desse frame, de acordo com os dados recebidos pelo frame
+   //ConsultaCliente
+   public void setFuncionarioForm(Funcionario funcionario){
+       SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
+       
+       //PEga os dados recebidos como parametro e seta nos campos do form.
+       jComboBoxFuncionarioAtivo.setSelectedItem(funcionario.getStatus().toString());
+       jComboBoxEstado.setSelectedItem(funcionario.getEstado());
+       
+       jFieldidCadFuncionario.setText(Integer.toString(funcionario.getId()));
+       jFieldnomeCadFuncionario.setText(funcionario.getNome());
+       jFieldcpfCadFuncionario.setText(funcionario.getCpf());
+       jFieldruaCadFuncionario.setText(funcionario.getRua());
+       jFieldnumeroCadFuncionario.setText(funcionario.getNumero());
+       jFieldbairroCadFuncionario.setText(funcionario.getBairro());
+       jFieldCompFuncionario.setText(funcionario.getComplemento());
+       jFieldcepCadFuncionario.setText(funcionario.getCep());
+       jFieldcidadeCadFuncionario.setText(funcionario.getCidade());
+       jFieldtelCadFuncionario.setText(funcionario.getTelefone());
+       jFieldcelCadFuncionario.setText(funcionario.getCelular());
+       jFieldemailCadFuncionario.setText(funcionario.getEmail());
+       jFieldobsCadFuncionario.setText(funcionario.getObservacoes());
+       jFieldcartCadFuncionario.setText(funcionario.getNumcarteiratrab());
+       jFieldseriecarteiraFuncionario.setText(funcionario.getSeriecarteiratrab());
+       
+       jFieldNascFuncionario.setText(sdf1.format(funcionario.getDhNascimento()).toString().replace("/", ""));
+       jFieldContrFuncionario.setText(sdf1.format(funcionario.getDhContrato()).toString().replace("/", ""));
+       jFieldDemisFuncionario.setText(sdf1.format(funcionario.getDhDemissao()).toString().replace("/", ""));
     }
 
     /**

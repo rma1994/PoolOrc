@@ -63,7 +63,7 @@ public class Cliente {
     }
 
     public void setTipoCliente(String tipoCliente) {
-        if(tipoCliente.equals("") || tipoCliente.equals(null)){
+        if(tipoCliente.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Tipo Cliente\n";
         } else {
@@ -84,7 +84,7 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        if(nome.equals("") || nome.equals(null)){
+        if(nome.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Nome\n";
         } else {
@@ -97,7 +97,7 @@ public class Cliente {
     }
 
     public void setCpf_cnpj(String cpf_cnpj) {
-        if(cpf_cnpj.equals("") || cpf_cnpj.equals(null) || cpf_cnpj.equals("   .   .   -  ") || cpf_cnpj.equals("  .   .   /    -  ")){
+        if(cpf_cnpj.equals("") || cpf_cnpj.equals("   .   .   -  ") || cpf_cnpj.equals("  .   .   /    -  ")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"CPF/CNPJ\n";
         } else {
@@ -113,7 +113,7 @@ public class Cliente {
     }
 
     public void setRua(String rua) {
-        if(rua.equals("") || rua.equals(null)){
+        if(rua.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Rua\n";
         } else {
@@ -126,7 +126,7 @@ public class Cliente {
     }
 
     public void setNumero(String numero) {
-        if(numero.equals("") || numero.equals(null)){
+        if(numero.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Numero\n";
         } else {
@@ -139,7 +139,7 @@ public class Cliente {
     }
 
     public void setBairro(String bairro) {
-        if(bairro.equals("") || bairro.equals(null)){
+        if(bairro.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Bairro\n";
         } else {
@@ -160,7 +160,7 @@ public class Cliente {
     }
 
     public void setCep(String cep) {
-        if(cep.equals("") || cep.equals(null) || cep.equals("     -   ")){
+        if(cep.equals("") || cep.equals("     -   ")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"CEP\n";
         } else {
@@ -174,7 +174,7 @@ public class Cliente {
     }
 
     public void setCidade(String cidade) {
-        if(cidade.equals("") || cidade.equals(null)){
+        if(cidade.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Cidade\n";
         } else {
@@ -187,7 +187,7 @@ public class Cliente {
     }
 
     public void setEstado(String estado) {
-        if(estado.equals("") || estado.equals(null)){
+        if(estado.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Estado\n";
         } else {
@@ -200,7 +200,7 @@ public class Cliente {
     }
 
     public void setTelefone(String telefone) {
-        if(telefone.equals("") || telefone.equals(null)){
+        if(telefone.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Telefone\n";
         } else {
@@ -227,7 +227,7 @@ public class Cliente {
     }
 
     public void setEmail(String email) {
-        if(email.equals("") || email.equals(null)){
+        if(email.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"E-mail\n";
         } else {

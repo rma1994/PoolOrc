@@ -87,6 +87,7 @@ public class FuncionarioDAO {
         return result;
     }
     
+    //Pega todos os funcionarios cadastrados no banco de dados
     public List<Funcionario> getTodosFuncionarios(){     
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
         
@@ -102,6 +103,7 @@ public class FuncionarioDAO {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(rs.getInt("id_funcionario"));
                 funcionario.setNome(rs.getString("nome_funcionario"));
+                funcionario.setCpf(rs.getString("CPF_FUNCIONARIO"));
                 funcionario.setDhNascimento(formatDate.format(rs.getDate("datanasc_funcionario")).toString());
                 funcionario.setTelefone(rs.getString("telefone_funcionario"));
                 funcionario.setCelular(rs.getString("celular_funcionario"));
@@ -125,7 +127,7 @@ public class FuncionarioDAO {
             
             
         }catch(Exception e){
-            e.printStackTrace();  
+            //e.printStackTrace();  
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
         return result;

@@ -164,6 +164,11 @@ public class ConsultaCliente extends javax.swing.JDialog {
         });
 
         jComboBoxCampoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome" }));
+        jComboBoxCampoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCampoPesquisaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,8 +263,6 @@ public class ConsultaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
         int linhaSelecionada;
         
         
@@ -328,6 +331,10 @@ public class ConsultaCliente extends javax.swing.JDialog {
         jTableClientes.setValueAt(cliente.getStatus().getValue(), linhaSelecionada, 14);
         jTableClientes.setValueAt(cliente.getObservacoes(), linhaSelecionada, 15);
     }//GEN-LAST:event_jTableClientesMouseClicked
+
+    private void jComboBoxCampoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCampoPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCampoPesquisaActionPerformed
   
     
     /**
