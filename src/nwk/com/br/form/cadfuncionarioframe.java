@@ -7,6 +7,7 @@
 package nwk.com.br.form;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.FuncionarioDAO;
@@ -77,9 +78,25 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
        jFieldcartCadFuncionario.setText(funcionario.getNumcarteiratrab());
        jFieldseriecarteiraFuncionario.setText(funcionario.getSeriecarteiratrab());
        
-       jFieldNascFuncionario.setText(sdf1.format(funcionario.getDhNascimento()).toString().replace("/", ""));
-       jFieldContrFuncionario.setText(sdf1.format(funcionario.getDhContrato()).toString().replace("/", ""));
-       jFieldDemisFuncionario.setText(sdf1.format(funcionario.getDhDemissao()).toString().replace("/", ""));
+       jFieldNascFuncionario.setText(consultaDatas(funcionario.getDhNascimento()));
+       jFieldContrFuncionario.setText(consultaDatas(funcionario.getDhContrato()));
+       jFieldDemisFuncionario.setText(consultaDatas(funcionario.getDhDemissao()));
+    }
+   
+   //Consulta se a data foi digitada pelo usuario ou nao
+    private String consultaDatas(Date data){
+        SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
+        String dataString = new String();
+        
+        //Coloca a data recebida em uma string
+        dataString = sdf1.format(data).toString();
+        
+        //Verifica se a data esta no formato padrao para datas nao existentes
+        if(dataString.equals("01/01/0001")){
+            dataString = "";
+        }
+        
+        return dataString;
     }
 
     /**
@@ -532,11 +549,34 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
         funcionario.setSeriecarteiratrab(jFieldseriecarteiraFuncionario.getText());
         funcionario.setStatus(StatusRepository.valueOf(jComboBoxFuncionarioAtivo.getSelectedItem().toString()));
         
-        System.out.println(funcionario.getDhContrato());
+        if(funcionario.isValida() == true){
+            if(funcionarioDAO.existenciaFuncionario(funcionario) == false){
+                //Tenta inserir os dados pelo formulario no banco de dados
+                boolean funcionarioresult = funcionarioDAO.inserir(funcionario);
+                if(funcionarioresult == true){
+                    JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
+                    this.dispose();
+                }
+            }else if(funcionarioDAO.existenciaFuncionario(funcionario) == true){
+                //Tenta ATUALIZAR os dados pelo formulario no banco de dados
+                boolean funcionarioresult = funcionarioDAO.atualizar(funcionario);
+                if(funcionarioresult == true){
+                    JOptionPane.showMessageDialog(null, "Cliente Atualizado Com Sucesso!");
+                    this.dispose();
+                }
+            }else if(funcionario.isValida() == false){
+                //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
+                JOptionPane.showMessageDialog(null, funcionario.getMensagemerroFuncionario());
+                funcionario.setMensagemerroFuncionario("Campos em branco: \n");
+                funcionario.setValida(true);
+            }
+        }
+        
+        /*System.out.println(funcionario.getDhContrato());
         System.out.println(funcionario.getDhDemissao());
         System.out.println(funcionario.getDhNascimento());
        
-        funcionarioDAO.inserir(funcionario);
+        funcionarioDAO.inserir(funcionario);*/
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**

@@ -38,9 +38,25 @@ public class Funcionario {
     
     private String mensagemerroFuncionario = new String("Campos em branco: \n");
     private boolean valida = true;
+
     
     SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
+
+    public String getMensagemerroFuncionario() {
+        return mensagemerroFuncionario;
+    }
+
+    public void setMensagemerroFuncionario(String mensagemerroFuncionario) {
+        this.mensagemerroFuncionario = mensagemerroFuncionario;
+    }
     
+    public boolean isValida() {
+        return valida;
+    }
+
+    public void setValida(boolean valida) {
+        this.valida = valida;
+    }
     
     public StatusRepository getStatus() {
         return status;
@@ -50,10 +66,12 @@ public class Funcionario {
         this.status = status;
     }
     
+    
     public int getId() {
         return id;
     }
 
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -220,10 +238,18 @@ public class Funcionario {
     }
 
     public void setDhNascimento(String dhNascimento) {
-        try{
-            this.dhNascimento = sdf1.parse(dhNascimento);
-        }catch(Exception e){
-            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        if(dhNascimento.equals("  /  /    ")){
+           try{
+                this.dhNascimento = sdf1.parse("01/01/0001");
+            }catch(Exception e){
+                System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
+        }else {
+            try{
+                this.dhNascimento = sdf1.parse(dhNascimento);
+            }catch(Exception e){
+                System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
         }
     }
 
@@ -232,10 +258,18 @@ public class Funcionario {
     }
 
     public void setDhContrato(String dhContrato) {
-        try{
-            this.dhContrato = sdf1.parse(dhContrato);
-        }catch(Exception e){
-            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        if(dhContrato.equals("  /  /    ")){
+           try{
+                this.dhContrato = sdf1.parse("01/01/0001");
+            }catch(Exception e){
+                System.out.println("Erro DH Contrato Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
+        }else{
+            try{
+                this.dhContrato = sdf1.parse(dhContrato);
+            }catch(Exception e){
+                System.out.println("Erro DH Contrato Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
         }
     }
 
@@ -244,10 +278,18 @@ public class Funcionario {
     }
 
     public void setDhDemissao(String dhDemissao) {
-        try{
-            this.dhDemissao = sdf1.parse(dhDemissao);
-        }catch(Exception e){
-            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        if(dhDemissao.equals("  /  /    ")){
+           try{
+                this.dhDemissao = sdf1.parse("01/01/0001");
+            }catch(Exception e){
+                System.out.println("Erro DH Demissao Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
+        }else{
+            try{
+                this.dhDemissao = sdf1.parse(dhDemissao);
+            }catch(Exception e){
+                System.out.println("Erro DH Demissao Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+            }
         }
     }
 

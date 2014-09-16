@@ -29,18 +29,21 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         initComponents();
         //Carrega os dados na tabela
         atualizaTable();
-        
-        //Seta as dimensões das colunas
-        jTableFuncionarios.getColumnModel().getColumn(0).setMinWidth(35);
-        jTableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(35);
-        jTableFuncionarios.getColumnModel().getColumn(1).setMinWidth(250);
-        jTableFuncionarios.getColumnModel().getColumn(2).setMinWidth(150);
+       
     }
     
     //Carrega os dados na tabela
     private void atualizaTable(){
         TableModel model = (TableModel) (funcionariostru.getTable());
         jTableFuncionarios.setModel(model);
+        
+        
+        
+        //Seta as dimensões das colunas
+        jTableFuncionarios.getColumnModel().getColumn(0).setMinWidth(35);
+        jTableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(35);
+        jTableFuncionarios.getColumnModel().getColumn(1).setMinWidth(250);
+        jTableFuncionarios.getColumnModel().getColumn(2).setMinWidth(150);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +64,7 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(594, 535));
 
+        jTableFuncionarios.setAutoCreateRowSorter(true);
         jTableFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -256,7 +260,7 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         funcionarioframe.setLocationRelativeTo(null);
         funcionarioframe.setVisible(true);
         
-        //atualizaTable();
+        atualizaTable();
         
         //cadclienteframe.setClienteForm(cliente);
         //cadclienteframe.setLocationRelativeTo(null);

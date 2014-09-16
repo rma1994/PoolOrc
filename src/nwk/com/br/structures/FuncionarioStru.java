@@ -7,6 +7,7 @@
 package nwk.com.br.structures;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import nwk.com.br.dao.FuncionarioDAO;
 import nwk.com.br.model.Funcionario;
@@ -16,9 +17,25 @@ import nwk.com.br.model.Funcionario;
  * @author Richard Matheus
  */
 public class FuncionarioStru {
+    private SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
+    
+    //Consulta se a data foi digitada pelo usuario ou nao
+    private String consultaDatas(Date data){
+        String dataString = new String();
+        
+        //Coloca a data recebida em uma string
+        dataString = sdf1.format(data).toString();
+        
+        //Verifica se a data esta no formato padrao para datas nao existentes
+        if(dataString.equals("01/01/0001")){
+            dataString = "  /  /    ";
+        }
+        
+        return dataString;
+    }
     
     public DefaultTableModel getTable() {
-        SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
+        
         FuncionarioDAO func = new FuncionarioDAO();
         int l = 0;
         
@@ -35,7 +52,7 @@ public class FuncionarioStru {
             dados[l][2] = funcionario.getEmail();
             dados[l][3] = funcionario.getTelefone();
             dados[l][4] = funcionario.getCpf();
-            dados[l][5] = sdf1.format(funcionario.getDhNascimento()).toString();
+            dados[l][5] = consultaDatas(funcionario.getDhNascimento());
             dados[l][6] = funcionario.getCelular();
             dados[l][7] = funcionario.getRua();
             dados[l][8] = funcionario.getNumero();
@@ -46,10 +63,12 @@ public class FuncionarioStru {
             dados[l][13] = funcionario.getCep();
             dados[l][14] = funcionario.getNumcarteiratrab();
             dados[l][15] = funcionario.getSeriecarteiratrab();
-            dados[l][16] = sdf1.format(funcionario.getDhContrato()).toString();
-            dados[l][17] = sdf1.format(funcionario.getDhDemissao()).toString();
+            dados[l][16] = consultaDatas(funcionario.getDhContrato());
+            dados[l][17] = consultaDatas(funcionario.getDhDemissao());
             dados[l][18] = funcionario.getObservacoes();
             dados[l][19] = funcionario.getStatus().getValue();
+            
+            
             
             l++;
         }
