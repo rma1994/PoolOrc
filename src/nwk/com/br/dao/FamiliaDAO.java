@@ -45,6 +45,28 @@ public class FamiliaDAO {
         return result;
     }
     
+    
+    //Função para inserir o cliente no banco de dados
+    public boolean inserir(Familia familia){
+        boolean result = false;
+        
+        String sql = "INSERT INTO familia(descricao_familia) VALUES('" + familia.getDescricao()+ "') ";
+                                                                                                    
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            stm.executeUpdate(sql);
+            System.out.println("Familia inserido com sucesso!");
+            result = true;
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
+        return result;
+    }
+    
+    
     //Pega todos os funcionarios cadastrados no banco de dados
     public List<Familia> getTodasFamilias(){     
                 

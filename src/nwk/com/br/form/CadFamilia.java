@@ -8,14 +8,20 @@ package nwk.com.br.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import nwk.com.br.dao.FamiliaDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.model.Familia;
 
 /**
  *
  * @author Richard Matheus
  */
 public class CadFamilia extends javax.swing.JDialog {
-
+    //Variaveis
+    Familia familia = new Familia();
+    FamiliaDAO familiadao = new FamiliaDAO();
+    
+    
     /**
      * Creates new form CadFamilia
      */
@@ -56,6 +62,11 @@ public class CadFamilia extends javax.swing.JDialog {
         jLabel2.setText("Descrição :");
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +132,12 @@ public class CadFamilia extends javax.swing.JDialog {
                 break;
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        familia.setDescricao(jFieldDescricao.getText());
+        
+        familiadao.inserir(familia);
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments

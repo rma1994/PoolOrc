@@ -38,6 +38,7 @@ public class ConsultaFamilia extends javax.swing.JDialog {
         //Seta as dimensões das colunas
         jTableFamilia.getColumnModel().getColumn(0).setMinWidth(35);
         jTableFamilia.getColumnModel().getColumn(0).setMaxWidth(35);
+        jTableFamilia.getColumnModel().getColumn(1).setPreferredWidth(463);
     }
 
     /**
