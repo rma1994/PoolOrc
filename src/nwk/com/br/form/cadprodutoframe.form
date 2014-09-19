@@ -105,7 +105,7 @@
                                   <Component id="jFieldporcenCadProduto" alignment="0" pref="201" max="32767" attributes="0"/>
                                   <Component id="jFieldvlcompCadProduto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jFieldsimilarCadProduto" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jFieldjTextField4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldMarca" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -144,7 +144,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFieldjTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jFieldfamiliaCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -212,6 +212,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jFieldcodproCadProduto">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -225,7 +228,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jFielddescCadProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="jFieldjTextField4">
+            <Component class="javax.swing.JTextField" name="jFieldMarca">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
@@ -309,6 +312,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

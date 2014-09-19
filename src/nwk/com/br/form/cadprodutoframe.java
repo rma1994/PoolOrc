@@ -6,6 +6,10 @@
 
 package nwk.com.br.form;
 
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import nwk.com.br.documents.ControleTexto;
+
 /**
  *
  * @author RMA
@@ -18,6 +22,16 @@ public class cadprodutoframe extends javax.swing.JDialog {
     public cadprodutoframe() {
         initComponents();
         this.setModal(true); 
+        setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
+    }
+    
+    //Define os caracteres validos nos campos de texto
+    private void setCamposTexto(){
+        jFieldcodfabCadProduto.setDocument(new ControleTexto());
+        jFielddescCadProduto.setDocument(new ControleTexto());
+        jFieldMarca.setDocument(new ControleTexto());
+        jFieldfamiliaCadProduto.setDocument(new ControleTexto());
+        jFieldsimilarCadProduto.setDocument(new ControleTexto());
     }
 
     /**
@@ -43,7 +57,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jFieldcodfabCadProduto = new javax.swing.JTextField();
         jFielddescCadProduto = new javax.swing.JTextField();
-        jFieldjTextField4 = new javax.swing.JTextField();
+        jFieldMarca = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jFieldfamiliaCadProduto = new javax.swing.JTextField();
         jFieldsimilarCadProduto = new javax.swing.JTextField();
@@ -76,6 +90,8 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jLabel6.setText("Valor de Venda :");
 
         jLabel7.setText("Porcentagem :");
+
+        jFieldcodproCadProduto.setEditable(false);
 
         jLabel8.setText("Codigo Produto Pelo Fabricante :");
 
@@ -119,7 +135,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
                             .addComponent(jFieldporcenCadProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                             .addComponent(jFieldvlcompCadProduto, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFieldsimilarCadProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFieldjTextField4, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jFieldMarca, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -148,7 +164,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFieldjTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jFieldfamiliaCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,6 +213,11 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jButton1.setText("Salvar");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,6 +249,22 @@ public class cadprodutoframe extends javax.swing.JDialog {
     private void jFieldcodfabCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFieldcodfabCadProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldcodfabCadProdutoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Altera as mensagens da caixa de confirmação para Sim ou Não
+        UIManager.put("OptionPane.yesButtonText", "Sim");  
+        UIManager.put("OptionPane.noButtonText", "Não");
+        
+        //Mostra uma caixa de confirmação se o usuario deseja mesmo sair
+        switch(JOptionPane.showConfirmDialog(null, "Deseja Mesmo Sair?", "Confirma" ,JOptionPane.YES_NO_OPTION)){
+            case 0:
+                setVisible(false);
+                dispose();
+                break;
+            case 1:
+                break;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,12 +304,12 @@ public class cadprodutoframe extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JTextField jFieldMarca;
     private javax.swing.JTextField jFieldcodfabCadProduto;
     private javax.swing.JTextField jFieldcodproCadProduto;
     private javax.swing.JTextField jFielddescCadProduto;
     private javax.swing.JTextField jFielddtCadProduto;
     private javax.swing.JTextField jFieldfamiliaCadProduto;
-    private javax.swing.JTextField jFieldjTextField4;
     private javax.swing.JTextField jFieldporcenCadProduto;
     private javax.swing.JTextField jFieldsimilarCadProduto;
     private javax.swing.JTextField jFieldvlcompCadProduto;
