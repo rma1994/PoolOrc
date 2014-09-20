@@ -303,6 +303,11 @@ public class mainframe extends javax.swing.JFrame {
         jMenu2.add(jMenuItem13);
 
         jMenuItem14.setText("Similar");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem14);
 
         jMenuBar1.add(jMenu2);
@@ -419,7 +424,9 @@ public class mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
+        CadSimilar cadsimilar = new CadSimilar(null, true);
+        cadsimilar.setLocationRelativeTo(null);
+        cadsimilar.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -434,6 +441,12 @@ public class mainframe extends javax.swing.JFrame {
         consultafamilia.setLocationRelativeTo(null);
         consultafamilia.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        ConsultaSimilar consultasimilar = new ConsultaSimilar(null, true);
+        consultasimilar.setLocationRelativeTo(null);
+        consultasimilar.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     /**
      * @param args the command line arguments

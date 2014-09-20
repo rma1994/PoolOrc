@@ -8,34 +8,35 @@ package nwk.com.br.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import nwk.com.br.dao.FamiliaDAO;
+import nwk.com.br.dao.SimilarDAO;
 import nwk.com.br.documents.ControleTexto;
-import nwk.com.br.model.Familia;
+import nwk.com.br.model.Similar;
 
 /**
  *
  * @author Richard Matheus
  */
-public class CadFamilia extends javax.swing.JDialog {
+public class CadSimilar extends javax.swing.JDialog {
     //Variaveis
-    private Familia familia = new Familia();
-    private FamiliaDAO familiadao = new FamiliaDAO();
+    private Similar similar = new Similar();
+    private SimilarDAO similardao = new SimilarDAO();
     private String id;
-    private int familiaID;
+    private int similarID;
     
     /**
-     * Creates new form CadFamilia
+     * Creates new form CadSimilar
      */
-    public CadFamilia(java.awt.Frame parent, boolean modal) {
+    public CadSimilar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
         
-        familiaID = (familiadao.checarID()); //checa o ultimo ID do funcionario
-        id = Integer.toString(familiaID); // transforma esse Id em String
+        similarID = (similardao.checarID()); //checa o ultimo ID do funcionario
+        id = Integer.toString(similarID); // transforma esse Id em String
         jFieldId.setText(id); //coloca esse id no campo jFieldidCadFuncionario
     }
+    
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
@@ -43,10 +44,11 @@ public class CadFamilia extends javax.swing.JDialog {
     }
     
     //Seta os campos de familia de acordo com o input de ConsultaFamilia
-    public void setFamiliaForm(Familia familia){
-        jFieldId.setText(Integer.toString(familia.getId()));
-        jFieldDescricao.setText(familia.getDescricao());
+    public void setFamiliaForm(Similar similar){
+        jFieldId.setText(Integer.toString(similar.getId()));
+        jFieldDescricao.setText(similar.getDescricao());
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,17 +59,23 @@ public class CadFamilia extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jFieldId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jFieldDescricao = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jFieldDescricao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jFieldId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Familia");
+        setTitle("Cadastro de Similar");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Familia"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Similar"));
+
+        jLabel1.setText("ID :");
+
+        jFieldId.setEditable(false);
+
+        jLabel2.setText("Descrição :");
 
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,40 +91,37 @@ public class CadFamilia extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Descrição :");
-
-        jFieldId.setEditable(false);
-
-        jLabel1.setText("Codigo :");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonCancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSalvar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jFieldDescricao)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(231, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSalvar)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -125,21 +130,21 @@ public class CadFamilia extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonCancelar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -167,31 +172,30 @@ public class CadFamilia extends javax.swing.JDialog {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         String descricao = jFieldDescricao.getText();
         
-        familia.setId(Integer.parseInt(jFieldId.getText()));
-        familia.setDescricao(descricao);
+        similar.setId(Integer.parseInt(jFieldId.getText()));
+        similar.setDescricao(descricao);
         
         if(!descricao.equals("")){
-            if(familiadao.existenciaFamilia(familia) == false){
+            if(similardao.existenciaFamilia(similar) == false){
                 
                 //Tenta inserir os dados pelo formulario no banco de dados
-                boolean funcionarioresult = familiadao.inserir(familia);
+                boolean funcionarioresult = similardao.inserir(similar);
                 if(funcionarioresult == true){
-                    JOptionPane.showMessageDialog(null, "Familia Inserido Com Sucesso!");
+                    JOptionPane.showMessageDialog(null, "Similar Inserido Com Sucesso!");
                     this.dispose();
                 }
-            }else if(familiadao.existenciaFamilia(familia) == true){
+            }else if(similardao.existenciaFamilia(similar) == true){
                 
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
-                boolean funcionarioresult = familiadao.atualizar(familia);
+                boolean funcionarioresult = similardao.atualizar(similar);
                 if(funcionarioresult == true){
-                    JOptionPane.showMessageDialog(null, "Familia Atualizado Com Sucesso!");
+                    JOptionPane.showMessageDialog(null, "Similar Atualizado Com Sucesso!");
                     this.dispose();
                 }
             }
         }else {
             JOptionPane.showMessageDialog(null, "Campo Descrição em Branco!");
         }
-        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
@@ -211,20 +215,20 @@ public class CadFamilia extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadSimilar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadSimilar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadSimilar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadSimilar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadFamilia dialog = new CadFamilia(new javax.swing.JFrame(), true);
+                CadSimilar dialog = new CadSimilar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
