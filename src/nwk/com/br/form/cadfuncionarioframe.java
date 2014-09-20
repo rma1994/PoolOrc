@@ -21,10 +21,10 @@ import nwk.com.br.model.Funcionario;
  */
 public class cadfuncionarioframe extends javax.swing.JDialog {
     //Declaração das Variaveis
-    Funcionario funcionario = new Funcionario();
-    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-    String id;
-    int funcionarioID;
+    private Funcionario funcionario = new Funcionario();
+    private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    private String id;
+    private int funcionarioID;
     
     /**
      * Creates new form cadclienteframe
@@ -554,14 +554,14 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean funcionarioresult = funcionarioDAO.inserir(funcionario);
                 if(funcionarioresult == true){
-                    JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucesso!");
+                    JOptionPane.showMessageDialog(null, "Funcionario Inserido Com Sucesso!");
                     this.dispose();
                 }
             }else if(funcionarioDAO.existenciaFuncionario(funcionario) == true){
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean funcionarioresult = funcionarioDAO.atualizar(funcionario);
                 if(funcionarioresult == true){
-                    JOptionPane.showMessageDialog(null, "Cliente Atualizado Com Sucesso!");
+                    JOptionPane.showMessageDialog(null, "Funcionario Atualizado Com Sucesso!");
                     this.dispose();
                 }
             }else if(funcionario.isValida() == false){

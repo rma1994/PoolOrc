@@ -23,11 +23,11 @@ import nwk.com.br.documents.ControleTexto;
 public class cadclienteframe extends javax.swing.JDialog {
     
     //Declaração das Variaveis
-    Cliente cliente = new Cliente();
-    ConsultaCliente consultacliente;
-    ClienteDAO clienteDAO = new ClienteDAO();
-    String id;
-    int clienteID;
+    private Cliente cliente = new Cliente();
+    private ConsultaCliente consultacliente;
+    private ClienteDAO clienteDAO = new ClienteDAO();
+    private String id;
+    private int clienteID;
     
     /**
      * Creates new form cadclienteframe

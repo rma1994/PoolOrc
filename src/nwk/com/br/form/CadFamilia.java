@@ -18,9 +18,10 @@ import nwk.com.br.model.Familia;
  */
 public class CadFamilia extends javax.swing.JDialog {
     //Variaveis
-    Familia familia = new Familia();
-    FamiliaDAO familiadao = new FamiliaDAO();
-    
+    private Familia familia = new Familia();
+    private FamiliaDAO familiadao = new FamiliaDAO();
+    private String id;
+    private int familiaID;
     
     /**
      * Creates new form CadFamilia
@@ -30,11 +31,21 @@ public class CadFamilia extends javax.swing.JDialog {
         initComponents();
         
         setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
+        
+        familiaID = (familiadao.checarID()); //checa o ultimo ID do funcionario
+        id = Integer.toString(familiaID); // transforma esse Id em String
+        jFieldId.setText(id); //coloca esse id no campo jFieldidCadFuncionario
     }
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
-    jFieldDescricao.setDocument(new ControleTexto());
+        jFieldDescricao.setDocument(new ControleTexto());
+    }
+    
+    //Seta os campos de familia de acordo com o input de ConsultaFamilia
+    public void setFamiliaForm(Familia familia){
+        jFieldId.setText(Integer.toString(familia.getId()));
+        jFieldDescricao.setText(familia.getDescricao());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,9 +145,33 @@ public class CadFamilia extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        familia.setDescricao(jFieldDescricao.getText());
+        String descricao = jFieldDescricao.getText();
         
-        familiadao.inserir(familia);
+        familia.setId(Integer.parseInt(jFieldId.getText()));
+        familia.setDescricao(descricao);
+        
+        if(!descricao.equals("")){
+            if(familiadao.existenciaFamilia(familia) == false){
+                
+                //Tenta inserir os dados pelo formulario no banco de dados
+                boolean funcionarioresult = familiadao.inserir(familia);
+                if(funcionarioresult == true){
+                    JOptionPane.showMessageDialog(null, "Familia Inserido Com Sucesso!");
+                    this.dispose();
+                }
+            }else if(familiadao.existenciaFamilia(familia) == true){
+                
+                //Tenta ATUALIZAR os dados pelo formulario no banco de dados
+                boolean funcionarioresult = familiadao.atualizar(familia);
+                if(funcionarioresult == true){
+                    JOptionPane.showMessageDialog(null, "Familia Atualizado Com Sucesso!");
+                    this.dispose();
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Campo Descrição em Branco!");
+        }
+        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**

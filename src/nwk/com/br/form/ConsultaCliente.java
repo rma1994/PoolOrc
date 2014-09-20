@@ -17,9 +17,9 @@ import nwk.com.br.dao.ClienteDAO;
  */
 public class ConsultaCliente extends javax.swing.JDialog {
     
-    cadclienteframe cadclienteframe = new cadclienteframe();
-    Cliente cliente = new Cliente();
-    ClienteDAO clientedao = new ClienteDAO();
+    private cadclienteframe cadclienteframe = new cadclienteframe();
+    private Cliente cliente = new Cliente();
+    private ClienteDAO clientedao = new ClienteDAO();
     /**
      * Creates new form ConsultaCliente
      */

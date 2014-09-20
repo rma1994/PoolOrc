@@ -93,4 +93,49 @@ public class FamiliaDAO {
         return result;
     
     }
+    
+    //Consulta para verificar se tal familia ja esta cadastrado
+    public boolean existenciaFamilia(Familia familia){
+        boolean result = false;
+        String sql = "SELECT cod_familia id FROM familia WHERE cod_familia = " + familia.getId();
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            //Checa se o valor ja existe
+            if(rs.isBeforeFirst() || rs.isAfterLast()){
+                result = true;
+            }else{
+                result = false;
+            }
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
+    
+    //Atualiza o cliente ja cadastrao no banco de dados
+    public boolean atualizar(Familia familia){
+        boolean result = false;
+        
+        String sql = "UPDATE familia"
+                    + " SET descricao_familia = '" + familia.getDescricao()+ "'"
+                + "WHERE cod_familia = " + familia.getId();
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            stm.executeUpdate(sql);
+            System.out.println("Familia Atualizada Com Sucesso!");
+            result = true;
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
+        return result;
+    }
 }
