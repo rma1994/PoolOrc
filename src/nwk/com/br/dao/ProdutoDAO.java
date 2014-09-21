@@ -150,7 +150,7 @@ public class ProdutoDAO {
                     + "valor_compras = '" + produto.getValorCompra() + "',"
                     + "valor_vendas = '" + produto.getValorVenda()+ "',"
                     + "porcentagem_venpecas = '" + produto.getPorcentagem()+ "',"
-                    + "observacoes_produto = '" + produto.getPorcentagem() + "'"
+                    + "observacoes_produto = '" + produto.getObservacoes() + "'"
                 + "WHERE cod_prod = '" + produto.getId() + "'";
         try{
             conn = Database.getInstance().getConnection();
