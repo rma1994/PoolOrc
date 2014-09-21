@@ -383,9 +383,9 @@ public class mainframe extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        cadprodutoframe produtoframe = new cadprodutoframe();
-        produtoframe.setLocationRelativeTo(null);
-        produtoframe.setVisible(true);
+        ConsultaProduto consultaproduto = new ConsultaProduto(null, true);
+        consultaproduto.setLocationRelativeTo(null);
+        consultaproduto.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed

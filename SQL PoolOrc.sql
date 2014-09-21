@@ -22,6 +22,9 @@ ativo_cliente CHAR(1) NOT NULL,
 observacoes_cliente VARCHAR(500) NULL,
 CONSTRAINT PK_Cliente_ID PRIMARY KEY(ID_Cliente));
 
+/*Caso esteja com uma versao anterios do sql, usar o seguinte comando para alterar a tabela Funcionario:
+alter table funcionario
+add ativo_funcionario CHAR(1) NOT NULL;*/
 CREATE TABLE Funcionario(
 id_funcionario INT NOT NULL,
 nome_funcionario VARCHAR(100) NULL,
@@ -44,23 +47,25 @@ datademiss_funcionario DATE NULL,
 observacoes_funcionario VARCHAR(500) NULL,
 ativo_funcionario CHAR(1) NOT NULL,
 CONSTRAINT PK_Funcionario_ID PRIMARY KEY(ID_Funcionario));
-/*Caso esteja com uma versao anterios do sql, usar o seguinte comando para alterar essa tabela:
+
+/*Caso esteja com uma versao anterios do sql, usar o seguinte comando para alterar a tabela Produto:
 alter table funcionario
 add ativo_funcionario CHAR(1) NOT NULL;*/
-
 CREATE TABLE Produto(
 cod_prod VARCHAR(9) NOT NULL,
 cod_fabricante VARCHAR(15) NULL,
 dat_cadastro DATE NULL,
 descricao_pecas VARCHAR(255) NULL,
 marca_pecas VARCHAR(100) NULL,
-familia_pecas VARCHAR(100) NULL,
-similar_pecas VARCHAR(100) NULL,
+familia_pecas INT NULL,
+similar_pecas INT NULL,
 valor_compras DECIMAL(8,2) NULL,
 valor_vendas DECIMAL(8,2) NULL,
 porcentagem_venpecas DECIMAL(5,2) NULL,
 observacoes_produto VARCHAR(500) NULL,
-CONSTRAINT PK_Produto_Cod PRIMARY KEY(cod_prod));
+CONSTRAINT PK_Produto_Cod PRIMARY KEY(cod_prod),
+CONSTRAINT FK_Familia_Cod FOREIGN KEY (familia_pecas) REFERENCES familia,
+CONSTRAINT FK_Similar_Cod FOREIGN KEY (similar_pecas) REFERENCES similar);
 
 CREATE TABLE Familia(
 cod_familia INT NOT NULL,

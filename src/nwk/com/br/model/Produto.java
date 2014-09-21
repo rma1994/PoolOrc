@@ -6,6 +6,7 @@
 
 package nwk.com.br.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * @author Richard Matheus
  */
 public class Produto {
-    private int id;
+    private String id;
     private String idFabricante;
     private String descricao;
     private String marca;
@@ -24,13 +25,38 @@ public class Produto {
     private String porcentagem;
     private String observacoes;
     private Date dhCadastro;
+    
+    private String mensagemerroProduto = new String("Campos em branco: \n");
+    private boolean valida = true;
+    SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
 
-    public int getId() {
+    public String getMensagemerroProduto() {
+        return mensagemerroProduto;
+    }
+
+    public void setMensagemerroProduto(String mensagemerroProduto) {
+        this.mensagemerroProduto = mensagemerroProduto;
+    }
+
+    public boolean isValida() {
+        return valida;
+    }
+
+    public void setValida(boolean valida) {
+        this.valida = valida;
+    }
+    
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        if(id.equals("")){
+            this.valida = false;
+            this.mensagemerroProduto = mensagemerroProduto + "ID\n";
+        } else {
+            this.id = id;
+        }
     }
 
     public String getIdFabricante() {
@@ -46,7 +72,12 @@ public class Produto {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        if(descricao.equals("")){
+            this.valida = false;
+            this.mensagemerroProduto = mensagemerroProduto + "Descrição\n";
+        } else {
+            this.descricao = descricao;
+        }
     }
 
     public String getMarca() {
@@ -54,7 +85,12 @@ public class Produto {
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        if(marca.equals("")){
+            this.valida = false;
+            this.mensagemerroProduto = mensagemerroProduto + "Marca\n";
+        } else {
+            this.marca = marca;
+        }
     }
 
     public String getFamilia() {
@@ -62,6 +98,11 @@ public class Produto {
     }
 
     public void setFamilia(String familia) {
+        //Armazerno somente o codigo de familia.
+        int index;
+        index = familia.indexOf("-"); //Pego a posição do -, que indica até vai o cod
+        familia = familia.substring(0, index); // armazeno o codigo até o -
+        
         this.familia = familia;
     }
 
@@ -70,6 +111,11 @@ public class Produto {
     }
 
     public void setSimilar(String similar) {
+        //Armazerno somente o codigo de familia.
+        int index;
+        index = similar.indexOf("-"); //Pego a posição do -, que indica até vai o cod
+        similar = similar.substring(0, index);// armazeno o codigo até o -
+        
         this.similar = similar;
     }
 
@@ -86,7 +132,12 @@ public class Produto {
     }
 
     public void setValorVenda(String valorVenda) {
-        this.valorVenda = valorVenda;
+        if(valorVenda.equals("")){
+            this.valida = false;
+            this.mensagemerroProduto = mensagemerroProduto + "Valor de Venda\n";
+        } else {
+            this.valorVenda = valorVenda;
+        }
     }
 
     public String getPorcentagem() {
@@ -109,8 +160,12 @@ public class Produto {
         return dhCadastro;
     }
 
-    public void setDhCadastro(Date dhCadastro) {
-        this.dhCadastro = dhCadastro;
+    public void setDhCadastro(String dhCadastro) {
+        try{
+            this.dhCadastro = sdf1.parse(dhCadastro);
+        }catch(Exception e){
+            System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
     }
     
 }

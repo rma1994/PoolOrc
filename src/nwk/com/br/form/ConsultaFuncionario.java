@@ -18,9 +18,9 @@ import nwk.com.br.structures.FuncionarioStru;
  */
 public class ConsultaFuncionario extends javax.swing.JDialog {
     
-    FuncionarioStru funcionariostru = new FuncionarioStru();
-    Funcionario funcionario = new Funcionario();
-    cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
+    private FuncionarioStru funcionariostru = new FuncionarioStru();
+    private Funcionario funcionario = new Funcionario();
+    private cadfuncionarioframe funcionarioframe = new cadfuncionarioframe();
     /**
      * Creates new form ConsultaFuncionario
      */
@@ -80,6 +80,9 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         jTableFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableFuncionariosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTableFuncionariosMouseEntered(evt);
             }
         });
         jScrollPane1.setViewportView(jTableFuncionarios);
@@ -285,6 +288,10 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         jTableClientes.setValueAt(cliente.getObservacoes(), linhaSelecionada, 15);
     */
     }//GEN-LAST:event_jTableFuncionariosMouseClicked
+
+    private void jTableFuncionariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFuncionariosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableFuncionariosMouseEntered
 
     /**
      * @param args the command line arguments

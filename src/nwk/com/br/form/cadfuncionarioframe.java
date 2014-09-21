@@ -58,7 +58,7 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
    public void setFuncionarioForm(Funcionario funcionario){
        SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
        
-       //PEga os dados recebidos como parametro e seta nos campos do form.
+       //Pega os dados recebidos como parametro e seta nos campos do form.
        jComboBoxFuncionarioAtivo.setSelectedItem(funcionario.getStatus().toString());
        jComboBoxEstado.setSelectedItem(funcionario.getEstado());
        
@@ -480,10 +480,10 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
             .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar)
-                .addGap(36, 36, 36)
                 .addComponent(jButtonSalvar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonCancelar)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,6 +557,7 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Funcionario Inserido Com Sucesso!");
                     this.dispose();
                 }
+                
             }else if(funcionarioDAO.existenciaFuncionario(funcionario) == true){
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean funcionarioresult = funcionarioDAO.atualizar(funcionario);
@@ -564,13 +565,14 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Funcionario Atualizado Com Sucesso!");
                     this.dispose();
                 }
-            }else if(funcionario.isValida() == false){
+            }
+        }else if(funcionario.isValida() == false){
                 //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
                 JOptionPane.showMessageDialog(null, funcionario.getMensagemerroFuncionario());
                 funcionario.setMensagemerroFuncionario("Campos em branco: \n");
                 funcionario.setValida(true);
-            }
         }
+        
         
         /*System.out.println(funcionario.getDhContrato());
         System.out.println(funcionario.getDhDemissao());

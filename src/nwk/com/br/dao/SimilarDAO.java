@@ -137,6 +137,5 @@ public class SimilarDAO {
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
         return result;
-    
     }
 }

@@ -38,8 +38,6 @@ public class Funcionario {
     
     private String mensagemerroFuncionario = new String("Campos em branco: \n");
     private boolean valida = true;
-
-    
     SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
 
     public String getMensagemerroFuncionario() {
@@ -83,7 +81,7 @@ public class Funcionario {
     public void setNome(String nome) {
         if(nome.equals("")){
             this.valida = false;
-            this.mensagemerroFuncionario = mensagemerroFuncionario+"E-mail\n";
+            this.mensagemerroFuncionario = mensagemerroFuncionario+"Nome\n";
         } else {
             this.nome = nome;
         }

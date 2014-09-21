@@ -14,6 +14,7 @@ import nwk.com.br.dao.FamiliaDAO;
 import nwk.com.br.dao.ProdutoDAO;
 import nwk.com.br.dao.SimilarDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
 import nwk.com.br.documents.ControleTextoValores;
 import nwk.com.br.model.Familia;
 import nwk.com.br.model.Produto;
@@ -29,8 +30,8 @@ public class cadprodutoframe extends javax.swing.JDialog {
     private SimilarDAO similardao = new SimilarDAO();
     private Produto produto = new Produto();
     private ProdutoDAO produtodao = new ProdutoDAO();
-    private String id;
-    private int produtoID;
+    /*private String id;
+    private int produtoID;*/
             
     /**
      * Creates new form cadprodutoframe
@@ -44,13 +45,14 @@ public class cadprodutoframe extends javax.swing.JDialog {
         setBoxSimilar(); //Mostra os similares cadastrados na combobox similar
         getTimeStamp(); //Pega a Hora atual para colocar no campo de texto 'data cadastro'
         
-        produtoID = (produtodao.checarID()); //checa o ultimo ID do funcionario
+        /*produtoID = (produtodao.checarID()); //checa o ultimo ID do funcionario
         id = Integer.toString(produtoID); // transforma esse Id em String
-        jFieldcodproCadProduto.setText(id); //coloca esse id no campo jFieldidCadFuncionario
+        jFieldcodproCadProduto.setText(id); //coloca esse id no campo jFieldidCadFuncionario*/
     }
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
+        jFieldcodproCadProduto.setDocument(new ControleTextoId());
         jFieldcodfabCadProduto.setDocument(new ControleTexto());
         jFielddescCadProduto.setDocument(new ControleTexto());
         jFieldMarca.setDocument(new ControleTexto());
@@ -59,17 +61,19 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jFieldporcenCadProduto.setDocument(new ControleTextoValores());
     }
     
+    //Seta os valores existentes na box familia
     private void setBoxFamilia(){
         jComboFamilia.removeAllItems();
         for (Familia familia : familiadao.getTodasFamilias()){
-            jComboFamilia.addItem(familia.getDescricao());
+            jComboFamilia.addItem(familia.getId() + " - " + familia.getDescricao());
         }
     }
     
+    //Seta os valores existentes na box similar
     private void setBoxSimilar(){
         jComboSimilar.removeAllItems();
         for (Similar similar : similardao.getTodosSimilares()){
-            jComboSimilar.addItem(similar.getDescricao());
+            jComboSimilar.addItem(similar.getId() + " - " + similar.getDescricao());
         }
     }
 
@@ -79,6 +83,26 @@ public class cadprodutoframe extends javax.swing.JDialog {
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
         
         jFielddtCadProduto.setText(formatDate.format(dataAtual));
+    }
+    
+    public void setProdutoForm(Produto produto){
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        
+        //Converte os dados para int
+        //Seta a combobox pelo valor do index, uma vez que o index sera sempre
+        //o valor da chave primaria de familia/similar -1
+        jComboFamilia.setSelectedIndex(Integer.parseInt(produto.getFamilia())-1);
+        jComboSimilar.setSelectedIndex(Integer.parseInt(produto.getSimilar())-1);
+        
+        jFieldcodproCadProduto.setText(produto.getId());
+        jFieldcodfabCadProduto.setText(produto.getIdFabricante());
+        jFielddtCadProduto.setText(formatDate.format(produto.getDhCadastro()).toString());
+        jFielddescCadProduto.setText(produto.getDescricao());
+        jFieldMarca.setText(produto.getMarca());
+        jFieldvlcompCadProduto.setText(produto.getValorCompra());
+        jFieldvlvendaCadProduto.setText(produto.getValorVenda());
+        jFieldporcenCadProduto.setText(produto.getPorcentagem());
+        jTextAreaObs.setText(produto.getObservacoes());
     }
     
     /**
@@ -117,9 +141,9 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jButtonCadFamilia = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextAreaObs = new javax.swing.JTextArea();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -139,8 +163,6 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jLabel6.setText("Valor de Venda :");
 
         jLabel7.setText("Porcentagem :");
-
-        jFieldcodproCadProduto.setEditable(false);
 
         jLabel8.setText("Codigo Produto Pelo Fabricante :");
 
@@ -272,9 +294,9 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
         jPanel2.setToolTipText("");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaObs.setColumns(20);
+        jTextAreaObs.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaObs);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -289,12 +311,17 @@ public class cadprodutoframe extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Obs", jPanel2);
 
-        jButton1.setText("Salvar");
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -305,9 +332,9 @@ public class cadprodutoframe extends javax.swing.JDialog {
             .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jButtonCancelar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonSalvar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -317,8 +344,8 @@ public class cadprodutoframe extends javax.swing.JDialog {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -329,7 +356,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldcodfabCadProdutoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         //Altera as mensagens da caixa de confirmação para Sim ou Não
         UIManager.put("OptionPane.yesButtonText", "Sim");  
         UIManager.put("OptionPane.noButtonText", "Não");
@@ -343,7 +370,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
             case 1:
                 break;
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonCadFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadFamiliaActionPerformed
         CadFamilia cadfamilia = new CadFamilia(null, true);
@@ -360,6 +387,44 @@ public class cadprodutoframe extends javax.swing.JDialog {
         
         setBoxSimilar();
     }//GEN-LAST:event_jButtonCadSimilarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        produto.setId(jFieldcodproCadProduto.getText());
+        produto.setIdFabricante(jFieldcodfabCadProduto.getText());
+        produto.setDhCadastro(jFielddtCadProduto.getText());
+        produto.setDescricao(jFielddescCadProduto.getText());
+        produto.setMarca(jFieldMarca.getText());
+        produto.setFamilia(jComboFamilia.getSelectedItem().toString());
+        produto.setSimilar(jComboSimilar.getSelectedItem().toString());
+        produto.setValorCompra(jFieldvlcompCadProduto.getText());
+        produto.setValorVenda(jFieldvlvendaCadProduto.getText());
+        produto.setPorcentagem(jFieldporcenCadProduto.getText());
+        produto.setObservacoes(jTextAreaObs.getText());
+        
+        if(produto.isValida() == true){
+            if(produtodao.existenciaProduto(produto) == false){
+                //Tenta inserir os dados pelo formulario no banco de dados
+                boolean produtoresult = produtodao.inserir(produto);
+                if(produtoresult == true){
+                    JOptionPane.showMessageDialog(null, "Produto Inserido Com Sucesso!");
+                    this.dispose();
+                }
+                
+            }else if(produtodao.existenciaProduto(produto) == true){
+                //Tenta ATUALIZAR os dados pelo formulario no banco de dados
+                boolean produtoresult = produtodao.atualizar(produto);
+                if(produtoresult == true){
+                    JOptionPane.showMessageDialog(null, "Produto Atualizado Com Sucesso!");
+                    this.dispose();
+                }
+            }
+        }else if(produto.isValida() == false){
+                //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
+                JOptionPane.showMessageDialog(null, produto.getMensagemerroProduto());
+                produto.setMensagemerroProduto("Campos em branco: \n");
+                produto.setValida(true);
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,10 +462,10 @@ public class cadprodutoframe extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonCadFamilia;
     private javax.swing.JButton jButtonCadSimilar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboFamilia;
     private javax.swing.JComboBox jComboSimilar;
     private javax.swing.JTextField jFieldMarca;
@@ -425,7 +490,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaObs;
     private javax.swing.JTextField vlvemCadProduto;
     // End of variables declaration//GEN-END:variables
 }
