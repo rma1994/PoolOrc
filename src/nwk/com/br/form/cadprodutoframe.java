@@ -6,12 +6,17 @@
 
 package nwk.com.br.form;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.FamiliaDAO;
+import nwk.com.br.dao.ProdutoDAO;
 import nwk.com.br.dao.SimilarDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoValores;
 import nwk.com.br.model.Familia;
+import nwk.com.br.model.Produto;
 import nwk.com.br.model.Similar;
 
 /**
@@ -19,9 +24,13 @@ import nwk.com.br.model.Similar;
  * @author RMA
  */
 public class cadprodutoframe extends javax.swing.JDialog {
+    //Variaveis
     private FamiliaDAO familiadao = new FamiliaDAO();
     private SimilarDAO similardao = new SimilarDAO();
-            
+    private Produto produto = new Produto();
+    private ProdutoDAO produtodao = new ProdutoDAO();
+    private String id;
+    private int produtoID;
             
     /**
      * Creates new form cadprodutoframe
@@ -33,6 +42,11 @@ public class cadprodutoframe extends javax.swing.JDialog {
         setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
         setBoxFamilia(); //Mostra as familias cadastradas na combobox familia
         setBoxSimilar(); //Mostra os similares cadastrados na combobox similar
+        getTimeStamp(); //Pega a Hora atual para colocar no campo de texto 'data cadastro'
+        
+        produtoID = (produtodao.checarID()); //checa o ultimo ID do funcionario
+        id = Integer.toString(produtoID); // transforma esse Id em String
+        jFieldcodproCadProduto.setText(id); //coloca esse id no campo jFieldidCadFuncionario
     }
     
     //Define os caracteres validos nos campos de texto
@@ -40,6 +54,9 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jFieldcodfabCadProduto.setDocument(new ControleTexto());
         jFielddescCadProduto.setDocument(new ControleTexto());
         jFieldMarca.setDocument(new ControleTexto());
+        jFieldvlcompCadProduto.setDocument(new ControleTextoValores());
+        jFieldvlvendaCadProduto.setDocument(new ControleTextoValores());
+        jFieldporcenCadProduto.setDocument(new ControleTextoValores());
     }
     
     private void setBoxFamilia(){
@@ -56,6 +73,14 @@ public class cadprodutoframe extends javax.swing.JDialog {
         }
     }
 
+    //Pega a Hora atual para colocar no campo de texto 'data cadastro'
+    private void getTimeStamp(){
+        Date dataAtual = new Date();
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        
+        jFielddtCadProduto.setText(formatDate.format(dataAtual));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,6 +153,8 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jLabel9.setText("Familia :");
 
         jLabel10.setText("Data de Cadastro :");
+
+        jFielddtCadProduto.setEditable(false);
 
         jComboFamilia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
