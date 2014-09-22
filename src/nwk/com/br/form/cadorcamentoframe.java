@@ -8,9 +8,13 @@ package nwk.com.br.form;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import nwk.com.br.dao.FuncionarioDAO;
+import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.dao.OrcamentoDAO;
+
 import nwk.com.br.model.Funcionario;
+import nwk.com.br.model.Cliente;
 
 /**
  *
@@ -20,6 +24,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     //Variaveis
     private FuncionarioDAO funcionariodao = new FuncionarioDAO();
     private OrcamentoDAO orcamentodao = new OrcamentoDAO();
+    private ClienteDAO clientedao = new ClienteDAO();
     
     /**
      * Creates new form cadorcamentoframe
@@ -60,6 +65,31 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         
         jFielddtCadOrcamento.setText(formatDate.format(dataAtual));
     }
+    
+    //Seta os dados do cliente no frame
+    public void setDadosCliente(){
+        Cliente cliente = new Cliente();
+        int idCliente;
+        
+        idCliente = Integer.parseInt(jFieldcodcliCadOrcamento.getText());
+        cliente.setId(idCliente);
+        
+        if(clientedao.existenciaCliente(cliente)){
+            cliente = clientedao.select(idCliente);
+            
+            jFieldnomecliCadOrcamento.setText(cliente.getNome());
+            jFieldtelCadOrcamento.setText(cliente.getTelefone());
+            jFieldcelCadOrcamento.setText(cliente.getCelular());
+            jFieldemailCadOrcamento.setText(cliente.getEmail());
+        }else{
+            JOptionPane.showMessageDialog(null, "ID Não Cadastrado!");
+            jFieldnomecliCadOrcamento.setText(null);
+            jFieldtelCadOrcamento.setText(null);
+            jFieldcelCadOrcamento.setText(null);
+            jFieldemailCadOrcamento.setText(null);
+            
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +110,6 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jFieldnomecliCadOrcamento = new javax.swing.JTextField();
-        jFieldtelCadOrcamento = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jFieldcelCadOrcamento = new javax.swing.JTextField();
         jFieldemailCadOrcamento = new javax.swing.JTextField();
@@ -109,6 +138,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jFieldobsCadOrcamento = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxFuncionario = new javax.swing.JComboBox();
+        jFieldtelCadOrcamento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Orçamento");
@@ -196,6 +226,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel21.setText("Cod Cliente :");
 
+        jFieldcodcliCadOrcamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFieldcodcliCadOrcamentoFocusLost(evt);
+            }
+        });
         jFieldcodcliCadOrcamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFieldcodcliCadOrcamentoActionPerformed(evt);
@@ -217,6 +252,14 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel6.setText("Observações :");
 
         jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        try {
+            jFieldtelCadOrcamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFieldtelCadOrcamento.setFocusCycleRoot(true);
+        jFieldtelCadOrcamento.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -247,8 +290,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jFieldnomecliCadOrcamento))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jFieldtelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jFieldtelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jFieldcelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,9 +362,9 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jFieldtelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(jFieldcelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFieldcelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFieldtelCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -386,6 +429,10 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jFieldcodcliCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFieldcodcliCadOrcamentoFocusLost
+        setDadosCliente();
+    }//GEN-LAST:event_jFieldcodcliCadOrcamentoFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -439,7 +486,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private javax.swing.JTextField jFieldnomecliCadOrcamento;
     private javax.swing.JTextArea jFieldobsCadOrcamento;
     private javax.swing.JTextField jFieldsubtotalCadOrcamento;
-    private javax.swing.JTextField jFieldtelCadOrcamento;
+    private javax.swing.JFormattedTextField jFieldtelCadOrcamento;
     private javax.swing.JTextField jFieldtotalCadOrcamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
