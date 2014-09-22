@@ -33,14 +33,14 @@ public class ProdutoStru {
         for (Produto produto : produtodao.getTodosProdutos()){
             dados[l][0] = produto.getId();
             dados[l][1] = produto.getDescricao();
-            dados[l][2] = produto.getValorVenda();
+            dados[l][2] = produto.getValorVenda().replace(".", ",");
             dados[l][3] = produto.getMarca();
             dados[l][4] = produto.getFamilia();
             dados[l][5] = produto.getSimilar();
             dados[l][6] = produto.getIdFabricante();
             dados[l][7] = sdf1.format(produto.getDhCadastro()).toString();
-            dados[l][8] = produto.getValorCompra();
-            dados[l][9] = produto.getPorcentagem();
+            dados[l][8] = produto.getValorCompra().replace(".", ",");
+            dados[l][9] = produto.getPorcentagem().replace(".", ",");
             dados[l][10] = produto.getObservacoes();
             
             l++;

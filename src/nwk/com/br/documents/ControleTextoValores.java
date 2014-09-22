@@ -19,7 +19,7 @@ import javax.swing.text.PlainDocument;
  * @author Richard Matheus
  */
 public class ControleTextoValores extends PlainDocument{
-    Character chs[] = {'0','1','2','3','4','5','6','7','8','9',','}; //Coloque aqui todos os caracteres válidos  
+    Character chs[] = {'0','1','2','3','4','5','6','7','8','9',',','.'}; //Coloque aqui todos os caracteres válidos  
     Set<Character> validos = new HashSet<Character>(Arrays.asList(chs));  
     
     @Override  

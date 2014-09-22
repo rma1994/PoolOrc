@@ -6,18 +6,59 @@
 
 package nwk.com.br.form;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import nwk.com.br.dao.FuncionarioDAO;
+import nwk.com.br.dao.OrcamentoDAO;
+import nwk.com.br.model.Funcionario;
+
 /**
  *
  * @author RMA
  */
 public class cadorcamentoframe extends javax.swing.JDialog {
-
+    //Variaveis
+    private FuncionarioDAO funcionariodao = new FuncionarioDAO();
+    private OrcamentoDAO orcamentodao = new OrcamentoDAO();
+    
     /**
      * Creates new form cadorcamentoframe
      */
     public cadorcamentoframe() {
         initComponents();
         this.setModal(true); 
+        
+        setIdOrcamento(); // Pega o ID
+        getTimeStamp(); //Pega a hora atual
+        setBoxFuncionario();//Mostra os funcionarios cadastrados na combobox funcionario
+    }
+    
+    
+    //Seta os valores existentes na box funcionario
+    private void setBoxFuncionario(){
+        jComboBoxFuncionario.removeAllItems();
+        for (Funcionario funcionario : funcionariodao.getTodosFuncionarios()){
+            jComboBoxFuncionario.addItem(funcionario.getId() + " - " + funcionario.getNome());
+        }
+    }
+    
+
+    //Seta o id do Orcamento
+    private void setIdOrcamento(){
+        int orcamentoID;
+        String id;
+        
+        orcamentoID = (orcamentodao.checarID()); //checa o ultimo ID do funcionario
+        id = Integer.toString(orcamentoID); // transforma esse Id em String
+        jFieldcodCadOrcamento.setText(id); //coloca esse id no campo jFieldidCadFuncionario
+    }
+    
+    //Pega a Hora atual para colocar no campo de texto 'data cadastro'
+    private void getTimeStamp(){
+        Date dataAtual = new Date();
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        
+        jFielddtCadOrcamento.setText(formatDate.format(dataAtual));
     }
 
     /**
@@ -67,7 +108,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jFieldobsCadOrcamento = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxFuncionario = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Orçamento");
@@ -77,6 +118,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel1.setText("Codigo :");
 
         jLabel2.setText("Data :");
+
+        jFielddtCadOrcamento.setEditable(false);
 
         jLabel3.setText("Funcionario :");
 
@@ -136,14 +179,20 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel18.setText("Subtotal :");
 
+        jFieldsubtotalCadOrcamento.setEditable(false);
+
         jLabel19.setText("Desconto :");
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel20.setText("TOTAL :");
 
+        jFieldtotalCadOrcamento.setEditable(false);
+
         jButton3.setText("Salvar");
 
         jButton4.setText("Cancela");
+
+        jFieldcodCadOrcamento.setEditable(false);
 
         jLabel21.setText("Cod Cliente :");
 
@@ -167,7 +216,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Observações :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -213,7 +262,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jComboBoxFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addGap(18, 18, 18)
@@ -226,15 +275,6 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                                 .addComponent(jButton3))
                             .addComponent(jFieldtotalCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6))
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFieldcodprodiCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -246,7 +286,16 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFielddescCadOrcamento)))
+                        .addComponent(jFielddescCadOrcamento))
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFieldcodprodiCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -259,7 +308,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     .addComponent(jFielddtCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jFieldcodCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
@@ -378,8 +427,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxFuncionario;
     private javax.swing.JTextField jFieldcelCadOrcamento;
     private javax.swing.JTextField jFieldcodCadOrcamento;
     private javax.swing.JTextField jFieldcodcliCadOrcamento;

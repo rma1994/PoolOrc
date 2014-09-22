@@ -20,8 +20,6 @@ public class CadSimilar extends javax.swing.JDialog {
     //Variaveis
     private Similar similar = new Similar();
     private SimilarDAO similardao = new SimilarDAO();
-    private String id;
-    private int similarID;
     
     /**
      * Creates new form CadSimilar
@@ -32,9 +30,7 @@ public class CadSimilar extends javax.swing.JDialog {
         
         setCamposTexto(); // Modifica os caracteres aceitos nos campos de texto
         
-        similarID = (similardao.checarID()); //checa o ultimo ID do funcionario
-        id = Integer.toString(similarID); // transforma esse Id em String
-        jFieldId.setText(id); //coloca esse id no campo jFieldidCadFuncionario
+        setIdSimilar();
     }
     
     
@@ -42,6 +38,17 @@ public class CadSimilar extends javax.swing.JDialog {
     private void setCamposTexto(){
         jFieldDescricao.setDocument(new ControleTexto());
     }
+    
+    //Seta o id de similar
+    private void setIdSimilar(){
+        int similarID;
+        String id;
+        
+        similarID = (similardao.checarID()); //checa o ultimo ID do funcionario
+        id = Integer.toString(similarID); // transforma esse Id em String
+        jFieldId.setText(id); //coloca esse id no campo jFieldidCadFuncionario
+    }
+    
     
     //Seta os campos de familia de acordo com o input de ConsultaFamilia
     public void setFamiliaForm(Similar similar){
