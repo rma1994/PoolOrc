@@ -182,7 +182,7 @@ public class ClienteDAO {
     }
     
     //Retorna o ultimo cliente inserido no banco de dados.
-    public Cliente selectNovoCliente(){
+    /*public Cliente selectNovoCliente(){
         Cliente cliente = new Cliente();
         String sql = "SELECT * FROM cliente WHERE id_cliente = (" + checarID() + ")";
         
@@ -215,5 +215,48 @@ public class ClienteDAO {
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
         return cliente;
+    }*/
+    
+    
+    //Pega todos os Clientes cadastrados no banco de dados
+    public List<Cliente> getTodosClientes(){     
+                
+        List<Cliente> result = new ArrayList<Cliente>();
+        String sql = "SELECT * FROM cliente ORDER BY id_cliente";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+           
+            while(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("id_cliente"));
+                cliente.setTipoCliente(rs.getString("tipo_cliente"));
+                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj_cliente"));
+                cliente.setRua(rs.getString("rua_cliente"));
+                cliente.setBairro(rs.getString("bairro_cliente"));
+                cliente.setNumero(rs.getString("numero_end_cliente"));
+                cliente.setComplemento(rs.getString("complemento_cliente"));
+                cliente.setCep(rs.getString("cep_cliente"));
+                cliente.setCidade(rs.getString("cidade_cliente"));
+                cliente.setEstado(rs.getString("estado_cliente"));
+                cliente.setTelefone(rs.getString("telefone_cliente"));
+                cliente.setCelular(rs.getString("celular_cliente"));
+                cliente.setEmail(rs.getString("email_cliente"));
+                cliente.setStatus(StatusRepository.getByValue(rs.getString("ativo_cliente")));
+                cliente.setObservacoes(rs.getString("observacoes_cliente"));
+                
+                result.add(cliente);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();  
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    
     }
 }

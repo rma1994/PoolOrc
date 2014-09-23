@@ -62,6 +62,7 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         jButtonPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta Funcionario");
         setPreferredSize(new java.awt.Dimension(594, 535));
 
         jTableFuncionarios.setAutoCreateRowSorter(true);

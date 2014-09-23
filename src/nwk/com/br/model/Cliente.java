@@ -66,8 +66,10 @@ public class Cliente {
         if(tipoCliente.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Tipo Cliente\n";
-        } else {
-        this.tipoCliente = tipoCliente;
+        } else if(tipoCliente == null){
+            this.tipoCliente = "";
+        }else {
+            this.tipoCliente = tipoCliente;
         }
     }
 
@@ -87,8 +89,10 @@ public class Cliente {
         if(nome.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Nome\n";
-        } else {
-        this.nome = nome;
+        } else if(nome == null){
+            this.nome = "";
+        }else {
+            this.nome = nome;
         }
     }
 
@@ -116,8 +120,10 @@ public class Cliente {
         if(rua.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Rua\n";
-        } else {
-        this.rua = rua;
+        } else if(rua == null){
+            this.rua = "";
+        }else{
+            this.rua = rua;
         }
     }
 
@@ -129,6 +135,8 @@ public class Cliente {
         if(numero.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Numero\n";
+        } else if (numero == null){
+            this.numero = "";
         } else {
         this.numero = numero;
         }
@@ -142,8 +150,10 @@ public class Cliente {
         if(bairro.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Bairro\n";
+        } else if(bairro == null){
+            this.bairro = "";
         } else {
-        this.bairro = bairro;
+            this.bairro = bairro;
         }
     }
 
@@ -152,7 +162,11 @@ public class Cliente {
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        if(complemento == null){
+            this.complemento = "";
+        } else {
+            this.complemento = complemento;
+        }
     }
 
     public String getCep() {
@@ -177,6 +191,8 @@ public class Cliente {
         if(cidade.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Cidade\n";
+        } else if (cidade == null){
+            this.cidade = "";
         } else {
         this.cidade = cidade;
         }
@@ -190,7 +206,9 @@ public class Cliente {
         if(estado.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Estado\n";
-        } else {
+        } else if (estado == null){
+            this.estado = "";
+        }{
         this.estado = estado;
         }
     }
@@ -203,6 +221,8 @@ public class Cliente {
         if(telefone.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"Telefone\n";
+        } else if(telefone == null){
+            this.telefone = "";
         } else {
             telefone = telefone.replace("(","");
             telefone = telefone.replace(")","");
@@ -216,10 +236,14 @@ public class Cliente {
     }
 
     public void setCelular(String celular) {
-        celular = celular.replace("(","");
-        celular = celular.replace(")","");
-        celular = celular.replace(" ","");
-        this.celular = celular;
+        if(celular == null){
+            this.celular = "";
+        } else {
+            celular = celular.replace("(","");
+            celular = celular.replace(")","");
+            celular = celular.replace(" ","");
+            this.celular = celular;
+        }
     }
 
     public String getEmail() {
@@ -230,6 +254,8 @@ public class Cliente {
         if(email.equals("")){
             this.valida = false;
             this.mensagemerroCliente = mensagemerroCliente+"E-mail\n";
+        } else if(email == null){
+            this.email = "";
         } else {
         this.email = email;
         }
@@ -240,7 +266,11 @@ public class Cliente {
     }
 
     public void setObservacoes(String observacoes) {
+        if(observacoes == null){
+            this.observacoes = "";
+        } else {
         this.observacoes = observacoes;
+        }
     }
     
 }

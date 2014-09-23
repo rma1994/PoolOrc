@@ -165,4 +165,37 @@ public class ProdutoDAO {
         }
         return result;
     }
+    
+    //Retorna um produto
+    public Produto select(String id){     
+                
+        Produto produto = new Produto();
+        String sql = "SELECT * FROM produto WHERE cod_prod = '" + id +"'";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+           
+            while(rs.next()){
+                produto.setId(rs.getString("cod_prod"));
+                produto.setIdFabricante(rs.getString("cod_fabricante"));
+                produto.setDhCadastro(formatDate.format(rs.getDate("dat_cadastro")).toString());
+                produto.setDescricao(rs.getString("descricao_pecas"));
+                produto.setMarca(rs.getString("marca_pecas"));
+                produto.setFamilia(rs.getString("familia_pecas") + "-");//Esse - serve para indicar o final do index usada em Produto
+                produto.setSimilar(rs.getString("similar_pecas") + "-");
+                produto.setValorCompra(rs.getString("valor_compras"));
+                produto.setValorVenda(rs.getString("valor_vendas"));
+                produto.setPorcentagem(rs.getString("porcentagem_venpecas"));
+                produto.setObservacoes(rs.getString("observacoes_produto"));
+            }
+            stm.close();
+            
+        }catch(Exception e){
+            //e.printStackTrace();  
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return produto;
+    }
 }

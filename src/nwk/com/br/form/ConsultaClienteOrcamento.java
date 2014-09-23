@@ -3,43 +3,60 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package nwk.com.br.form;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
-import nwk.com.br.model.Familia;
-import nwk.com.br.structures.FamiliaStru;
+import nwk.com.br.model.Cliente;
+import nwk.com.br.structures.ClienteStru;
 
 /**
  *
  * @author Richard Matheus
  */
-public class ConsultaFamilia extends javax.swing.JDialog {
-    FamiliaStru familiastru = new FamiliaStru();
-    Familia familia = new Familia();
-    CadFamilia cadfamilia = new CadFamilia(null,true);
+public class ConsultaClienteOrcamento extends javax.swing.JDialog {
+    ClienteStru clientestru = new ClienteStru();
+    Cliente cliente = new Cliente();
+    cadclienteframe cadcliente = new cadclienteframe();
     
     /**
-     * Creates new form ConsultaFamilia
+     * Creates new form ConsultaClienteOrcamento
      */
-    public ConsultaFamilia(java.awt.Frame parent, boolean modal) {
+    public ConsultaClienteOrcamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
         atualizaTable();
     }
     
     //Carrega os dados na tabela
     private void atualizaTable(){
-        TableModel model = (TableModel) (familiastru.getTable());
-        jTableFamilia.setModel(model);
+        TableModel model = (TableModel) (clientestru.getTable());
+        jTableClientes.setModel(model);
         
         //Seta as dimensões das colunas
-        jTableFamilia.getColumnModel().getColumn(0).setMinWidth(35);
-        jTableFamilia.getColumnModel().getColumn(0).setMaxWidth(35);
-        jTableFamilia.getColumnModel().getColumn(1).setPreferredWidth(463);
+        jTableClientes.getColumnModel().getColumn(0).setMinWidth(35);
+        jTableClientes.getColumnModel().getColumn(0).setMaxWidth(35);
+        jTableClientes.getColumnModel().getColumn(1).setPreferredWidth(350);
     }
-
+    
+    //Retorna o cliente selecionado
+    public Cliente getCliente(){
+        //Seta essa janela visivel
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        
+        //Pega a linha selectionada
+        int linhaSelecionada;
+        linhaSelecionada = jTableClientes.getSelectedRow();
+        
+        //Seta essa linha em cliente
+        cliente.setId(Integer.parseInt(jTableClientes.getValueAt(linhaSelecionada, 0).toString()));
+        return cliente;
+    }
+    
+    //Retorna o codigo co cliente selecionado
+    //public Cliente
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,22 +66,15 @@ public class ConsultaFamilia extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jComboBoxIdNome = new javax.swing.JComboBox();
-        jFieldPesquisa = new javax.swing.JTextField();
+        jTextFieldPesquisa = new javax.swing.JTextField();
         jButtonPesquisar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableFamilia = new javax.swing.JTable();
+        jTableClientes = new javax.swing.JTable();
+        jButtonInserir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta Familia");
-
-        jButton1.setText("Inserir Familia");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jComboBoxIdNome.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome" }));
 
@@ -75,8 +85,8 @@ public class ConsultaFamilia extends javax.swing.JDialog {
             }
         });
 
-        jTableFamilia.setAutoCreateRowSorter(true);
-        jTableFamilia.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClientes.setAutoCreateRowSorter(true);
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -87,13 +97,20 @@ public class ConsultaFamilia extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableFamilia.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTableFamilia.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableClientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableFamiliaMouseClicked(evt);
+                jTableClientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableFamilia);
+        jScrollPane1.setViewportView(jTableClientes);
+
+        jButtonInserir.setText("Inserir Cliente");
+        jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInserirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,36 +119,44 @@ public class ConsultaFamilia extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxIdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxIdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxIdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+        //ao receber o clique ele fecha a janela para que possavoltar a janela anterios com o codigo do cliente
+        this.dispose();
+    }//GEN-LAST:event_jTableClientesMouseClicked
+
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        String pesquisaTabela = jFieldPesquisa.getText();
+        String pesquisaTabela = jTextFieldPesquisa.getText();
         String espacoTabela;
         int c;
         boolean encontrou = false;
@@ -145,50 +170,30 @@ public class ConsultaFamilia extends javax.swing.JDialog {
                 c = 1;
             }
             //Percorre os campos da tabela e procura pelos itens que contenham os parametros de pesquisa em seu nome
-            for(int r=0;r<jTableFamilia.getRowCount();r++){
+            for(int r=0;r<jTableClientes.getRowCount();r++){
                 
-                //Converte os valores para maiusculo
-                espacoTabela = jTableFamilia.getValueAt(r, c).toString();
+                espacoTabela = jTableClientes.getValueAt(r, c).toString();
                 espacoTabela = espacoTabela.toUpperCase();
                 
                 if(espacoTabela.contains(pesquisaTabela)){
-                    //Seleciona a linha em questão
-                    jTableFamilia.setColumnSelectionInterval(0, 1);  
-                    jTableFamilia.setRowSelectionInterval(r, r);
+                    jTableClientes.setColumnSelectionInterval(0, 2);  
+                    jTableClientes.setRowSelectionInterval(r, r);
                     encontrou = true;
                     break;
                 }
             }
         }
-        //Caso não encontre o resutlado, retorna essa mensagem para o usuario
         if(encontrou == false){
             JOptionPane.showMessageDialog(null, "Resultado Não Encontrado!");
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CadFamilia cadfamilia = new CadFamilia(null, true);
-        cadfamilia.setLocationRelativeTo(null);
-        cadfamilia.setVisible(true);
+    private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
+        cadcliente.setLocationRelativeTo(null);
+        cadcliente.setVisible(true);
         
         atualizaTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTableFamiliaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFamiliaMouseClicked
-        int linhaSelecionada;
-        
-        linhaSelecionada = jTableFamilia.getSelectedRow();
-        
-        //Abaixo são setados os campos não obrigatorios
-        familia.setId(Integer.parseInt(jTableFamilia.getValueAt(linhaSelecionada, 0).toString()));
-        familia.setDescricao(jTableFamilia.getValueAt(linhaSelecionada, 1).toString());
-        
-        cadfamilia.setFamiliaForm(familia);
-        cadfamilia.setLocationRelativeTo(null);
-        cadfamilia.setVisible(true);
-        
-        atualizaTable();
-    }//GEN-LAST:event_jTableFamiliaMouseClicked
+    }//GEN-LAST:event_jButtonInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,20 +212,20 @@ public class ConsultaFamilia extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaClienteOrcamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaClienteOrcamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaClienteOrcamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaFamilia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaClienteOrcamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultaFamilia dialog = new ConsultaFamilia(new javax.swing.JFrame(), true);
+                ConsultaClienteOrcamento dialog = new ConsultaClienteOrcamento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -233,11 +238,12 @@ public class ConsultaFamilia extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JComboBox jComboBoxIdNome;
-    private javax.swing.JTextField jFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableFamilia;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTableClientes;
+    private javax.swing.JTextField jTextFieldPesquisa;
     // End of variables declaration//GEN-END:variables
 }
