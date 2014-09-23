@@ -91,10 +91,15 @@ CONSTRAINT PK_Orcamento_Cod_Orc PRIMARY KEY(cod_orcamento),
 CONSTRAINT FK_Cod_Func FOREIGN KEY (id_funcionario) REFERENCES Funcionario,
 CONSTRAINT FK_Cod_Cli FOREIGN KEY (id_cliente) REFERENCES Cliente);
 
+/*ALTER TABLE ItensOrcamento
+ADD desconto_prod DECIMAL (8,2) NOT NULL;
+ADD valor_unidade DECIMAL(8,2) NOT NULL;*/
 CREATE TABLE ItensOrcamento(
 cod_orcamento INT NOT NULL,
 cod_prod VARCHAR(9) NOT NULL,
 quantidade DECIMAL(8,2) NOT NULL,
+desconto_prod DECIMAL (8,2) NOT NULL;
+valor_unidade DECIMAL(8,2) NOT NULL;
 CONSTRAINT FK_iOrcamento_codOrc FOREIGN KEY (cod_orcamento) REFERENCES Orcamento,
 CONSTRAINT FK_codProd FOREIGN KEY (cod_prod) REFERENCES Produto);
 

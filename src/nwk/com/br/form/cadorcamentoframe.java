@@ -247,6 +247,9 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         for(int r=0;r<jTableProdOrc.getRowCount();r++){
             Produto produto = new Produto();
             produto.setId(jTableProdOrc.getValueAt(r, 0).toString());
+            produto.setQuantidade(jTableProdOrc.getValueAt(r, 2).toString());
+            produto.setValorVenda(jTableProdOrc.getValueAt(r, 3).toString());
+            produto.setDesconto(jTableProdOrc.getValueAt(r, 4).toString());
             produto.setTotal(jTableProdOrc.getValueAt(r, 5).toString());
             
             result.add(produto);
@@ -642,6 +645,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private void jButtonInserirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirProdActionPerformed
         // TODO add your handling code here:
         inserirProduto();
+        jFieldcodprodiCadOrcamento.setText(null);
     }//GEN-LAST:event_jButtonInserirProdActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -679,6 +683,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int id = Integer.parseInt(jFieldcodCadOrcamento.getText());
+        
         orcamento.setIdCliente(Integer.parseInt(jFieldcodcliCadOrcamento.getText()));
         orcamento.setIdFuncionario(jComboBoxFuncionario.getSelectedItem().toString());
         orcamento.setDhOrcamento(jFielddtCadOrcamento.getText());
@@ -687,8 +693,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         orcamento.setDesconto(jFielddescCadOrcamento.getText());
         orcamento.setTotal(jFieldtotalCadOrcamento.getText());
         orcamento.setObservacoes(jFieldobsCadOrcamento.getText());
+        orcamento.setResult(getTodosProdutosOrc());
+        
         
         orcamentodao.inserir(orcamento);
+        produtodao.insertProdutosOrc(id, getTodosProdutosOrc());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jFielddescCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFielddescCadOrcamentoFocusLost

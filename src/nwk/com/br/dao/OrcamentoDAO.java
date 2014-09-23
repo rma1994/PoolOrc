@@ -56,6 +56,7 @@ public class OrcamentoDAO {
                                                                                                     + "'" + orcamento.getDesconto().replace(".", ",")  + "',"
                                                                                                     + "'" + orcamento.getTotal().replace(".", ",")  + "',"
                                                                                                     + "'" + orcamento.getObservacoes()+ "') ";
+        
         try{
             conn = Database.getInstance().getConnection();
             Statement stm = this.conn.createStatement();

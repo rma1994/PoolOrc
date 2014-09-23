@@ -6,7 +6,9 @@
 package nwk.com.br.model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -22,6 +24,8 @@ public class Orcamento {
     private String desconto;
     private String total;
     private String observacoes;
+    
+    private List<Produto> result = new ArrayList<Produto>();
     
     private String mensagemerroProduto = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -124,4 +128,14 @@ public class Orcamento {
     public void setValida(boolean valida) {
         this.valida = valida;
     }
+
+    public List<Produto> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Produto> result) {
+        this.result = result;
+    }
+    
+    
 }
