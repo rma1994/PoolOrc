@@ -5,6 +5,7 @@
  */
 package nwk.com.br.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -22,7 +23,18 @@ public class Orcamento {
     private String total;
     private String observacoes;
     
-    private boolean valida;
+    private String mensagemerroProduto = new String("Campos em branco: \n");
+    private boolean valida = true;
+    SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
+
+    
+    public String getMensagemerroProduto() {
+        return mensagemerroProduto;
+    }
+
+    public void setMensagemerroProduto(String mensagemerroProduto) {
+        this.mensagemerroProduto = mensagemerroProduto;
+    }
 
     public int getId() {
         return id;
@@ -36,8 +48,13 @@ public class Orcamento {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setIdFuncionario(String idFuncionario) {
+        //Armazerno somente o codigo de familia.
+        int index;
+        index = idFuncionario.indexOf("-"); //Pego a posição do -, que indica até vai o cod
+        idFuncionario = idFuncionario.substring(0, index).trim(); // armazeno o codigo até o -
+        this.idFuncionario = Integer.parseInt(idFuncionario);
+        System.out.println(this.idFuncionario);
     }
 
     public int getIdCliente() {
@@ -52,8 +69,12 @@ public class Orcamento {
         return dhOrcamento;
     }
 
-    public void setDhOrcamento(Date dhOrcamento) {
-        this.dhOrcamento = dhOrcamento;
+    public void setDhOrcamento(String dhOrcamento) {
+        try{
+            this.dhOrcamento = sdf1.parse(dhOrcamento);
+        }catch(Exception e){
+            System.out.println("Erro DH cadastro orcamento " + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
     }
 
     public String getFormaPagamento() {
@@ -69,7 +90,7 @@ public class Orcamento {
     }
 
     public void setSubTotal(String subTotal) {
-        this.subTotal = subTotal;
+        this.subTotal = subTotal.replace(",", ".");
     }
 
     public String getDesconto() {
@@ -77,7 +98,7 @@ public class Orcamento {
     }
 
     public void setDesconto(String desconto) {
-        this.desconto = desconto;
+        this.desconto = desconto.replace(",", ".");
     }
 
     public String getTotal() {
@@ -85,7 +106,7 @@ public class Orcamento {
     }
 
     public void setTotal(String total) {
-        this.total = total;
+        this.total = total.replace(",", ".");
     }
 
     public String getObservacoes() {

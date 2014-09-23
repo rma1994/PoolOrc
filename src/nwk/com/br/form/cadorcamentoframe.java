@@ -27,6 +27,7 @@ import nwk.com.br.documents.ControleTextoValores;
 
 import nwk.com.br.model.Funcionario;
 import nwk.com.br.model.Cliente;
+import nwk.com.br.model.Orcamento;
 import nwk.com.br.model.Produto;
 import nwk.com.br.structures.ProdutosOrcamentoStru;
 
@@ -40,7 +41,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private OrcamentoDAO orcamentodao = new OrcamentoDAO();
     private ClienteDAO clientedao = new ClienteDAO();
     private ProdutoDAO produtodao = new ProdutoDAO();
+    
+    private Orcamento orcamento = new Orcamento();
+    
     private ProdutosOrcamentoStru prodorcstru = new ProdutosOrcamentoStru();
+    
     private OrcamentoCalc orcamentocalc = new OrcamentoCalc();
     
     /**
@@ -279,7 +284,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProdOrc = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBoxFormaPagamento = new javax.swing.JComboBox();
         jLabel18 = new javax.swing.JLabel();
         jFieldsubtotalCadOrcamento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -379,7 +384,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel17.setText("Forma de Pagamento :");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A Vista: Dinheiro", "A Vista: Cartão", "Parcelado" }));
+        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A Vista: Dinheiro", "A Vista: Cartão", "Parcelado" }));
 
         jLabel18.setText("Subtotal :");
 
@@ -513,7 +518,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -574,7 +579,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(jFieldsubtotalCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19)
@@ -674,7 +679,16 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        orcamento.setIdCliente(Integer.parseInt(jFieldcodcliCadOrcamento.getText()));
+        orcamento.setIdFuncionario(jComboBoxFuncionario.getSelectedItem().toString());
+        orcamento.setDhOrcamento(jFielddtCadOrcamento.getText());
+        orcamento.setSubTotal(jFieldsubtotalCadOrcamento.getText());
+        orcamento.setFormaPagamento(Integer.toString(jComboBoxFormaPagamento.getSelectedIndex()));
+        orcamento.setDesconto(jFielddescCadOrcamento.getText());
+        orcamento.setTotal(jFieldtotalCadOrcamento.getText());
+        orcamento.setObservacoes(jFieldobsCadOrcamento.getText());
         
+        orcamentodao.inserir(orcamento);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jFielddescCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFielddescCadOrcamentoFocusLost
@@ -731,7 +745,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private javax.swing.JButton jButtonInserirProd;
     private javax.swing.JButton jButtonPesquisarCliente;
     private javax.swing.JButton jButtonPesquisarProduto;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxFormaPagamento;
     private javax.swing.JComboBox jComboBoxFuncionario;
     private javax.swing.JTextField jFieldcelCadOrcamento;
     private javax.swing.JTextField jFieldcodCadOrcamento;

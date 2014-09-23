@@ -42,4 +42,31 @@ public class OrcamentoDAO {
         }         
         return result;
     }
+    
+    //Função para inserir o orçamento no banco de dados
+    public boolean inserir(Orcamento orcamento){
+        boolean result = false;
+        
+        String sql = "INSERT INTO Orcamento(id_funcionario, id_cliente, data_orcamento, sub_Total, forma_pagamento, desconto_valor, total_orcamento, orbservacoes_orcamento) "
+                                                                                             + "VALUES('" + orcamento.getIdFuncionario()+ "',"
+                                                                                                    + "'" + orcamento.getIdCliente() + "',"
+                                                                                                    + "'" + formatDate.format(orcamento.getDhOrcamento()) + "',"
+                                                                                                    + "'" + orcamento.getSubTotal().replace(".", ",") + "',"
+                                                                                                    + "'" + orcamento.getFormaPagamento() + "',"
+                                                                                                    + "'" + orcamento.getDesconto().replace(".", ",")  + "',"
+                                                                                                    + "'" + orcamento.getTotal().replace(".", ",")  + "',"
+                                                                                                    + "'" + orcamento.getObservacoes()+ "') ";
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            stm.executeUpdate(sql);
+            System.out.println("Orçamento salvo com sucesso!");
+            result = true;
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
+        return result;
+    }
 }
