@@ -132,18 +132,77 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         
         //Checa se o codigo existe
         if(produtodao.existenciaProduto(produto)){
+            //Se o produto existir ira jogalo para outra janela
+            EdicaoProdutoOrc edicaoprodutoorc = new EdicaoProdutoOrc(null, true);
+            
+            //Pega todos os dados desse produto
             produto = produtodao.select(idProduto);
             
-            //Cria um vetor com os dados do produto
-            String[] dados = new String[] {produto.getId() , produto.getDescricao(), "", produto.getValorVenda(), "", ""};
-            //Adiciona uma linha na tabela com as informações do produto
-            DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
-            model.addRow(dados);
+            //Joga os dados desse produto para janela edicaoprodutoorc
+            produto = edicaoprodutoorc.getProdutoOrc(produto);
+            
+            //Caso a jenela anterior nao tenha sido fechada sem finalizar, o programa segue em frente
+            if(!(produto.getId() == null || produto.getId().equals(""))){
+                //Cria um vetor com os dados do produto
+                String[] dados = new String[] {produto.getId() , produto.getDescricao(), produto.getQuantidade(), produto.getValorVenda(), produto.getDesconto(), produto.getTotal()};
+
+                //Adiciona uma linha na tabela com as informações do produto
+                DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
+                model.addRow(dados);
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "Codigo de Produto Não Encontrado!");
             jFieldcodprodiCadOrcamento.setText(null);
         }
     }
+    
+    
+    //Editar produto na tabela
+    private void editarProduto(){
+        Produto produto = new Produto();
+        String idProduto;
+        int linhaSelecionada;
+        
+        //Pega a linha selecionada
+        linhaSelecionada = jTableProdOrc.getSelectedRow();
+        
+        idProduto = jTableProdOrc.getValueAt(linhaSelecionada, 0).toString();
+        
+        produto.setId(idProduto);
+        produto.setDescricao(jTableProdOrc.getValueAt(linhaSelecionada, 1).toString());
+        produto.setQuantidade(jTableProdOrc.getValueAt(linhaSelecionada, 2).toString());
+        produto.setValorVenda(jTableProdOrc.getValueAt(linhaSelecionada, 3).toString());
+        produto.setDesconto(jTableProdOrc.getValueAt(linhaSelecionada, 4).toString());
+        produto.setTotal(jTableProdOrc.getValueAt(linhaSelecionada, 5).toString());
+        
+        //Checa se o codigo existe
+        if(produtodao.existenciaProduto(produto)){
+            //Se o produto existir ira jogalo para outra janela
+            EdicaoProdutoOrc edicaoprodutoorc = new EdicaoProdutoOrc(null, true);
+                        
+            //Joga os dados desse produto para janela edicaoprodutoorc
+            produto = edicaoprodutoorc.editProdutoOrc(produto);
+            
+            //Caso a jenela anterior nao tenha sido fechada sem finalizar, o programa segue em frente
+            if(!(produto.getId() == null || produto.getId().equals(""))){
+                //Cria um vetor com os dados do produto
+                //String[] dados = new String[] { , , , , , };
+
+                //Adiciona uma linha na tabela com as informações do produto
+                DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
+                model.setValueAt(produto.getId(), linhaSelecionada, 0);
+                model.setValueAt(produto.getDescricao(), linhaSelecionada, 1);
+                model.setValueAt(produto.getQuantidade(), linhaSelecionada, 2);
+                model.setValueAt(produto.getValorVenda(), linhaSelecionada, 3);
+                model.setValueAt(produto.getDesconto(), linhaSelecionada, 4);
+                model.setValueAt(produto.getTotal(), linhaSelecionada, 5);
+            }
+            
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -252,6 +311,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         });
         jTableProdOrc.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTableProdOrc.getTableHeader().setReorderingAllowed(false);
+        jTableProdOrc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdOrcMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProdOrc);
         if (jTableProdOrc.getColumnModel().getColumnCount() > 0) {
             jTableProdOrc.getColumnModel().getColumn(0).setResizable(false);
@@ -527,6 +591,10 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 break;
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTableProdOrcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdOrcMouseClicked
+        editarProduto();
+    }//GEN-LAST:event_jTableProdOrcMouseClicked
 
     /**
      * @param args the command line arguments

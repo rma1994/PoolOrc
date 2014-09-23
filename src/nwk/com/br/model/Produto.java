@@ -25,6 +25,9 @@ public class Produto {
     private String porcentagem;
     private String observacoes;
     private Date dhCadastro;
+    private String total;
+    private String quantidade;
+    private String desconto;
     
     private String mensagemerroProduto = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -166,6 +169,30 @@ public class Produto {
         }catch(Exception e){
             System.out.println("Erro DH Nascimento Funcionario" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(String desconto) {
+        this.desconto = desconto;
     }
     
 }
