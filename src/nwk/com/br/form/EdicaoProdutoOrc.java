@@ -86,6 +86,25 @@ public class EdicaoProdutoOrc extends javax.swing.JDialog {
         }
     }
     
+    private void focusLostCalc(){
+        if(jTextFieldQtd.getText().equals("")){
+            jTextFieldQtd.setText("0");
+        }
+        if(jTextFieldValUni.getText().equals("")){
+            jTextFieldValUni.setText("0");
+        }
+        if(jTextFieldDesconto.getText().equals("")){
+            jTextFieldDesconto.setText("0");
+        }
+        
+        BigDecimal qtd = new BigDecimal(jTextFieldQtd.getText().replace(",", "."));
+        BigDecimal vlUnit = new BigDecimal(jTextFieldValUni.getText().replace(",", "."));
+        BigDecimal desc = new BigDecimal(jTextFieldDesconto.getText().replace(",", "."));
+        BigDecimal total = calcularTotal(qtd, vlUnit, desc);
+        
+        jTextFieldTotal.setText(total.setScale(2, RoundingMode.HALF_UP).toString());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -265,12 +284,14 @@ public class EdicaoProdutoOrc extends javax.swing.JDialog {
         produto.setTotal(jTextFieldTotal.getText());
         
         //Verifica se algum campo esta em branco
-        if((produto.getDescricao().equals("")) || (produto.getQuantidade().equals("")) || (produto.getValorVenda().equals(""))){
-            JOptionPane.showMessageDialog(null, "Campos em Branco!");
+        if((produto.getDescricao().equals("")) || (produto.getQuantidade().equals("") || produto.getQuantidade().equals("0")) || (produto.getValorVenda().equals(""))){
+            /*System.out.println(produto.getDescricao());
+            System.out.println(produto.getQuantidade());
+            System.out.println(produto.getValorVenda());*/
+            JOptionPane.showMessageDialog(null, "Campos em branco ou invalidos!");
         }else {
             this.dispose();
         }
-        
         
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
@@ -280,33 +301,15 @@ public class EdicaoProdutoOrc extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldQtdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldQtdFocusLost
-        BigDecimal qtd = new BigDecimal(jTextFieldQtd.getText().replace(",", "."));
-        BigDecimal vlUnit = new BigDecimal(jTextFieldValUni.getText().replace(",", "."));
-        BigDecimal desc = new BigDecimal(jTextFieldDesconto.getText().replace(",", "."));
-        BigDecimal total = calcularTotal(qtd, vlUnit, desc);
-        
-        
-        jTextFieldTotal.setText(total.setScale(2, RoundingMode.HALF_UP).toString());
+        focusLostCalc();
     }//GEN-LAST:event_jTextFieldQtdFocusLost
 
     private void jTextFieldValUniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldValUniFocusLost
-        BigDecimal qtd = new BigDecimal(jTextFieldQtd.getText().replace(",", "."));
-        BigDecimal vlUnit = new BigDecimal(jTextFieldValUni.getText().replace(",", "."));
-        BigDecimal desc = new BigDecimal(jTextFieldDesconto.getText().replace(",", "."));
-        BigDecimal total = calcularTotal(qtd, vlUnit, desc);
-        
-        
-        jTextFieldTotal.setText(total.setScale(2, RoundingMode.HALF_UP).toString());
+        focusLostCalc();
     }//GEN-LAST:event_jTextFieldValUniFocusLost
 
     private void jTextFieldDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDescontoFocusLost
-        BigDecimal qtd = new BigDecimal(jTextFieldQtd.getText().replace(",", "."));
-        BigDecimal vlUnit = new BigDecimal(jTextFieldValUni.getText().replace(",", "."));
-        BigDecimal desc = new BigDecimal(jTextFieldDesconto.getText().replace(",", "."));
-        BigDecimal total = calcularTotal(qtd, vlUnit, desc);
-        
-        
-        jTextFieldTotal.setText(total.setScale(2, RoundingMode.HALF_UP).toString());
+        focusLostCalc();
     }//GEN-LAST:event_jTextFieldDescontoFocusLost
 
     /**

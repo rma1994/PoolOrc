@@ -6,16 +6,24 @@
 
 package nwk.com.br.form;
 
+import com.sun.javafx.css.CalculatedValue;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import nwk.com.br.calculos.OrcamentoCalc;
 import nwk.com.br.dao.FuncionarioDAO;
 import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.dao.OrcamentoDAO;
 import nwk.com.br.dao.ProdutoDAO;
+import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
+import nwk.com.br.documents.ControleTextoValores;
 
 import nwk.com.br.model.Funcionario;
 import nwk.com.br.model.Cliente;
@@ -33,6 +41,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private ClienteDAO clientedao = new ClienteDAO();
     private ProdutoDAO produtodao = new ProdutoDAO();
     private ProdutosOrcamentoStru prodorcstru = new ProdutosOrcamentoStru();
+    private OrcamentoCalc orcamentocalc = new OrcamentoCalc();
     
     /**
      * Creates new form cadorcamentoframe
@@ -41,12 +50,19 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         initComponents();
         this.setModal(true); 
         
-        atualizaTable();
-        setIdOrcamento(); // Pega o ID
+        atualizaTable();//
+        setCamposTexto();//
+        setIdDescOrcamento(); // Pega o ID
         getTimeStamp(); //Pega a hora atual
         setBoxFuncionario();//Mostra os funcionarios cadastrados na combobox funcionario
     }
     
+    //Seta as configurações dos campos de texto
+    private void setCamposTexto(){
+        jFieldcodcliCadOrcamento.setDocument(new ControleTextoId());
+        jFieldcodprodiCadOrcamento.setDocument(new ControleTextoId());
+        jFielddescCadOrcamento.setDocument(new ControleTextoValores());
+    }
     
     //Seta os valores existentes na box funcionario
     private void setBoxFuncionario(){
@@ -58,13 +74,15 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     
 
     //Seta o id do Orcamento
-    private void setIdOrcamento(){
+    private void setIdDescOrcamento(){
         int orcamentoID;
         String id;
         
         orcamentoID = (orcamentodao.checarID()); //checa o ultimo ID do funcionario
         id = Integer.toString(orcamentoID); // transforma esse Id em String
         jFieldcodCadOrcamento.setText(id); //coloca esse id no campo jFieldidCadFuncionario
+        
+        jFielddescCadOrcamento.setText("0");
     }
     
     //Pega a Hora atual para colocar no campo de texto 'data cadastro'
@@ -141,14 +159,22 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             //Joga os dados desse produto para janela edicaoprodutoorc
             produto = edicaoprodutoorc.getProdutoOrc(produto);
             
-            //Caso a jenela anterior nao tenha sido fechada sem finalizar, o programa segue em frente
-            if(!(produto.getId() == null || produto.getId().equals(""))){
+            //Caso a janela anterior nao tenha sido fechada sem finalizar, o programa segue em frente
+            if(!(produto.getValorVenda().equals("") || produto.getQuantidade().equals(""))){
                 //Cria um vetor com os dados do produto
                 String[] dados = new String[] {produto.getId() , produto.getDescricao(), produto.getQuantidade(), produto.getValorVenda(), produto.getDesconto(), produto.getTotal()};
 
                 //Adiciona uma linha na tabela com as informações do produto
                 DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
                 model.addRow(dados);
+                
+                //Soma o valor de todos os produtos na tabela
+                BigDecimal subtotal = orcamentocalc.somarProdutos(getTodosProdutosOrc());
+                jFieldsubtotalCadOrcamento.setText(subtotal.toString());
+                
+                //Subtrai o cvalor de subtotal pelo de desconto
+                BigDecimal total = orcamentocalc.valorTotal(jFieldsubtotalCadOrcamento.getText(), jFielddescCadOrcamento.getText());
+                jFieldtotalCadOrcamento.setText(total.toString());
             }
             
         }else{
@@ -197,12 +223,32 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 model.setValueAt(produto.getValorVenda(), linhaSelecionada, 3);
                 model.setValueAt(produto.getDesconto(), linhaSelecionada, 4);
                 model.setValueAt(produto.getTotal(), linhaSelecionada, 5);
+                
+                BigDecimal subtotal = orcamentocalc.somarProdutos(getTodosProdutosOrc());
+                jFieldsubtotalCadOrcamento.setText(subtotal.toString());
+                
+                //Subtrai o valor de subtotal pelo de desconto
+                BigDecimal total = orcamentocalc.valorTotal(jFieldsubtotalCadOrcamento.getText(), jFielddescCadOrcamento.getText());
+                jFieldtotalCadOrcamento.setText(total.toString());
             }
             
         }
     }
     
-    
+    //Array com valores e ids dos produtos
+    private List<Produto> getTodosProdutosOrc(){
+        List<Produto> result = new ArrayList<Produto>();
+            
+        for(int r=0;r<jTableProdOrc.getRowCount();r++){
+            Produto produto = new Produto();
+            produto.setId(jTableProdOrc.getValueAt(r, 0).toString());
+            produto.setTotal(jTableProdOrc.getValueAt(r, 5).toString());
+            
+            result.add(produto);
+        }
+        
+        return result;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,7 +275,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jFieldcodprodiCadOrcamento = new javax.swing.JTextField();
         jButtonInserirProd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonPesquisarProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProdOrc = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
@@ -245,7 +291,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jFieldcodCadOrcamento = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jFieldcodcliCadOrcamento = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jButtonPesquisarCliente = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jFieldobsCadOrcamento = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
@@ -282,7 +328,12 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Pesquisar");
+        jButtonPesquisarProduto.setText("Pesquisar");
+        jButtonPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarProdutoActionPerformed(evt);
+            }
+        });
 
         jTableProdOrc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -336,12 +387,24 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel19.setText("Desconto :");
 
+        jFielddescCadOrcamento.setText("0");
+        jFielddescCadOrcamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFielddescCadOrcamentoFocusLost(evt);
+            }
+        });
+
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel20.setText("TOTAL :");
 
         jFieldtotalCadOrcamento.setEditable(false);
 
         jButton3.setText("Salvar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cancela");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -365,10 +428,10 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             }
         });
 
-        jButton5.setText("...");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPesquisarCliente.setText("...");
+        jButtonPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonPesquisarClienteActionPerformed(evt);
             }
         });
 
@@ -412,7 +475,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jFieldcodcliCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -466,7 +529,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonInserirProd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -486,7 +549,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     .addComponent(jFieldcodcliCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jFieldnomecliCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(jButtonPesquisarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -504,7 +567,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     .addComponent(jLabel16)
                     .addComponent(jFieldcodprodiCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonInserirProd)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonPesquisarProduto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -553,7 +616,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFieldcodcliCadOrcamentoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarClienteActionPerformed
         ConsultaClienteOrcamento consultacliente = new ConsultaClienteOrcamento(null, true);
         String idCliente;
         
@@ -563,8 +626,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         idCliente = Integer.toString(consultacliente.getCliente().getId());
         
         jFieldcodcliCadOrcamento.setText(idCliente);
-        setDadosClienteLocal();//Seta os dados na tabela de acordo com o id
-    }//GEN-LAST:event_jButton5ActionPerformed
+        setDadosClienteLocal();//seta os dados no frame de acordo com o id do cliente
+    }//GEN-LAST:event_jButtonPesquisarClienteActionPerformed
 
     private void jFieldcodcliCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFieldcodcliCadOrcamentoFocusLost
         setDadosClienteLocal();
@@ -595,6 +658,36 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private void jTableProdOrcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdOrcMouseClicked
         editarProduto();
     }//GEN-LAST:event_jTableProdOrcMouseClicked
+
+    private void jButtonPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutoActionPerformed
+        ConsultaProdutoOrcamento consultaproduto = new ConsultaProdutoOrcamento(null, true);
+        String idProduto;
+        
+        //Pega o cliente retornado por consulta cliente
+        //Depois pega o id desse cliente
+        //converse esse id para String
+        idProduto = consultaproduto.getProduto().getId();
+        
+        jFieldcodprodiCadOrcamento.setText(idProduto);
+        inserirProduto();//Executa o inserir produto, que ira abrir outra tela
+    }//GEN-LAST:event_jButtonPesquisarProdutoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jFielddescCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFielddescCadOrcamentoFocusLost
+        String desconto = jFielddescCadOrcamento.getText();
+        desconto = desconto.replace(",", ".");
+        
+        if(desconto.equals("") || desconto == null ){
+            jFielddescCadOrcamento.setText("0");
+        }
+        
+        //Subtrai o cvalor de subtotal pelo de desconto
+        BigDecimal total = orcamentocalc.valorTotal(jFieldsubtotalCadOrcamento.getText(), desconto);
+        jFieldtotalCadOrcamento.setText(total.toString());
+    }//GEN-LAST:event_jFielddescCadOrcamentoFocusLost
 
     /**
      * @param args the command line arguments
@@ -632,11 +725,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonInserirProd;
+    private javax.swing.JButton jButtonPesquisarCliente;
+    private javax.swing.JButton jButtonPesquisarProduto;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBoxFuncionario;
     private javax.swing.JTextField jFieldcelCadOrcamento;
