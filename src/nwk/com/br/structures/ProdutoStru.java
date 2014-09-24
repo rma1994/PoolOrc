@@ -24,7 +24,7 @@ public class ProdutoStru {
         int l = 0;
         
         //Pega o ultimo valor do id, para ver a quantia maxima de linhas
-        int max = Integer.parseInt(produtodao.checarID());
+        int max = produtodao.getQuantiaLinha();
         
         String[] colunas = new String[]{"ID", "Descrição", "Valor de Venda", "Marca", "Familia", "Similar", "ID Pelo Fabricante", "Data Cadastro", "Valor de Compra", "Porcentagem", "Observações"};
         String[][] dados = new String[max][11];

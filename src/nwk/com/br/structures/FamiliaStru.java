@@ -22,10 +22,10 @@ public class FamiliaStru {
         int l = 0;
         
         //Pega o ultimo valor do id, para ver a quantia maxima de linhas
-        int max = familiadao.checarID();
+        int max = familiadao.getQuantiaLinha();
         
         String[] colunas = new String[]{"ID", "Descrição"};
-        String[][] dados = new String[max-1][2];
+        String[][] dados = new String[max][2];
         
         //Para cada funcionario em getTodosFuncionarios, coloque esses dados na tabela
         for (Familia familia : familiadao.getTodasFamilias()){

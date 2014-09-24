@@ -194,4 +194,27 @@ public class FuncionarioDAO {
         }
         return result;
     }
+    
+    //Pega a quantia de linhas da tabela
+    public int getQuantiaLinha(){
+        int qtd=0;
+        
+        String sql = "SELECT COUNT(*) qtd FROM funcionario";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                qtd = rs.getInt("qtd");
+            }
+            
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return qtd;
+    }
 }

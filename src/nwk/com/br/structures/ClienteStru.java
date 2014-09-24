@@ -21,10 +21,10 @@ public class ClienteStru {
         int l = 0;
         
         //Pega o ultimo valor do id, para ver a quantia maxima de linhas
-        int max = clientedao.checarID();
+        int max = clientedao.getQuantiaLinha();
         
         String[] colunas = new String[]{"ID", "Nome", "E-Mail", "Telefone", "CPF/CNPJ", "Celular", "Tipo", "Rua", "Numero", "Bairro", "Complemento", "Cidade", "Estado", "CEP", "Status", "Observações"};
-        String[][] dados = new String[max-1][16];
+        String[][] dados = new String[max][16];
         
         //Para cada funcionario em getTodosFuncionarios, coloque esses dados na tabela
         for (Cliente cliente : clientedao.getTodosClientes()){

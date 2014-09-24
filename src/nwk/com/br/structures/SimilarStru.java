@@ -22,10 +22,10 @@ public class SimilarStru {
         int l = 0;
         
         //Pega o ultimo valor do id, para ver a quantia maxima de linhas
-        int max = similardao.checarID();
+        int max = similardao.getQuantiaLinha();
         
         String[] colunas = new String[]{"ID", "Descrição"};
-        String[][] dados = new String[max-1][2];
+        String[][] dados = new String[max][2];
         
         //Para cada funcionario em getTodosFuncionarios, coloque esses dados na tabela
         for (Similar similar : similardao.getTodosSimilares()){

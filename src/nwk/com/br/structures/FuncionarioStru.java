@@ -40,10 +40,10 @@ public class FuncionarioStru {
         int l = 0;
         
         //Pega o ultimo valor do id, para ver a quantia maxima de linhas
-        int max = func.checarID();
+        int max = func.getQuantiaLinha();
         
         String[] colunas = new String[]{"ID", "Nome", "E-Mail", "Telefone", "CPF", "Data de Nascimento", "Celular", "Rua", "Numero", "Bairro", "Complemento", "Cidade", "Estado", "CEP", "Carteira de Trabalho", "Serie Carteira", "Data Contratação", "Data Demissão", "Observações", "Status"};
-        String[][] dados = new String[max-1][20];
+        String[][] dados = new String[max][20];
         
         //Para cada funcionario em getTodosFuncionarios, coloque esses dados na tabela
         for (Funcionario funcionario : func.getTodosFuncionarios()){
