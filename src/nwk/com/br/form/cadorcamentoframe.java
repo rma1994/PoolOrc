@@ -115,6 +115,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             jFieldemailCadOrcamento.setText(cliente.getEmail());
         }else{
             JOptionPane.showMessageDialog(null, "ID Não Cadastrado!");
+            jFieldcodcliCadOrcamento.setText(null);
             jFieldnomecliCadOrcamento.setText(null);
             jFieldtelCadOrcamento.setText(null);
             jFieldcelCadOrcamento.setText(null);
@@ -257,6 +258,35 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         
         return result;
     }
+    
+    
+     //Seta os campos desse frame, de acordo com os dados recebidos pelo frame
+   //ConsultaCliente
+   public void setOrcamentoForm(Orcamento orcamento){
+       SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
+       
+       //Pega os dados recebidos como parametro e seta nos campos do form.
+       jComboBoxFormaPagamento.setSelectedIndex(Integer.parseInt(orcamento.getFormaPagamento()));
+       jComboBoxFuncionario.setSelectedIndex(orcamento.getIdFuncionario()-1);
+       
+       jFieldcodCadOrcamento.setText(Integer.toString(orcamento.getId()));
+       jFieldcodcliCadOrcamento.setText(Integer.toString(orcamento.getIdCliente()));
+       jFielddtCadOrcamento.setText(sdf1.format(orcamento.getDhOrcamento()).toString());
+       jFieldtotalCadOrcamento.setText(orcamento.getTotal());
+       jFieldsubtotalCadOrcamento.setText(orcamento.getSubTotal());
+       jFielddescCadOrcamento.setText(orcamento.getDesconto());
+       jFieldobsCadOrcamento.setText(orcamento.getObservacoes());
+       
+       setDadosClienteLocal();
+       
+       TableModel model = (TableModel) (prodorcstru.getTableProdutosCadastr(orcamento));
+       jTableProdOrc.setModel(model);
+        
+       //Seta as dimensões das colunas
+       jTableProdOrc.getColumnModel().getColumn(0).setMinWidth(35);
+       jTableProdOrc.getColumnModel().getColumn(0).setMaxWidth(35);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -392,6 +422,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel18.setText("Subtotal :");
 
         jFieldsubtotalCadOrcamento.setEditable(false);
+        jFieldsubtotalCadOrcamento.setText("0.00");
 
         jLabel19.setText("Desconto :");
 
@@ -407,6 +438,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jFieldtotalCadOrcamento.setEditable(false);
         jFieldtotalCadOrcamento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jFieldtotalCadOrcamento.setText("0.00");
 
         jButton3.setText("Salvar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {

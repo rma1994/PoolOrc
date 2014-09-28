@@ -19,6 +19,7 @@ public class Orcamento {
     private int idFuncionario;
     private int idCliente;
     private Date dhOrcamento;
+    private String nomeCliente;
     private String formaPagamento;
     private String subTotal;
     private String desconto;
@@ -48,6 +49,15 @@ public class Orcamento {
         this.id = id;
     }
 
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    
     public int getIdFuncionario() {
         return idFuncionario;
     }
@@ -58,7 +68,6 @@ public class Orcamento {
         index = idFuncionario.indexOf("-"); //Pego a posição do -, que indica até vai o cod
         idFuncionario = idFuncionario.substring(0, index).trim(); // armazeno o codigo até o -
         this.idFuncionario = Integer.parseInt(idFuncionario);
-        System.out.println(this.idFuncionario);
     }
 
     public int getIdCliente() {

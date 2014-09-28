@@ -5,12 +5,17 @@
  */
 package nwk.com.br.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Orcamento;
+import nwk.com.br.model.Produto;
 import nwk.com.br.repository.Database;
 
 /**
@@ -76,6 +81,105 @@ public class OrcamentoDAO {
         int qtd=0;
         
         String sql = "SELECT COUNT(*) qtd FROM orcamento";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                qtd = rs.getInt("qtd");
+            }
+            
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return qtd;
+    }
+    
+    
+    //Pega todos os funcionarios cadastrados no banco de dados
+    public List<Orcamento> getTodosOrcamentos(){     
+                
+        List<Orcamento> result = new ArrayList<Orcamento>();
+        String sql = "SELECT o.*, c.NOME_CLIENTE FROM orcamento o, cliente c WHERE c.ID_CLIENTE = o.ID_CLIENTE ORDER BY cod_orcamento";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+           
+            while(rs.next()){
+                Orcamento orcamento = new Orcamento();
+                orcamento.setId(rs.getInt("cod_orcamento"));
+                orcamento.setIdCliente(rs.getInt("id_cliente"));
+                orcamento.setIdFuncionario(rs.getString("id_funcionario") + "-");//Esse - serve para indicar o final do index usada em Produto)
+                orcamento.setDhOrcamento(formatDate.format(rs.getDate("data_orcamento")).toString());
+                orcamento.setSubTotal(Double.toString(rs.getDouble("sub_Total")));
+                orcamento.setFormaPagamento(rs.getString("forma_pagamento"));
+                orcamento.setDesconto(Double.toString(rs.getDouble("desconto_valor")));
+                orcamento.setTotal(Double.toString(rs.getDouble("total_orcamento")));
+                orcamento.setObservacoes(rs.getString("orbservacoes_orcamento"));
+                orcamento.setNomeCliente(rs.getString("nome_cliente"));
+                
+                result.add(orcamento);
+            }
+            
+            
+        }catch(Exception e){
+            //e.printStackTrace();  
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
+    
+    
+    //Pega todos os produtos cadastrados no banco de dados
+    public List<Produto> getTodosProdutosOrcamento(Orcamento orcamento){   
+        
+        List<Produto> result = new ArrayList<Produto>();
+        String sql = "SELECT io.cod_prod, io.quantidade, io.desconto_prod, io.valor_unidade, p.descricao_pecas, SUM((io.quantidade*valor_unidade)-desconto_prod) AS Total " +
+                        "FROM itensorcamento io, produto p, orcamento o " +
+                        "WHERE o.cod_orcamento = " + orcamento.getId() +
+                        "AND o.cod_orcamento = io.cod_orcamento " +
+                        "AND io.cod_prod = p.cod_prod " +
+                        "GROUP BY p.descricao_pecas, io.cod_orcamento, io.cod_prod, io.quantidade, io.desconto_prod, io.valor_unidade " +
+                        "ORDER BY io.cod_prod";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+           
+            while(rs.next()){
+                Produto produto = new Produto();
+                produto.setId(rs.getString("cod_prod"));
+                produto.setQuantidade(rs.getString("quantidade"));
+                produto.setDesconto(Double.toString(rs.getDouble("desconto_prod")));
+                produto.setValorVenda(rs.getString("valor_unidade"));
+                produto.setDescricao(rs.getString("descricao_pecas"));
+                produto.setTotal(Double.toString(rs.getDouble("Total")));
+                
+                result.add(produto);
+            }
+            
+        }catch(Exception e){
+            //e.printStackTrace();  
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
+    
+    
+    //Pega a quantia de linhas da tabela
+    public int getQuantiaLinhaProdutos(Orcamento orcamento){
+        int qtd=0;
+        
+        String sql = "Select count(*)" +
+                        "from ItensOrcamento" +
+                        "where cod_orcamento = " + orcamento.getId();
         
         try{
             conn = Database.getInstance().getConnection();

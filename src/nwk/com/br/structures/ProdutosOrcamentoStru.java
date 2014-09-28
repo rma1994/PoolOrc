@@ -6,8 +6,10 @@
 package nwk.com.br.structures;
 
 import javax.swing.table.DefaultTableModel;
+import nwk.com.br.dao.OrcamentoDAO;
 import nwk.com.br.dao.ProdutoDAO;
 import nwk.com.br.model.Produto;
+import nwk.com.br.model.Orcamento;
 
 /**
  *
@@ -49,6 +51,43 @@ public class ProdutosOrcamentoStru {
             return false;
         }
     };
+    
+    //Retorna o modelo gerado aqui
+    return model;
+    }
+    
+    
+    
+    public DefaultTableModel getTableProdutosCadastr(Orcamento orcamento) {
+        
+        OrcamentoDAO orcamentodao = new OrcamentoDAO();
+        //int l = 0;
+        
+        //Pega o ultimo valor do id, para ver a quantia maxima de linhas
+        //int max = orcamentodao.getQuantiaLinhaProdutos(orcamento);
+        
+        String[] colunas = new String[]{"Codigo", "Descrição", "Quantidade", "Valor Und", "Desconto", "Total"};
+        //String[][] dados = new String[max][6];
+        
+        //Linhas não editaveis.
+        DefaultTableModel model = new DefaultTableModel(null , colunas ){
+            public boolean isCellEditable(int rowIndex, int vColIndex) {
+                return false;
+            }
+        };
+        
+        //Para cada funcionario em getTodosFuncionarios, coloque esses dados na tabela, adicionando uma nova linha
+        for (Produto produto : orcamentodao.getTodosProdutosOrcamento(orcamento)){
+            String[] dados = new String[6];
+            dados[0] = produto.getId();
+            dados[1] = produto.getDescricao();
+            dados[2] = produto.getQuantidade();
+            dados[3] = produto.getValorVenda().replace(".", ",");
+            dados[4] = produto.getDesconto().replace(".", ",");
+            dados[5] = produto.getTotal().replace(".", ",");
+            model.addRow(dados);
+        }
+       
     
     //Retorna o modelo gerado aqui
     return model;

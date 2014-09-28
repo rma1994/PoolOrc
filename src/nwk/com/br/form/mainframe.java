@@ -376,9 +376,9 @@ public class mainframe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        cadorcamentoframe orcamenteframe = new cadorcamentoframe();
-        orcamenteframe.setLocationRelativeTo(null);
-        orcamenteframe.setVisible(true);
+        ConsultaOrcamento consultaorcamento = new ConsultaOrcamento(null, true);
+        consultaorcamento.setLocationRelativeTo(null);
+        consultaorcamento.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
