@@ -359,6 +359,12 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel16.setText("Codigo do Produto :");
 
+        jFieldcodprodiCadOrcamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFieldcodprodiCadOrcamentoFocusLost(evt);
+            }
+        });
+
         jButtonInserirProd.setText("Inserir");
         jButtonInserirProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -675,9 +681,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jFieldcodcliCadOrcamentoFocusLost
 
     private void jButtonInserirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirProdActionPerformed
-        // TODO add your handling code here:
-        inserirProduto();
-        jFieldcodprodiCadOrcamento.setText(null);
+        
     }//GEN-LAST:event_jButtonInserirProdActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -717,19 +721,55 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int id = Integer.parseInt(jFieldcodCadOrcamento.getText());
         
-        orcamento.setIdCliente(Integer.parseInt(jFieldcodcliCadOrcamento.getText()));
+        //Exibe mensagem de erro caso o campo id cliente esteja em branco.
+        try{
+            orcamento.setIdCliente(Integer.parseInt(jFieldcodcliCadOrcamento.getText()));
+            orcamento.setFormaPagamento(Integer.toString(jComboBoxFormaPagamento.getSelectedIndex()));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Campos ID Cliente em Branco");
+        }
+        
+        orcamento.setId(Integer.parseInt(jFieldcodCadOrcamento.getText()));
         orcamento.setIdFuncionario(jComboBoxFuncionario.getSelectedItem().toString());
         orcamento.setDhOrcamento(jFielddtCadOrcamento.getText());
         orcamento.setSubTotal(jFieldsubtotalCadOrcamento.getText());
-        orcamento.setFormaPagamento(Integer.toString(jComboBoxFormaPagamento.getSelectedIndex()));
         orcamento.setDesconto(jFielddescCadOrcamento.getText());
         orcamento.setTotal(jFieldtotalCadOrcamento.getText());
         orcamento.setObservacoes(jFieldobsCadOrcamento.getText());
         orcamento.setResult(getTodosProdutosOrc());
         
+        if(orcamento.isValida() == true){
+            if(orcamentodao.existenciaOrcamento(orcamento) == false){
+                
+                //Tenta inserir os dados pelo formulario no banco de dados
+                boolean orcamentoresult = orcamentodao.inserir(orcamento);
+                boolean prodOrcResult = orcamentodao.insertProdutosOrc(id, getTodosProdutosOrc());
+                
+                if(orcamentoresult == true && prodOrcResult == true){
+                    JOptionPane.showMessageDialog(null, "Orcamento Inserido Com Sucesso!");
+                    this.dispose();
+                }
+                
+            }else if(orcamentodao.existenciaOrcamento(orcamento) == true){
+                //Tenta ATUALIZAR os dados pelo formulario no banco de dados
+                boolean orcamentoresult = orcamentodao.atualizar(orcamento, getTodosProdutosOrc());
+                
+                if(orcamentoresult == true){
+                    JOptionPane.showMessageDialog(null, "Orcamento Atualizado Com Sucesso!");
+                    this.dispose();
+                }
+            }
+            
+        }else if(orcamento.isValida() == false){
+                //Caso exista campos obrigatorios em branco ou nulos, ele apresenta aqui.
+                JOptionPane.showMessageDialog(null, orcamento.getMensagemerroOrcamento());
+                orcamento.setMensagemerroOrcamento("Campos em branco: \n");
+                orcamento.setValida(true);
+        }
         
-        orcamentodao.inserir(orcamento);
-        produtodao.insertProdutosOrc(id, getTodosProdutosOrc());
+        
+        //orcamentodao.inserir(orcamento);
+        //orcamentodao.insertProdutosOrc(id, getTodosProdutosOrc());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jFielddescCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFielddescCadOrcamentoFocusLost
@@ -744,6 +784,12 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         BigDecimal total = orcamentocalc.valorTotal(jFieldsubtotalCadOrcamento.getText(), desconto);
         jFieldtotalCadOrcamento.setText(total.toString());
     }//GEN-LAST:event_jFielddescCadOrcamentoFocusLost
+
+    private void jFieldcodprodiCadOrcamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFieldcodprodiCadOrcamentoFocusLost
+        // TODO add your handling code here:
+        inserirProduto();
+        jFieldcodprodiCadOrcamento.setText(null);
+    }//GEN-LAST:event_jFieldcodprodiCadOrcamentoFocusLost
 
     /**
      * @param args the command line arguments

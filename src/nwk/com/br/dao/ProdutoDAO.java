@@ -199,35 +199,7 @@ public class ProdutoDAO {
         return produto;
     }
     
-    //Pega todos os produtos cadastrados no banco de dados
-    public boolean insertProdutosOrc(int cod, List<Produto> produtolist){     
-        boolean result = false;
         
-        
-        try{
-            conn = Database.getInstance().getConnection();
-            Statement stm = this.conn.createStatement();
-            
-            for (Produto produto : produtolist){
-                String sql = "INSERT INTO ItensOrcamento(cod_orcamento, cod_prod, quantidade, desconto_prod, valor_unidade)"
-                        + "VALUES('" + cod + "',"
-                        + "'" + produto.getId() + "',"
-                        + "'" + produto.getQuantidade().replace(".", ",") + "',"
-                        + "'" + produto.getDesconto().replace(".", ",") + "',"
-                        + "'" + produto.getValorVenda().replace(".", ",") + "')";
-                
-                stm.executeUpdate(sql);
-                System.out.println("Produto inserido com sucesso!");
-            }
-            result = true;
-            stm.close();
-        }catch(Exception e){
-            //e.printStackTrace();  
-            System.out.println("Erro ao tentar Inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
-        }         
-        return result;
-    }
-    
     //Pega a quantia de linhas da tabela
     public int getQuantiaLinha(){
         int qtd=0;

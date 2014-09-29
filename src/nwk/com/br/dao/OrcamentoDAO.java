@@ -117,10 +117,10 @@ public class OrcamentoDAO {
                 orcamento.setIdCliente(rs.getInt("id_cliente"));
                 orcamento.setIdFuncionario(rs.getString("id_funcionario") + "-");//Esse - serve para indicar o final do index usada em Produto)
                 orcamento.setDhOrcamento(formatDate.format(rs.getDate("data_orcamento")).toString());
-                orcamento.setSubTotal(Double.toString(rs.getDouble("sub_Total")));
+                orcamento.setSubTotal(Double.toString(rs.getDouble("sub_Total")).replace(",", "."));
                 orcamento.setFormaPagamento(rs.getString("forma_pagamento"));
-                orcamento.setDesconto(Double.toString(rs.getDouble("desconto_valor")));
-                orcamento.setTotal(Double.toString(rs.getDouble("total_orcamento")));
+                orcamento.setDesconto(Double.toString(rs.getDouble("desconto_valor")).replace(",", "."));
+                orcamento.setTotal(Double.toString(rs.getDouble("total_orcamento")).replace(",", "."));
                 orcamento.setObservacoes(rs.getString("orbservacoes_orcamento"));
                 orcamento.setNomeCliente(rs.getString("nome_cliente"));
                 
@@ -157,10 +157,10 @@ public class OrcamentoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getString("cod_prod"));
                 produto.setQuantidade(rs.getString("quantidade"));
-                produto.setDesconto(Double.toString(rs.getDouble("desconto_prod")));
+                produto.setDesconto(Double.toString(rs.getDouble("desconto_prod")).replace(",", "."));
                 produto.setValorVenda(rs.getString("valor_unidade"));
                 produto.setDescricao(rs.getString("descricao_pecas"));
-                produto.setTotal(Double.toString(rs.getDouble("Total")));
+                produto.setTotal(Double.toString(rs.getDouble("Total")).replace(",", "."));
                 
                 result.add(produto);
             }
@@ -196,5 +196,110 @@ public class OrcamentoDAO {
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
         return qtd;
+    }
+    
+    //Pega todos os produtos cadastrados no banco de dados
+    public boolean insertProdutosOrc(int cod, List<Produto> produtolist){     
+        boolean result = false;
+        
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            
+            for (Produto produto : produtolist){
+                String sql = "INSERT INTO ItensOrcamento(cod_orcamento, cod_prod, quantidade, desconto_prod, valor_unidade)"
+                        + "VALUES('" + cod + "',"
+                        + "'" + produto.getId() + "',"
+                        + "'" + produto.getQuantidade().replace(".", ",") + "',"
+                        + "'" + produto.getDesconto().replace(".", ",") + "',"
+                        + "'" + produto.getValorVenda().replace(".", ",") + "')";
+                
+                stm.executeUpdate(sql);
+                System.out.println("Produto inserido com sucesso!");
+            }
+            result = true;
+            stm.close();
+        }catch(Exception e){
+            //e.printStackTrace();  
+            System.out.println("Erro ao tentar Inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
+    
+    
+    //Atualiza o orçamento ja cadastrao no banco de dados
+    public boolean atualizar(Orcamento orcamento, List<Produto> produtolist){
+        boolean result = false;
+        
+        //SQL para atualizar os dados do orçamento
+        String sqlUpd = "UPDATE orcamento"
+                    + " SET id_funcionario = '" + orcamento.getIdFuncionario() + "',"
+                    + "id_cliente = '" + orcamento.getIdCliente() + "',"
+                    + "sub_Total = '" + orcamento.getSubTotal().replace(".", ",") + "',"
+                    + "forma_pagamento = '" + orcamento.getFormaPagamento() + "',"
+                    + "desconto_valor = '" + orcamento.getDesconto().replace(".", ",") + "',"
+                    + "total_orcamento = '" + orcamento.getTotal().replace(".", ",") + "',"
+                    + "orbservacoes_orcamento = '" + orcamento.getObservacoes()+ "' "
+                + "WHERE cod_orcamento = " + orcamento.getId() + "";
+        
+        String sqlDel = "DELETE FROM itensorcamento WHERE cod_orcamento = " + orcamento.getId() + "";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            
+            //Atualiza o orcamento
+            stm.executeUpdate(sqlUpd);
+            
+            //Apaga os produtos que existiam no ormçamento
+            stm.executeUpdate(sqlDel);
+            
+            //SQL para atualizar os produtos do orçamento
+            for (Produto produto : produtolist){
+                String sqlProd = "INSERT INTO ItensOrcamento(cod_orcamento, cod_prod, quantidade, desconto_prod, valor_unidade)"
+                        + "VALUES('" + orcamento.getId() + "',"
+                        + "'" + produto.getId() + "',"
+                        + "'" + produto.getQuantidade().replace(".", ",") + "',"
+                        + "'" + produto.getDesconto().replace(".", ",") + "',"
+                        + "'" + produto.getValorVenda().replace(".", ",") + "')";
+                
+                stm.executeUpdate(sqlProd);
+                System.out.println("Produto Atualizado com sucesso!");
+            }
+            
+            System.out.println("Orcamento Atualizado Com Sucesso!");
+            result = true;
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar inserir (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }
+        return result;
+    }
+    
+    
+    //Consulta para verificar se tal orcamento ja esta cadastrado
+    public boolean existenciaOrcamento(Orcamento orcamento){
+        boolean result = false;
+        String sql = "SELECT cod_orcamento id FROM orcamento WHERE cod_orcamento = '" + orcamento.getId() + "'";
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            //Checa se o valor ja existe
+            if(rs.isBeforeFirst() || rs.isAfterLast()){
+                result = true;
+            }else{
+                result = false;
+            }
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar consultar \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
     }
 }

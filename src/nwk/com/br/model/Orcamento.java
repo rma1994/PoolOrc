@@ -28,17 +28,17 @@ public class Orcamento {
     
     private List<Produto> result = new ArrayList<Produto>();
     
-    private String mensagemerroProduto = new String("Campos em branco: \n");
+    private String mensagemerroOrcamento = new String("Campos em branco: \n");
     private boolean valida = true;
     SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");
 
     
-    public String getMensagemerroProduto() {
-        return mensagemerroProduto;
+    public String getMensagemerroOrcamento() {
+        return mensagemerroOrcamento;
     }
 
-    public void setMensagemerroProduto(String mensagemerroProduto) {
-        this.mensagemerroProduto = mensagemerroProduto;
+    public void setMensagemerroOrcamento(String mensagemerroProduto) {
+        this.mensagemerroOrcamento = mensagemerroProduto;
     }
 
     public int getId() {

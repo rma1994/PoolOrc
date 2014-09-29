@@ -280,6 +280,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jFieldcodprodiCadOrcamento">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFieldcodprodiCadOrcamentoFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonInserirProd">
               <Properties>

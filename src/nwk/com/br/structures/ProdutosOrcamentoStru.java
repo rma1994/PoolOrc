@@ -82,9 +82,9 @@ public class ProdutosOrcamentoStru {
             dados[0] = produto.getId();
             dados[1] = produto.getDescricao();
             dados[2] = produto.getQuantidade();
-            dados[3] = produto.getValorVenda().replace(".", ",");
-            dados[4] = produto.getDesconto().replace(".", ",");
-            dados[5] = produto.getTotal().replace(".", ",");
+            dados[3] = produto.getValorVenda().replace(",", ".");
+            dados[4] = produto.getDesconto().replace(",", ".");
+            dados[5] = produto.getTotal().replace(",", ".");
             model.addRow(dados);
         }
        
