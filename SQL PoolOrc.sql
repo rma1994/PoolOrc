@@ -48,6 +48,16 @@ observacoes_funcionario VARCHAR(500) NULL,
 ativo_funcionario CHAR(1) NOT NULL,
 CONSTRAINT PK_Funcionario_ID PRIMARY KEY(ID_Funcionario));
 
+CREATE TABLE Familia(
+cod_familia INT NOT NULL,
+descricao_familia VARCHAR(100) NOT NULL,
+CONSTRAINT PK_Familia_Cod PRIMARY KEY (cod_familia));
+
+CREATE TABLE Similar(
+cod_similar INT NOT NULL,
+descricao_similar VARCHAR(100) NOT NULL,
+CONSTRAINT PK_Similar_Cod PRIMARY KEY (cod_similar));
+
 /*Caso esteja com uma versao anterios do sql, usar o seguinte comando para alterar a tabela Produto:
 alter table funcionario
 add ativo_funcionario CHAR(1) NOT NULL;*/
@@ -66,16 +76,6 @@ observacoes_produto VARCHAR(500) NULL,
 CONSTRAINT PK_Produto_Cod PRIMARY KEY(cod_prod),
 CONSTRAINT FK_Familia_Cod FOREIGN KEY (familia_pecas) REFERENCES familia,
 CONSTRAINT FK_Similar_Cod FOREIGN KEY (similar_pecas) REFERENCES similar);
-
-CREATE TABLE Familia(
-cod_familia INT NOT NULL,
-descricao_familia VARCHAR(100) NOT NULL,
-CONSTRAINT PK_Familia_Cod PRIMARY KEY (cod_familia));
-
-CREATE TABLE Similar(
-cod_similar INT NOT NULL,
-descricao_similar VARCHAR(100) NOT NULL,
-CONSTRAINT PK_Similar_Cod PRIMARY KEY (cod_similar));
 
 CREATE TABLE Orcamento(
 cod_orcamento INT NOT NULL ,
@@ -98,8 +98,8 @@ CREATE TABLE ItensOrcamento(
 cod_orcamento INT NOT NULL,
 cod_prod VARCHAR(9) NOT NULL,
 quantidade DECIMAL(8,2) NOT NULL,
-desconto_prod DECIMAL (8,2) NOT NULL;
-valor_unidade DECIMAL(8,2) NOT NULL;
+desconto_prod DECIMAL (8,2) NOT NULL,
+valor_unidade DECIMAL(8,2) NOT NULL,
 CONSTRAINT FK_iOrcamento_codOrc FOREIGN KEY (cod_orcamento) REFERENCES Orcamento,
 CONSTRAINT FK_codProd FOREIGN KEY (cod_prod) REFERENCES Produto);
 
