@@ -9,16 +9,18 @@ package nwk.com.br.repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import nwk.com.br.files.LerEscreverIpServer;
 
 /**
  *
  * @author monan
  */
-public class Database {
+public class Database{
+    LerEscreverIpServer leserver = new LerEscreverIpServer();
     
     private final String DATABASE = "xe";
     //private final String HOST = "jdbc:oracle:thin:@//25.176.118.32:1521/" + DATABASE;
-    private final String HOST = "jdbc:oracle:thin:@//localhost:1521/" + DATABASE;
+    private final String HOST = "jdbc:oracle:thin:@//"+ leserver.getIp() +":1521/" + DATABASE;
     private final String USER = "PoolOrc";
     private final String PASSWORD = "PoolOrcNWK";
     private Connection connection;

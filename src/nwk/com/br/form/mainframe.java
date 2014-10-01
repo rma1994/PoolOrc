@@ -314,7 +314,12 @@ public class mainframe extends javax.swing.JFrame {
 
         jMenu3.setText("Ajuda");
 
-        jMenuItem7.setText("Atalhos");
+        jMenuItem7.setText("Selecionar Servidor");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
         jMenu3.add(jSeparator1);
 
@@ -447,6 +452,12 @@ public class mainframe extends javax.swing.JFrame {
         consultasimilar.setLocationRelativeTo(null);
         consultasimilar.setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        SelecionaHost host = new SelecionaHost(this, true);
+        host.setLocationRelativeTo(null);
+        host.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
