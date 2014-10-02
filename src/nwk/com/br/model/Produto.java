@@ -28,6 +28,7 @@ public class Produto {
     private String total;
     private String quantidade;
     private String desconto;
+    private int linha;
     
     private String mensagemerroProduto = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -194,5 +195,12 @@ public class Produto {
     public void setDesconto(String desconto) {
         this.desconto = desconto;
     }
-    
+
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
+    }
 }

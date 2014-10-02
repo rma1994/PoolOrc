@@ -140,13 +140,12 @@ public class OrcamentoDAO {
     public List<Produto> getTodosProdutosOrcamento(Orcamento orcamento){   
         
         List<Produto> result = new ArrayList<Produto>();
-        String sql = "SELECT io.cod_prod, io.quantidade, io.desconto_prod, io.valor_unidade, p.descricao_pecas, SUM((io.quantidade*valor_unidade)-desconto_prod) AS Total " +
-                        "FROM itensorcamento io, produto p, orcamento o " +
+        String sql = "SELECT io.cod_prod, io.quantidade, io.linha_prod, io.desconto_prod, io.valor_unidade, io.descricao_prod, SUM((io.quantidade*valor_unidade)-desconto_prod) AS Total " +
+                        "FROM itensorcamento io, orcamento o " +
                         "WHERE o.cod_orcamento = " + orcamento.getId() +
                         "AND o.cod_orcamento = io.cod_orcamento " +
-                        "AND io.cod_prod = p.cod_prod " +
-                        "GROUP BY p.descricao_pecas, io.cod_orcamento, io.cod_prod, io.quantidade, io.desconto_prod, io.valor_unidade " +
-                        "ORDER BY io.cod_prod";
+                        "GROUP BY io.cod_prod, io.linha_prod, io.quantidade, io.desconto_prod, io.valor_unidade, io.descricao_prod " +
+                        "ORDER BY io.linha_prod";
         
         try{
             conn = Database.getInstance().getConnection();
@@ -155,11 +154,16 @@ public class OrcamentoDAO {
            
             while(rs.next()){
                 Produto produto = new Produto();
+                
+                if(rs.getString("linha_prod") != null){
+                    produto.setLinha(Integer.parseInt(rs.getString("linha_prod")));
+                }
+                
                 produto.setId(rs.getString("cod_prod"));
                 produto.setQuantidade(rs.getString("quantidade"));
                 produto.setDesconto(Double.toString(rs.getDouble("desconto_prod")).replace(",", "."));
                 produto.setValorVenda(rs.getString("valor_unidade"));
-                produto.setDescricao(rs.getString("descricao_pecas"));
+                produto.setDescricao(rs.getString("descricao_prod"));
                 produto.setTotal(Double.toString(rs.getDouble("Total")).replace(",", "."));
                 
                 result.add(produto);
@@ -199,17 +203,19 @@ public class OrcamentoDAO {
     }
     
     //Pega todos os produtos cadastrados no banco de dados
-    public boolean insertProdutosOrc(int cod, List<Produto> produtolist){     
+    public boolean insertProdutosOrc(List<Produto> produtolist){     
         boolean result = false;
-        
+        int cod = checarID()-1;
         
         try{
             conn = Database.getInstance().getConnection();
             Statement stm = this.conn.createStatement();
             
             for (Produto produto : produtolist){
-                String sql = "INSERT INTO ItensOrcamento(cod_orcamento, cod_prod, quantidade, desconto_prod, valor_unidade)"
+                String sql = "INSERT INTO ItensOrcamento(cod_orcamento, descricao_prod, linha_prod, cod_prod, quantidade, desconto_prod, valor_unidade)"
                         + "VALUES('" + cod + "',"
+                        + "'" + produto.getDescricao() + "',"
+                        + "'" + Integer.toString(produto.getLinha()) + "',"
                         + "'" + produto.getId() + "',"
                         + "'" + produto.getQuantidade().replace(".", ",") + "',"
                         + "'" + produto.getDesconto().replace(".", ",") + "',"
@@ -257,8 +263,10 @@ public class OrcamentoDAO {
             
             //SQL para atualizar os produtos do orçamento
             for (Produto produto : produtolist){
-                String sqlProd = "INSERT INTO ItensOrcamento(cod_orcamento, cod_prod, quantidade, desconto_prod, valor_unidade)"
+                String sqlProd = "INSERT INTO ItensOrcamento(cod_orcamento, descricao_prod, linha_prod, cod_prod, quantidade, desconto_prod, valor_unidade)"
                         + "VALUES('" + orcamento.getId() + "',"
+                        + "'" + produto.getDescricao() + "',"
+                        + "'" + Integer.toString(produto.getLinha()) + "',"
                         + "'" + produto.getId() + "',"
                         + "'" + produto.getQuantidade().replace(".", ",") + "',"
                         + "'" + produto.getDesconto().replace(".", ",") + "',"

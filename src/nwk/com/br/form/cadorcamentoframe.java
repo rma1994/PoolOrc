@@ -247,7 +247,10 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             
         for(int r=0;r<jTableProdOrc.getRowCount();r++){
             Produto produto = new Produto();
+            
+            produto.setLinha(r);
             produto.setId(jTableProdOrc.getValueAt(r, 0).toString());
+            produto.setDescricao(jTableProdOrc.getValueAt(r, 1).toString());
             produto.setQuantidade(jTableProdOrc.getValueAt(r, 2).toString());
             produto.setValorVenda(jTableProdOrc.getValueAt(r, 3).toString());
             produto.setDesconto(jTableProdOrc.getValueAt(r, 4).toString());
@@ -743,7 +746,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean orcamentoresult = orcamentodao.inserir(orcamento);
-                boolean prodOrcResult = orcamentodao.insertProdutosOrc(id, getTodosProdutosOrc());
+                boolean prodOrcResult = orcamentodao.insertProdutosOrc(getTodosProdutosOrc());
                 
                 if(orcamentoresult == true && prodOrcResult == true){
                     JOptionPane.showMessageDialog(null, "Orcamento Inserido Com Sucesso!");
