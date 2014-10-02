@@ -59,7 +59,7 @@ public class ConsultaOrcamento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonInserir.setText("Inserir Produto");
+        jButtonInserir.setText("Inserir Orçamento");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInserirActionPerformed(evt);
