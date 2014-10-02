@@ -64,6 +64,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     
     //Seta as configurações dos campos de texto
     private void setCamposTexto(){
+        jFieldcodCadOrcamento.setDocument(new ControleTextoId());
         jFieldcodcliCadOrcamento.setDocument(new ControleTextoId());
         jFieldcodprodiCadOrcamento.setDocument(new ControleTextoId());
         jFielddescCadOrcamento.setDocument(new ControleTextoValores());
@@ -462,8 +463,6 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 jButton4ActionPerformed(evt);
             }
         });
-
-        jFieldcodCadOrcamento.setEditable(false);
 
         jLabel21.setText("Cod Cliente :");
 
