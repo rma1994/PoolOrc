@@ -126,9 +126,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jFieldId">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

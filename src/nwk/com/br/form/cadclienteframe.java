@@ -198,7 +198,6 @@ public class cadclienteframe extends javax.swing.JDialog {
 
         jLabel8.setText("E-Mail :");
 
-        jFieldidCadCliente.setEditable(false);
         jFieldidCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFieldidCadClienteActionPerformed(evt);

@@ -123,7 +123,7 @@ public class OrcamentoDAO {
                 orcamento.setTotal(Double.toString(rs.getDouble("total_orcamento")).replace(",", "."));
                 orcamento.setObservacoes(rs.getString("orbservacoes_orcamento"));
                 orcamento.setNomeCliente(rs.getString("nome_cliente"));
-                
+                System.out.println(orcamento.getObservacoes());
                 result.add(orcamento);
             }
             

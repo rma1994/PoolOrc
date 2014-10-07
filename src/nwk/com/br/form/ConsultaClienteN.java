@@ -239,6 +239,7 @@ public class ConsultaClienteN extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
+        cadclienteframe cadcliente = new cadclienteframe();
         cadcliente.setLocationRelativeTo(null);
         cadcliente.setVisible(true);
         

@@ -180,7 +180,6 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
 
         jLabel8.setText("E-Mail :");
 
-        jFieldidCadFuncionario.setEditable(false);
         jFieldidCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFieldidCadFuncionarioActionPerformed(evt);

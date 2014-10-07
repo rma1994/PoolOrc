@@ -39,7 +39,7 @@ public class OrcamentoStru {
             dados[l][6] = orcamento.getSubTotal().replace(".", ",");
             dados[l][7] = orcamento.getFormaPagamento();
             dados[l][8] = orcamento.getDesconto().replace(".", ",");
-            dados[l][10] = orcamento.getObservacoes();
+            dados[l][9] = orcamento.getObservacoes();
             
             l++;
         }

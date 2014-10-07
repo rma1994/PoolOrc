@@ -85,8 +85,6 @@ public class CadFamilia extends javax.swing.JDialog {
 
         jLabel2.setText("Descrição :");
 
-        jFieldId.setEditable(false);
-
         jLabel1.setText("Codigo :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

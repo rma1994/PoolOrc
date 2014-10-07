@@ -80,8 +80,6 @@ public class CadSimilar extends javax.swing.JDialog {
 
         jLabel1.setText("ID :");
 
-        jFieldId.setEditable(false);
-
         jLabel2.setText("Descrição :");
 
         jButtonSalvar.setText("Salvar");
