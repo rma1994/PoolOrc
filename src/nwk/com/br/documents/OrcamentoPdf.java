@@ -227,7 +227,7 @@ import nwk.com.br.model.Produto;
 
             //celula com espaço em branco e com o Total
             PdfPCell spc = new PdfPCell(new Paragraph(" "));
-            PdfPCell total = new PdfPCell(new Paragraph("TOTAL: " + orcamento.getTotal(),fontTotal));
+            PdfPCell total = new PdfPCell(new Paragraph("TOTAL: R$" + orcamento.getTotal(),fontTotal));
 
             //alinha a celula total a esquerda
             total.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -238,7 +238,7 @@ import nwk.com.br.model.Produto;
             spc.setBorder(0);
 
             dPagamento.addCell(new Paragraph("Forma de Pagamento: " + orcamento.getFormaPagamento(),f));
-            dPagamento.addCell(new Paragraph("Desconto: " + orcamento.getDesconto(),f));
+            dPagamento.addCell(new Paragraph("Desconto: R$" + orcamento.getDesconto(),f));
             dPagamento.addCell(total);
 
             return dPagamento;

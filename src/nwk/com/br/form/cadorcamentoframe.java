@@ -365,6 +365,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jComboBoxFuncionario = new javax.swing.JComboBox();
         jFieldtelCadOrcamento = new javax.swing.JFormattedTextField();
+        jButtonAlteraData = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Orçamento");
@@ -442,6 +443,9 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             }
         });
         jTableProdOrc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableProdOrcKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTableProdOrcKeyReleased(evt);
             }
@@ -532,6 +536,13 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jFieldtelCadOrcamento.setFocusCycleRoot(true);
         jFieldtelCadOrcamento.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
 
+        jButtonAlteraData.setText("Inserir");
+        jButtonAlteraData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlteraDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -573,7 +584,9 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jFielddtCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
+                                .addGap(3, 3, 3)
+                                .addComponent(jButtonAlteraData, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -622,7 +635,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     .addComponent(jFielddtCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jFieldcodCadOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAlteraData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
@@ -735,7 +749,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTableProdOrcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdOrcMouseClicked
-        editarProduto();
+        //editarProduto();
     }//GEN-LAST:event_jTableProdOrcMouseClicked
 
     private void jButtonPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutoActionPerformed
@@ -827,17 +841,45 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     }//GEN-LAST:event_jFieldcodprodiCadOrcamentoFocusLost
 
     private void jTableProdOrcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableProdOrcKeyReleased
+        
+    }//GEN-LAST:event_jTableProdOrcKeyReleased
+
+    private void jButtonAlteraDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlteraDataActionPerformed
+        // TODO add your handling code here:
+        //Altera as mensagens da caixa de confirmação para Sim ou Não
+        UIManager.put("OptionPane.yesButtonText", "Sim");  
+        UIManager.put("OptionPane.noButtonText", "Não");
+        
+        //Mostra uma caixa de confirmação se o usuario deseja mesmo Imprimir
+        switch(JOptionPane.showConfirmDialog(null, "Deseja alterar a data do orçamento para a data de hoje?", "Data" ,JOptionPane.YES_NO_OPTION)){
+            case 0:
+                getTimeStamp();
+                break;
+                
+            case 1:
+                break;
+        }
+    }//GEN-LAST:event_jButtonAlteraDataActionPerformed
+
+    private void jTableProdOrcKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableProdOrcKeyPressed
         // Se apertar enter, abre a tela de edição do produto, se for del, deleta o produto selecionado
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             editarProduto();
+            
         } else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
             
             DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
             int linhaSelecionada = jTableProdOrc.getSelectedRow();
-            
             model.removeRow(linhaSelecionada);
+            
+            BigDecimal subtotal = orcamentocalc.somarProdutos(getTodosProdutosOrc());
+            jFieldsubtotalCadOrcamento.setText(subtotal.toString());
+
+            //Subtrai o valor de subtotal pelo de desconto
+            BigDecimal total = orcamentocalc.valorTotal(jFieldsubtotalCadOrcamento.getText(), jFielddescCadOrcamento.getText());
+            jFieldtotalCadOrcamento.setText(total.toString());
         }
-    }//GEN-LAST:event_jTableProdOrcKeyReleased
+    }//GEN-LAST:event_jTableProdOrcKeyPressed
 
     /**
      * @param args the command line arguments
@@ -877,6 +919,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAlteraData;
     private javax.swing.JButton jButtonInserirProd;
     private javax.swing.JButton jButtonPesquisarCliente;
     private javax.swing.JButton jButtonPesquisarProduto;

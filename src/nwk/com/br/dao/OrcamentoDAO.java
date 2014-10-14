@@ -245,6 +245,7 @@ public class OrcamentoDAO {
                     + "sub_Total = '" + orcamento.getSubTotal().replace(".", ",") + "',"
                     + "forma_pagamento = '" + orcamento.getFormaPagamento() + "',"
                     + "desconto_valor = '" + orcamento.getDesconto().replace(".", ",") + "',"
+                    + "data_orcamento = '" + formatDate.format(orcamento.getDhOrcamento()) + "',"
                     + "total_orcamento = '" + orcamento.getTotal().replace(".", ",") + "',"
                     + "orbservacoes_orcamento = '" + orcamento.getObservacoes()+ "' "
                 + "WHERE cod_orcamento = " + orcamento.getId() + "";
