@@ -7,6 +7,7 @@
 package nwk.com.br.form;
 
 import com.sun.javafx.css.CalculatedValue;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import nwk.com.br.dao.ProdutoDAO;
 import nwk.com.br.documents.ControleTexto;
 import nwk.com.br.documents.ControleTextoId;
 import nwk.com.br.documents.ControleTextoValores;
+import nwk.com.br.documents.OrcamentoPdf;
 
 import nwk.com.br.model.Funcionario;
 import nwk.com.br.model.Cliente;
@@ -290,6 +292,30 @@ public class cadorcamentoframe extends javax.swing.JDialog {
        jTableProdOrc.getColumnModel().getColumn(0).setMinWidth(35);
        jTableProdOrc.getColumnModel().getColumn(0).setMaxWidth(35);
     }
+   
+   private void gerarPdf(Orcamento orc){
+       //Altera as mensagens da caixa de confirmação para Sim ou Não
+        UIManager.put("OptionPane.yesButtonText", "Sim");  
+        UIManager.put("OptionPane.noButtonText", "Não");
+        
+        //Mostra uma caixa de confirmação se o usuario deseja mesmo Imprimir
+        switch(JOptionPane.showConfirmDialog(null, "Deseja salvar em PDF?", "Imprimir" ,JOptionPane.YES_NO_OPTION)){
+            case 0:
+                OrcamentoPdf pdf = new OrcamentoPdf();
+                
+                try{
+                    pdf.gerarPdf(orc);
+                    JOptionPane.showMessageDialog(null, "PDF gerado em C:\\PoolOrc\\OrcPdf");
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Erro ao gerar o PDF:\n" + e);
+                    System.out.println(e);
+                }
+                break;
+                
+            case 1:
+                break;
+        }
+   }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -413,6 +439,11 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         jTableProdOrc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableProdOrcMouseClicked(evt);
+            }
+        });
+        jTableProdOrc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableProdOrcKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTableProdOrc);
@@ -749,6 +780,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 
                 if(orcamentoresult == true && prodOrcResult == true){
                     JOptionPane.showMessageDialog(null, "Orcamento Inserido Com Sucesso!");
+                    gerarPdf(orcamento);
                     this.dispose();
                 }
                 
@@ -758,6 +790,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                 
                 if(orcamentoresult == true){
                     JOptionPane.showMessageDialog(null, "Orcamento Atualizado Com Sucesso!");
+                    gerarPdf(orcamento);
                     this.dispose();
                 }
             }
@@ -792,6 +825,19 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         inserirProduto();
         jFieldcodprodiCadOrcamento.setText(null);
     }//GEN-LAST:event_jFieldcodprodiCadOrcamentoFocusLost
+
+    private void jTableProdOrcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableProdOrcKeyReleased
+        // Se apertar enter, abre a tela de edição do produto, se for del, deleta o produto selecionado
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            editarProduto();
+        } else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+            
+            DefaultTableModel model = (DefaultTableModel)(jTableProdOrc.getModel());
+            int linhaSelecionada = jTableProdOrc.getSelectedRow();
+            
+            model.removeRow(linhaSelecionada);
+        }
+    }//GEN-LAST:event_jTableProdOrcKeyReleased
 
     /**
      * @param args the command line arguments
