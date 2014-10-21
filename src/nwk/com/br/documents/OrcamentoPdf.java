@@ -154,7 +154,7 @@ import nwk.com.br.model.Produto;
             cliente = clientedao.select(orcamento.getIdCliente());
             
             
-            PdfPTable dadosCliente = new PdfPTable(new float[] { 0.4f, 0.3f, 0.3f });
+            PdfPTable dadosCliente = new PdfPTable(new float[] { 0.35f, 0.35f, 0.3f });
             dadosCliente.setWidthPercentage(90.0f);//seta o tamanho da tabela em relaçao ao documento
             dadosCliente.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);//alinha os dados a esquerda
             dadosCliente.getDefaultCell().setBorder(0);//retira a borda
@@ -166,10 +166,16 @@ import nwk.com.br.model.Produto;
             nomeCli.setBorder(0);
             dadosCliente.addCell(nomeCli);
             
+            //formatação do celular e do telefone
+            String celular = new String();
+            String telefone = new String();
+            celular = "(" + cliente.getCelular().substring(0, 2) + ") " + cliente.getCelular().substring(2);
+            telefone = "(" + cliente.getTelefone().substring(0, 2) + ") " + cliente.getCelular().substring(2);
+            
             //adciona os demais dados do cliente a tabela
             dadosCliente.addCell("E-mail: " + cliente.getEmail());
-            dadosCliente.addCell("Telefone: " + cliente.getTelefone());
-            dadosCliente.addCell("Celular: " + cliente.getCelular());
+            dadosCliente.addCell("Telefone: " + telefone);
+            dadosCliente.addCell("Celular: " + celular);
             dadosCliente.addCell("Rua: " + cliente.getRua() + ", " + cliente.getNumero());
             dadosCliente.addCell("Bairro: " + cliente.getBairro());
             dadosCliente.addCell("Complemento: " + cliente.getComplemento());
