@@ -324,6 +324,11 @@ public class mainframe extends javax.swing.JFrame {
         jMenu3.add(jSeparator1);
 
         jMenuItem8.setText("Versão");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
@@ -458,6 +463,13 @@ public class mainframe extends javax.swing.JFrame {
         host.setLocationRelativeTo(null);
         host.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        VersaoFrame versao = new VersaoFrame();
+        versao.setLocationRelativeTo(null);
+        versao.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
