@@ -157,7 +157,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="PoolOrc"/>
+    <Property name="title" type="java.lang.String" value="PoolOrc: Or&#xe7;amentos De Piscinas"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

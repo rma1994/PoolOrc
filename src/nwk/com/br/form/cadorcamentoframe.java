@@ -62,6 +62,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         setIdDescOrcamento(); // Pega o ID
         getTimeStamp(); //Pega a hora atual
         setBoxFuncionario();//Mostra os funcionarios cadastrados na combobox funcionario
+        jFieldobsCadOrcamento.setLineWrap(true);//faz com que o text do campo de texto obs seja quebrado ao chegar no fim da linha
     }
     
     //Seta as configurações dos campos de texto

@@ -73,7 +73,7 @@ public class mainframe extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PoolOrc");
+        setTitle("PoolOrc: Orçamentos De Piscinas");
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
@@ -427,10 +427,9 @@ public class mainframe extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        /*ConsultaFrame cconsultaframe = new ConsultaFrame();
-        cconsultaframe.setVisible(true);
-        cconsultaframe.setLocationRelativeTo(null);*/
-        
+        EscolhaConsulta cconsultaframe = new EscolhaConsulta();
+        cconsultaframe.setLocationRelativeTo(null);
+        cconsultaframe.setVisible(true);               
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed

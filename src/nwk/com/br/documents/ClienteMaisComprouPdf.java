@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.dao.OrcamentoDAO;
@@ -34,28 +35,25 @@ import nwk.com.br.model.Cliente;
 import nwk.com.br.model.Orcamento;
 import nwk.com.br.model.Produto;
   
-    public class OrcamentoPdf {
-        OrcamentoDAO orcamentodao = new OrcamentoDAO();
-        Orcamento orcamento = new Orcamento();
+    public class ClienteMaisComprouPdf {
         Cliente cliente = new Cliente();
         ClienteDAO clientedao = new ClienteDAO();
         
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date dia = new Date();
         Font f = new Font(Font.FontFamily.TIMES_ROMAN, 12);
         
         
-        public void gerarPdf(Orcamento orcamento) throws Exception {
+        public void getClienteMaisComprou() throws Exception {
             Document doc = null;
             OutputStream os = null;
-            cliente = clientedao.select(orcamento.getIdCliente());
             
             try {
                 //cria o documento tamanho A4, margens de 2,54cm
                 doc = new Document(PageSize.A4, 35, 35, 35, 35);
-                
+  
                 //cria a stream de saída
-                String caminho = "C:\\PoolOrc\\OrcPdf\\ORC" + orcamento.getId() + " " + cliente.getNome() + ".pdf";
-                os = new FileOutputStream(caminho);
+                os = new FileOutputStream("C:\\PoolOrc\\Consultas\\ClienteMaisComprou.pdf");
   
                 //associa a stream de saída ao 
                 PdfWriter.getInstance(doc, os);
@@ -65,7 +63,7 @@ import nwk.com.br.model.Produto;
                 
                 //Definindo a font coamily.COURIER, 20, Font.BOLD);mo Courier, tamanho 20 em negrito
                 //Font f = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
-                Paragraph orc = new Paragraph("ORÇAMENTO",f);
+                Paragraph orc = new Paragraph("CLIENTE QUE MAIS COMPROU",f);
                 orc.setAlignment(Element.ALIGN_CENTER);
                 
                 /*AREA DE TESTES**************************************************/
@@ -75,27 +73,23 @@ import nwk.com.br.model.Produto;
                 /*AREA DE TESTES**************************************************/
                 
                 
-                doc.add(numPed(orcamento));//adiciona numero do pedido
+                doc.add(cabecalho());//adiciona o cabecalho com informações da empresa
                 doc.add(new Paragraph(" "));
-                doc.add(cabecalho(orcamento));//adiciona o cabecalho com informações da empresa
-                doc.add(new Paragraph(" "));
-                doc.add(new Paragraph(" "));
-                doc.add(dadosCliente(orcamento));//adiciona os dados do cliente
                 doc.add(new Paragraph(" "));
                 doc.add(orc);//esreve orçamento
                 doc.add(new Paragraph(" "));
-                doc.add(dadosProdutos(orcamento));//adiciona os produtos
+                doc.add(getCliente());//adiciona os produtos
                 //doc.add(new Paragraph(" "));
                 doc.add(new Paragraph("______________________________________________________________________________"));
                 //doc.add(new Paragraph(" "));
-                doc.add(dadosPagamento(orcamento));//adiciona os dados de valores e forma de pagamento
+                /*doc.add(dadosPagamento(orcamento));//adiciona os dados de valores e forma de pagamento
                 doc.add(new Paragraph(" "));
                 doc.add(new Paragraph(" "));
                 doc.add(new Paragraph(" "));
-                doc.add(dadosRodape(orcamento));//adiciona o rodape ao orçamento
+                doc.add(dadosRodape(orcamento));//adiciona o rodape ao orçamento*/
                 
                 //abrindo o arquivo
-                File arquivo = new File(caminho);
+                File arquivo = new File("C:\\PoolOrc\\Consultas\\ClienteMaisComprou.pdf");
                 Desktop.getDesktop().open(arquivo);
             } finally {
                 if (doc != null) {
@@ -111,17 +105,8 @@ import nwk.com.br.model.Produto;
         }
         
         
-        //Pega o Id do orçamento
-        private Paragraph numPed(Orcamento orcamento) throws Exception{
-            //cria uma linha com o numero do pedido
-            Paragraph cod = new Paragraph("Orçamento: " + orcamento.getId(),f);
-            cod.setAlignment(Element.ALIGN_RIGHT);
-            return cod;
-        }
-        
-        
         //Adiciona o cabecalho do orcamento
-        private PdfPTable cabecalho(Orcamento orcamento) throws Exception{
+        private PdfPTable cabecalho() throws Exception{
 
             //Cria Uma nova tabela com tres colunas, onde cada uma ocupa 20%, 20% e 60% do tamanho delas
             PdfPTable cabecalho = new PdfPTable(new float[] { 0.3f, 0.4f, 0.3f });
@@ -143,7 +128,7 @@ import nwk.com.br.model.Produto;
             
             //adiciona informações da empresa a tabela
             cabecalho.addCell(new Phrase(new Chunk("Sos da Piscina",f)));
-            cabecalho.addCell(new Phrase(new Chunk(formatDate.format(orcamento.getDhOrcamento()).toString(),f)));
+            cabecalho.addCell(new Phrase(new Chunk(formatDate.format(dia).toString(),f)));
             cabecalho.addCell(new Phrase(new Chunk("Avenida Rebouças, 1440 - Centro",f)));
             cabecalho.addCell(new Phrase(new Chunk("Sumaré/SP - 13170-140",f)));
             cabecalho.addCell(new Phrase(new Chunk("contato@sosdapiscina.com.br",f)));
@@ -154,81 +139,36 @@ import nwk.com.br.model.Produto;
         }
         
         
-        //Adiciona os dados do cliente do orcamento
-        private PdfPTable dadosCliente(Orcamento orcamento) throws Exception{
-            cliente = clientedao.select(orcamento.getIdCliente());
-            
-            
-            PdfPTable dadosCliente = new PdfPTable(new float[] { 0.35f, 0.35f, 0.3f });
-            dadosCliente.setWidthPercentage(90.0f);//seta o tamanho da tabela em relaçao ao documento
-            dadosCliente.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);//alinha os dados a esquerda
-            dadosCliente.getDefaultCell().setBorder(0);//retira a borda
-            
-            //Cria uma cedula da tabela que pegara tres colunas
-            PdfPCell nomeCli = new PdfPCell(new Paragraph("Nome: " + cliente.getNome(),f));
-            nomeCli.setColspan(3);
-            nomeCli.setHorizontalAlignment(Element.ALIGN_LEFT);
-            nomeCli.setBorder(0);
-            dadosCliente.addCell(nomeCli);
-            
-            //formatação do celular e do telefone
-            String celular = new String();
-            String telefone = new String();
-            celular = "(" + cliente.getCelular().substring(0, 2) + ") " + cliente.getCelular().substring(2);
-            telefone = "(" + cliente.getTelefone().substring(0, 2) + ") " + cliente.getCelular().substring(2);
-            
-            //adciona os demais dados do cliente a tabela
-            dadosCliente.addCell("E-mail: " + cliente.getEmail());
-            dadosCliente.addCell("Telefone: " + telefone);
-            dadosCliente.addCell("Celular: " + celular);
-            dadosCliente.addCell("Rua: " + cliente.getRua() + ", " + cliente.getNumero());
-            dadosCliente.addCell("Bairro: " + cliente.getBairro());
-            dadosCliente.addCell("Complemento: " + cliente.getComplemento());
-            dadosCliente.addCell(cliente.getCidade() + "/" + cliente.getEstado());
-            dadosCliente.addCell(cliente.getCep());
-            
-            return dadosCliente;
-        }
-        
-        
         //Adiciona os dados dos produtos
-        private PdfPTable dadosProdutos(Orcamento orcamento) throws Exception{
-            PdfPTable produtosOrc = new PdfPTable(new float[] { 0.1f/*cod*/, 0.45f/*descri*/, 0.1f/*qtd*/, 0.2f/*valuni*/, 0.15f/*descon*/, 0.2f/*total*/ });
-            produtosOrc.setWidthPercentage(100.0f);//seta o tamanho da tabela em relaçao ao documento
-            produtosOrc.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
-            produtosOrc.getDefaultCell().setBorder(0);
+        private PdfPTable getCliente() throws Exception{
+            PdfPTable clienteMaisComprou = new PdfPTable(new float[] { 0.1f/*id*/, 0.65f/*nome*/, 0.25f/*soma*/});
+            clienteMaisComprou.setWidthPercentage(100.0f);//seta o tamanho da tabela em relaçao ao documento
+            clienteMaisComprou.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
+            clienteMaisComprou.getDefaultCell().setBorder(0);
             
             //Adiciona os nomes das colunas
-            PdfPCell codProd = new PdfPCell(new Paragraph("Cod"));
-            PdfPCell descProd = new PdfPCell(new Paragraph("Descrição"));
-            PdfPCell qtdProd = new PdfPCell(new Paragraph("Qtd"));
-            PdfPCell valProd = new PdfPCell(new Paragraph("Valor Unitario"));
-            PdfPCell desProd = new PdfPCell(new Paragraph("Desconto"));
-            PdfPCell totalProd = new PdfPCell(new Paragraph("Total"));
+            PdfPCell idCliente = new PdfPCell(new Paragraph("Id"));
+            PdfPCell nomeCliente = new PdfPCell(new Paragraph("Nome"));
+            PdfPCell valorCliente = new PdfPCell(new Paragraph("Valor"));
 
-            produtosOrc.addCell(codProd);
-            produtosOrc.addCell(descProd);
-            produtosOrc.addCell(qtdProd);
-            produtosOrc.addCell(valProd);
-            produtosOrc.addCell(desProd);
-            produtosOrc.addCell(totalProd);
+            clienteMaisComprou.addCell(idCliente);
+            clienteMaisComprou.addCell(nomeCliente);
+            clienteMaisComprou.addCell(valorCliente);
 
-            //Adiciona as informações dos produtos na tabela
-            for(Produto produto : orcamentodao.getTodosProdutosOrcamento(orcamento)){
-                produtosOrc.addCell(produto.getId());
-                produtosOrc.addCell(produto.getDescricao());
-                produtosOrc.addCell(produto.getQuantidade());
-                produtosOrc.addCell("R$ " + produto.getValorVenda());
-                produtosOrc.addCell("R$ " + produto.getDesconto());
-                produtosOrc.addCell("R$ " + produto.getTotal());
-            }
+            //Adiciona as informações do cliente na tabela
+            cliente = clientedao.getClienteMaisComprou();
             
-            return produtosOrc;
+            clienteMaisComprou.addCell(Integer.toString(cliente.getId()));
+            clienteMaisComprou.addCell(cliente.getNome());
+            clienteMaisComprou.addCell("R$ " + cliente.getTotalCompra());
+            
+            
+            return clienteMaisComprou;
         }
         
         
         //Adiciona os dados de valores
-        private PdfPTable dadosPagamento(Orcamento orcamento) throws Exception{
+        /*private PdfPTable dadosPagamento(Orcamento orcamento) throws Exception{
             Font fontTotal = new Font(Font.FontFamily.TIMES_ROMAN, 16);
 
             PdfPTable dPagamento = new PdfPTable(new float[] { 0.5f, 0.2f, 0.3f});
@@ -238,7 +178,7 @@ import nwk.com.br.model.Produto;
 
             //celula com espaço em branco e com o Total
             PdfPCell spc = new PdfPCell(new Paragraph(" "));
-            PdfPCell total = new PdfPCell(new Paragraph("TOTAL: R$" + orcamento.getTotal(),fontTotal));
+            PdfPCell total = new PdfPCell(new Paragraph("TOTAL: " + orcamento.getTotal(),fontTotal));
 
             //alinha a celula total a esquerda
             total.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -249,7 +189,7 @@ import nwk.com.br.model.Produto;
             spc.setBorder(0);
 
             dPagamento.addCell(new Paragraph("Forma de Pagamento: " + orcamento.getFormaPagamento(),f));
-            dPagamento.addCell(new Paragraph("Desconto: R$" + orcamento.getDesconto(),f));
+            dPagamento.addCell(new Paragraph("Desconto: " + orcamento.getDesconto(),f));
             dPagamento.addCell(total);
 
             return dPagamento;
@@ -257,7 +197,7 @@ import nwk.com.br.model.Produto;
     
         
         //Adiciona o rodape
-        private PdfPTable dadosRodape (Orcamento orcamento) throws Exception{
+       private PdfPTable dadosRodape (Orcamento orcamento) throws Exception{
             //tabela que pega com 100% do tamanho do arquivo, alinhada no centro com tres colunas e sem bordas
             PdfPTable rodape = new PdfPTable(new float[] { 0.5f, 0.2f, 0.3f});
             rodape.setWidthPercentage(100.0f);//seta o tamanho da tabela em relaçao ao documento
@@ -312,5 +252,5 @@ import nwk.com.br.model.Produto;
             rodape2.setExtendLastRow(true);
             
             return rodape2;
-        }
+        }*/
     }

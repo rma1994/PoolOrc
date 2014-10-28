@@ -281,4 +281,42 @@ public class ClienteDAO {
         }         
         return qtd;
     }
+    
+    
+    //Retorna o cliente que mais comprou
+    public Cliente getClienteMaisComprou(){
+        Cliente cliente = new Cliente();
+        
+        String subquery = "(SELECT MAX (SUM(v.quantidade * v.valor_unidade)) "
+                            + "FROM Cliente c, Orcamento o, ItensOrcamento v "
+                            + "WHERE v.cod_orcamento = o.cod_orcamento "
+                            + "AND c.id_cliente = o.id_cliente "
+                            + "GROUP BY nome_cliente) ";
+        
+        String sql = "SELECT c.id_cliente, c.nome_cliente, SUM(v.quantidade * v.valor_unidade) \"soma\" "
+         + "FROM Cliente c, ItensOrcamento v, Orcamento o "
+         + "WHERE v.cod_orcamento = o.cod_orcamento "
+         + "AND c.id_cliente = o.id_cliente "
+         + "GROUP BY c.ID_CLIENTE, c.nome_cliente "
+         + "HAVING SUM(v.quantidade * v.valor_unidade) = " + subquery;
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            //System.out.println(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                cliente.setId(Integer.parseInt(rs.getString("id_cliente")));
+                cliente.setNome(rs.getString("nome_cliente"));
+                cliente.setTotalCompra(rs.getString("soma"));
+            }
+            
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar consultar \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return cliente;
+    }
 }
