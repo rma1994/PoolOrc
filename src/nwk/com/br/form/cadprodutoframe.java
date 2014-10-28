@@ -52,7 +52,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
-        jFieldcodproCadProduto.setDocument(new ControleTextoId());
+        jFieldcodproCadProduto.setDocument(new ControleTexto());
         jFieldcodfabCadProduto.setDocument(new ControleTexto());
         jFielddescCadProduto.setDocument(new ControleTexto());
         jFieldMarca.setDocument(new ControleTexto());

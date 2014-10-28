@@ -16,6 +16,7 @@ import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
 /**
  *
  * @author RMA
@@ -114,6 +115,7 @@ public class cadclienteframe extends javax.swing.JDialog {
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
+        jFieldidCadCliente.setDocument(new ControleTextoId());
         jFieldnomeCadCliente.setDocument(new ControleTexto());
         jFieldruaCadCliente.setDocument(new ControleTexto());
         jFieldbairroCadCliente.setDocument(new ControleTexto());

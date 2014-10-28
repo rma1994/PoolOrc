@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.FuncionarioDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
 import nwk.com.br.enums.StatusRepository;
 import nwk.com.br.model.Funcionario;
 
@@ -41,6 +42,8 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
     }
     
     private void setCamposTexto(){
+        jFieldidCadFuncionario.setDocument(new ControleTextoId());
+        
         jFieldnomeCadFuncionario.setDocument(new ControleTexto());
         jFieldseriecarteiraFuncionario.setDocument(new ControleTexto());
         jFieldruaCadFuncionario.setDocument(new ControleTexto());
