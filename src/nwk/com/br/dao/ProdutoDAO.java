@@ -222,4 +222,48 @@ public class ProdutoDAO {
         }         
         return qtd;
     }
+    
+    
+    //Retorna o produto que mais comprou
+    public List<Produto> getProdutoeMaisVendido(){
+        List<Produto> result = new ArrayList<Produto>();
+        
+        String subquery = "(SELECT MAX(SUM(v.quantidade)) "
+                    + "FROM Produto p, ItensOrcamento v, Orcamento o "
+                    + "WHERE v.cod_orcamento = o.cod_orcamento "
+                    + "AND p.cod_prod = v.cod_prod "
+                    + "GROUP BY descricao_pecas) ";
+        
+        String sql = "SELECT p.cod_prod, p.descricao_pecas, sum(v.quantidade) \"soma\" "
+         + "FROM Produto p, ItensOrcamento v, Orcamento o "
+         + "WHERE v.cod_orcamento = o.cod_orcamento "
+         + "AND p.cod_prod = v.cod_prod "
+         + "GROUP BY p.cod_prod, p.descricao_pecas "
+         + "ORDER BY \"soma\" DESC";
+         //+ "HAVING SUM(v.quantidade) = " + subquery;
+        
+        try{
+            conn = Database.getInstance().getConnection();
+            Statement stm = this.conn.createStatement();
+            //System.out.println(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            
+            
+            while(rs.next()){
+                Produto produto = new Produto();
+                
+                produto.setId(rs.getString("cod_prod"));
+                produto.setDescricao(rs.getString("descricao_pecas"));
+                produto.setQuantidade(rs.getString("soma"));
+                
+                result.add(produto);
+            }
+            
+            stm.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao tentar consultar \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
+            System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
+        }         
+        return result;
+    }
 }

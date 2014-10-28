@@ -7,8 +7,11 @@ package nwk.com.br.form;
 
 import javax.swing.JOptionPane;
 import nwk.com.br.dao.ClienteDAO;
+import nwk.com.br.dao.ProdutoDAO;
 import nwk.com.br.documents.ClienteMaisComprouPdf;
+import nwk.com.br.documents.ProdutoMaisVendidoPdf;
 import nwk.com.br.model.Cliente;
+import nwk.com.br.model.Produto;
 
 /**
  *
@@ -47,6 +50,11 @@ public class EscolhaConsulta extends javax.swing.JDialog {
         });
 
         jButton2.setText("Produto Mais Vendido");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,6 +93,21 @@ public class EscolhaConsulta extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Produto produto = new Produto();
+        ProdutoDAO produtodao = new ProdutoDAO();
+        ProdutoMaisVendidoPdf prodPfd = new ProdutoMaisVendidoPdf();
+        
+        //produto = produtodao.getProdutoeMaisVendido();
+        //System.out.println(produto.getId() + " | " + produto.getDescricao() + " | " + produto.getQuantidade());
+        
+        try{
+            prodPfd.getProdutoMaisVendido();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
