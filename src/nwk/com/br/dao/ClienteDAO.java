@@ -284,21 +284,22 @@ public class ClienteDAO {
     
     
     //Retorna o cliente que mais comprou
-    public Cliente getClienteMaisComprou(){
-        Cliente cliente = new Cliente();
+    public List<Cliente> getClienteMaisComprou(){
+        List<Cliente> result = new ArrayList<Cliente>();
         
-        String subquery = "(SELECT MAX (SUM(v.quantidade * v.valor_unidade)) "
+        /*String subquery = "(SELECT MAX (SUM(v.quantidade * v.valor_unidade)) "
                             + "FROM Cliente c, Orcamento o, ItensOrcamento v "
                             + "WHERE v.cod_orcamento = o.cod_orcamento "
                             + "AND c.id_cliente = o.id_cliente "
-                            + "GROUP BY nome_cliente) ";
+                            + "GROUP BY nome_cliente) ";*/
         
         String sql = "SELECT c.id_cliente, c.nome_cliente, SUM(v.quantidade * v.valor_unidade) \"soma\" "
          + "FROM Cliente c, ItensOrcamento v, Orcamento o "
          + "WHERE v.cod_orcamento = o.cod_orcamento "
          + "AND c.id_cliente = o.id_cliente "
          + "GROUP BY c.ID_CLIENTE, c.nome_cliente "
-         + "HAVING SUM(v.quantidade * v.valor_unidade) = " + subquery;
+         + "ORDER BY \"soma\" DESC";
+        // + "HAVING SUM(v.quantidade * v.valor_unidade) = " + subquery;
         
         try{
             conn = Database.getInstance().getConnection();
@@ -307,9 +308,12 @@ public class ClienteDAO {
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
+                Cliente cliente = new Cliente();
                 cliente.setId(Integer.parseInt(rs.getString("id_cliente")));
                 cliente.setNome(rs.getString("nome_cliente"));
                 cliente.setTotalCompra(rs.getString("soma"));
+                
+                result.add(cliente);
             }
             
             stm.close();
@@ -317,6 +321,6 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao tentar consultar \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 
             System.out.println("Erro ao tentar consultar (" + this.getClass().getName().toString() + ") - " + e.getMessage());
         }         
-        return cliente;
+        return result;
     }
 }

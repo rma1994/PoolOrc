@@ -108,7 +108,7 @@ CONSTRAINT FK_iOrcamento_codOrc FOREIGN KEY (cod_orcamento) REFERENCES Orcamento
 CONSTRAINT FK_codProd FOREIGN KEY (cod_prod) REFERENCES Produto);
 
 /*AutoIncrement*/
-/*pt1: Sequencias*/
+/*pt1: Sequencias: CRIAR UMA A UMA*/
 
 CREATE SEQUENCE cliente_id
 START WITH 1
@@ -130,7 +130,7 @@ CREATE SEQUENCE orcamento_id
 START WITH 1
 INCREMENT BY 1;
 
-/*p2: Triggers, criar um por vez*/
+/*p2: Triggers, CRIAR UMA A UMA*/
 
 CREATE OR REPLACE TRIGGER trigger_cliente
 BEFORE INSERT ON Cliente

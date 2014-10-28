@@ -150,18 +150,24 @@ import nwk.com.br.model.Produto;
             PdfPCell idCliente = new PdfPCell(new Paragraph("Id"));
             PdfPCell nomeCliente = new PdfPCell(new Paragraph("Nome"));
             PdfPCell valorCliente = new PdfPCell(new Paragraph("Valor"));
-
+            
             clienteMaisComprou.addCell(idCliente);
             clienteMaisComprou.addCell(nomeCliente);
             clienteMaisComprou.addCell(valorCliente);
 
             //Adiciona as informações do cliente na tabela
-            cliente = clientedao.getClienteMaisComprou();
-            
-            clienteMaisComprou.addCell(Integer.toString(cliente.getId()));
-            clienteMaisComprou.addCell(cliente.getNome());
-            clienteMaisComprou.addCell("R$ " + cliente.getTotalCompra());
-            
+            int qtdCli = 0;
+            for(Cliente cliente : clientedao.getClienteMaisComprou()){
+                clienteMaisComprou.addCell(Integer.toString(cliente.getId()));
+                clienteMaisComprou.addCell(cliente.getNome());
+                clienteMaisComprou.addCell("R$ " + cliente.getTotalCompra());
+                
+                if(qtdCli == 19){
+                    break;
+                } else{
+                    qtdCli++;
+                }
+            }
             
             return clienteMaisComprou;
         }
