@@ -169,10 +169,11 @@ public class ClienteDAO {
                 cliente.setEstado(rs.getString("estado_cliente"));
                 cliente.setTelefone(rs.getString("telefone_cliente"));
                 cliente.setCelular(rs.getString("celular_cliente"));
-                cliente.setEmail(rs.getString("celular_cliente"));
+                cliente.setEmail(rs.getString("email_cliente"));
                 cliente.setStatus(StatusRepository.getByValue(rs.getString("ativo_cliente")));
                 cliente.setObservacoes(rs.getString("observacoes_cliente"));
             }
+            System.out.println(cliente.getObservacoes());
             stm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir \n\n(" + this.getClass().getName().toString() + ") - " + e.getMessage()); 

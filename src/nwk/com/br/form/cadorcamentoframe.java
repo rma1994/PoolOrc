@@ -68,6 +68,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
     //Seta as configurações dos campos de texto
     private void setCamposTexto(){
         jFieldcodCadOrcamento.setDocument(new ControleTextoId());
+        jFieldobsCadOrcamento.setDocument(new ControleTexto());
         jFieldcodcliCadOrcamento.setDocument(new ControleTextoId());
         jFieldcodprodiCadOrcamento.setDocument(new ControleTextoId());
         jFielddescCadOrcamento.setDocument(new ControleTextoValores());
