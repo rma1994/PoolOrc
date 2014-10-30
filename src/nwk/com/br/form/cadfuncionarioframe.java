@@ -428,6 +428,7 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
 
         jFieldobsCadFuncionario.setColumns(20);
+        jFieldobsCadFuncionario.setLineWrap(true);
         jFieldobsCadFuncionario.setRows(5);
         jScrollPane1.setViewportView(jFieldobsCadFuncionario);
 

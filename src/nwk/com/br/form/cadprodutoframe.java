@@ -296,6 +296,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jPanel2.setToolTipText("");
 
         jTextAreaObs.setColumns(20);
+        jTextAreaObs.setLineWrap(true);
         jTextAreaObs.setRows(5);
         jScrollPane1.setViewportView(jTextAreaObs);
 

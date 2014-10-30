@@ -431,6 +431,7 @@ public class cadclienteframe extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Observações"));
 
         jFieldobsCadCliente.setColumns(20);
+        jFieldobsCadCliente.setLineWrap(true);
         jFieldobsCadCliente.setRows(5);
         jScrollPane1.setViewportView(jFieldobsCadCliente);
 
