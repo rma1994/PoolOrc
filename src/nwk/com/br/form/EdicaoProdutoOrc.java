@@ -30,7 +30,7 @@ public class EdicaoProdutoOrc extends javax.swing.JDialog {
     
     //Formata os campos de texto
     private void setCamposTexto(){
-        jTextFieldDescricao.setDocument(new ControleTexto());
+        jTextFieldDescricao.setDocument(new ControleTexto(255));
         jTextFieldQtd.setDocument(new ControleTextoValores());
         jTextFieldDesconto.setDocument(new ControleTextoValores());
         jTextFieldValUni.setDocument(new ControleTextoValores());

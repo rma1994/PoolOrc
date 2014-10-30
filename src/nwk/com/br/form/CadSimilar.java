@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.SimilarDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
 import nwk.com.br.model.Similar;
 
 /**
@@ -36,7 +37,9 @@ public class CadSimilar extends javax.swing.JDialog {
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
-        jFieldDescricao.setDocument(new ControleTexto());
+        jFieldDescricao.setDocument(new ControleTexto(100));
+        
+        jFieldId.setDocument(new ControleTextoId());
     }
     
     //Seta o id de similar

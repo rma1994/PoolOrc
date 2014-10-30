@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import nwk.com.br.dao.FamiliaDAO;
 import nwk.com.br.documents.ControleTexto;
+import nwk.com.br.documents.ControleTextoId;
 import nwk.com.br.model.Familia;
 
 /**
@@ -39,7 +40,8 @@ public class CadFamilia extends javax.swing.JDialog {
     
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
-        jFieldDescricao.setDocument(new ControleTexto());
+        jFieldDescricao.setDocument(new ControleTexto(100));
+        jFieldId.setDocument(new ControleTextoId());
     }
     
     //Seta os campos de familia de acordo com o input de ConsultaFamilia

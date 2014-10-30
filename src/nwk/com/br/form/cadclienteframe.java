@@ -116,14 +116,15 @@ public class cadclienteframe extends javax.swing.JDialog {
     //Define os caracteres validos nos campos de texto
     private void setCamposTexto(){
         jFieldidCadCliente.setDocument(new ControleTextoId());
-        jFieldnomeCadCliente.setDocument(new ControleTexto());
-        jFieldruaCadCliente.setDocument(new ControleTexto());
-        jFieldbairroCadCliente.setDocument(new ControleTexto());
-        jFieldnumeroCadCliente.setDocument(new ControleTexto());
-        jFieldcomplemCadCliente.setDocument(new ControleTexto());
-        jFieldcidadeCadCliente.setDocument(new ControleTexto());
-        jFieldemailCadCliente.setDocument(new ControleTexto());
-        jFieldobsCadCliente.setDocument(new ControleTexto());
+        
+        jFieldnomeCadCliente.setDocument(new ControleTexto(255));
+        jFieldruaCadCliente.setDocument(new ControleTexto(100));
+        jFieldbairroCadCliente.setDocument(new ControleTexto(50));
+        jFieldnumeroCadCliente.setDocument(new ControleTexto(8));
+        jFieldcomplemCadCliente.setDocument(new ControleTexto(100));
+        jFieldcidadeCadCliente.setDocument(new ControleTexto(45));
+        jFieldemailCadCliente.setDocument(new ControleTexto(50));
+        jFieldobsCadCliente.setDocument(new ControleTexto(500));
     }
     
     /**

@@ -44,16 +44,16 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
     private void setCamposTexto(){
         jFieldidCadFuncionario.setDocument(new ControleTextoId());
         
-        jFieldnomeCadFuncionario.setDocument(new ControleTexto());
-        jFieldseriecarteiraFuncionario.setDocument(new ControleTexto());
-        jFieldruaCadFuncionario.setDocument(new ControleTexto());
-        jFieldnumeroCadFuncionario.setDocument(new ControleTexto());
-        jFieldbairroCadFuncionario.setDocument(new ControleTexto());
-        jFieldCompFuncionario.setDocument(new ControleTexto());
-        jFieldcidadeCadFuncionario.setDocument(new ControleTexto());
-        jFieldemailCadFuncionario.setDocument(new ControleTexto());
-        jFieldobsCadFuncionario.setDocument(new ControleTexto());
-        jFieldcartCadFuncionario.setDocument(new ControleTexto());
+        jFieldnomeCadFuncionario.setDocument(new ControleTexto(100));
+        jFieldseriecarteiraFuncionario.setDocument(new ControleTexto(7));
+        jFieldruaCadFuncionario.setDocument(new ControleTexto(100));
+        jFieldnumeroCadFuncionario.setDocument(new ControleTexto(8));
+        jFieldbairroCadFuncionario.setDocument(new ControleTexto(100));
+        jFieldCompFuncionario.setDocument(new ControleTexto(100));
+        jFieldcidadeCadFuncionario.setDocument(new ControleTexto(100));
+        jFieldemailCadFuncionario.setDocument(new ControleTexto(50));
+        jFieldobsCadFuncionario.setDocument(new ControleTexto(500));
+        jFieldcartCadFuncionario.setDocument(new ControleTexto(7));
     }
     
     //Seta os campos desse frame, de acordo com os dados recebidos pelo frame
