@@ -247,8 +247,15 @@ import nwk.com.br.model.Produto;
 
             total.setBorder(0);
             spc.setBorder(0);
-
-            dPagamento.addCell(new Paragraph("Forma de Pagamento: " + orcamento.getFormaPagamento(),f));
+            
+            if(orcamento.getFormaPagamento().equals("0")){
+                dPagamento.addCell(new Paragraph("Forma de Pagamento: A vista - Dinheiro" ,f));
+            } else if(orcamento.getFormaPagamento().equals("1")){
+                dPagamento.addCell(new Paragraph("Forma de Pagamento: A vista - Cartão" ,f));
+            } else if(orcamento.getFormaPagamento().equals("2")){
+                dPagamento.addCell(new Paragraph("Forma de Pagamento: Parcelado" ,f));
+            }
+            
             dPagamento.addCell(new Paragraph("Desconto: R$" + orcamento.getDesconto(),f));
             dPagamento.addCell(total);
 
