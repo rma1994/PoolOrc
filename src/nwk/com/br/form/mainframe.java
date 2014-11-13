@@ -30,7 +30,7 @@ public class mainframe extends javax.swing.JFrame {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png")));
     }
 
     /**
