@@ -6,6 +6,7 @@
 
 package nwk.com.br.form;
 
+import java.awt.Toolkit;
 import nwk.com.br.model.Cliente;
 import nwk.com.br.dao.ClienteDAO;
 import nwk.com.br.model.Funcionario;
@@ -25,6 +26,11 @@ public class mainframe extends javax.swing.JFrame {
      */
     public mainframe() {
         initComponents();
+        setIcon();
+    }
+    
+    private void setIcon(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
     }
 
     /**
