@@ -511,6 +511,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
             }
         });
 
+        jFieldcodCadOrcamento.setEditable(false);
+
         jLabel21.setText("Cod Cliente :");
 
         jFieldcodcliCadOrcamento.addFocusListener(new java.awt.event.FocusAdapter() {

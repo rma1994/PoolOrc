@@ -85,6 +85,8 @@ public class CadSimilar extends ModeloJDialog {
 
         jLabel1.setText("ID :");
 
+        jFieldId.setEditable(false);
+
         jLabel2.setText("Descrição :");
 
         jButtonSalvar.setText("Salvar");
