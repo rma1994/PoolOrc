@@ -104,6 +104,8 @@ public class cadprodutoframe extends javax.swing.JDialog {
         jFieldvlvendaCadProduto.setText(produto.getValorVenda());
         jFieldporcenCadProduto.setText(produto.getPorcentagem());
         jTextAreaObs.setText(produto.getObservacoes());
+        
+        this.produto.setInserOrUpd(produto.getInserOrUpd());
     }
     
     /**
@@ -404,7 +406,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
         produto.setObservacoes(jTextAreaObs.getText());
         
         if(produto.isValida() == true){
-            if(produtodao.existenciaProduto(produto) == false){
+            if(produto.getInserOrUpd() == null){
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean produtoresult = produtodao.inserir(produto);
                 if(produtoresult == true){
@@ -412,7 +414,7 @@ public class cadprodutoframe extends javax.swing.JDialog {
                     this.dispose();
                 }
                 
-            }else if(produtodao.existenciaProduto(produto) == true){
+            }else if(produto.getInserOrUpd().equals("update")){
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean produtoresult = produtodao.atualizar(produto);
                 if(produtoresult == true){

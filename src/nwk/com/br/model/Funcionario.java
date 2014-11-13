@@ -35,6 +35,7 @@ public class Funcionario {
     private String numcarteiratrab;
     private String seriecarteiratrab;
     private StatusRepository status;
+    private String inserOrUpd;
     
     private String mensagemerroFuncionario = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -306,5 +307,14 @@ public class Funcionario {
     public void setSeriecarteiratrab(String seriecarteiratrab) {
         this.seriecarteiratrab = seriecarteiratrab;
     }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
+    }
+    
     
 }

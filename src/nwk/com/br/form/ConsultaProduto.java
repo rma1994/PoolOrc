@@ -187,6 +187,8 @@ public class ConsultaProduto extends javax.swing.JDialog {
         //produto.setPorcentagem(jTableProduto.getValueAt(linhaSelecionada, 9).toString());
         //produto.setObservacoes(jTableProduto.getValueAt(linhaSelecionada, 10).toString());
         
+        produto.setInserOrUpd("update");
+        
         /*Uma vez que os campos obrigatorios podem ser nulos, 
         é necessario checar se eles são, e caso sejam é preciso dar um valor mesmo que em branco para eles*/
                 

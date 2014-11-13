@@ -25,6 +25,7 @@ public class Orcamento {
     private String desconto;
     private String total;
     private String observacoes;
+    private String inserOrUpd;
     
     private List<Produto> result = new ArrayList<Produto>();
     
@@ -144,6 +145,14 @@ public class Orcamento {
 
     public void setResult(List<Produto> result) {
         this.result = result;
+    }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
     }
     
     

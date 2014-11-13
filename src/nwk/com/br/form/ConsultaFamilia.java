@@ -182,6 +182,7 @@ public class ConsultaFamilia extends javax.swing.JDialog {
         //Abaixo são setados os campos não obrigatorios
         familia.setId(Integer.parseInt(jTableFamilia.getValueAt(linhaSelecionada, 0).toString()));
         familia.setDescricao(jTableFamilia.getValueAt(linhaSelecionada, 1).toString());
+        familia.setInserOrUpd("update");
         
         cadfamilia.setFamiliaForm(familia);
         cadfamilia.setLocationRelativeTo(null);

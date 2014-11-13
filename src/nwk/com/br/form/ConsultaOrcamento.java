@@ -185,6 +185,8 @@ public class ConsultaOrcamento extends javax.swing.JDialog {
         orcamento.setFormaPagamento(jTableOrcamento.getValueAt(linhaSelecionada, 7).toString());
         orcamento.setDesconto(jTableOrcamento.getValueAt(linhaSelecionada, 8).toString());
         
+        orcamento.setInserOrUpd("update");
+        
         /*Uma vez que os campos obrigatorios podem ser nulos, 
         é necessario checar se eles são, e caso sejam é preciso dar um valor mesmo que em branco para eles*/
          

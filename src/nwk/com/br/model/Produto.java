@@ -29,6 +29,7 @@ public class Produto {
     private String quantidade;
     private String desconto;
     private int linha;
+    private String inserOrUpd;
     
     private String mensagemerroProduto = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -203,4 +204,14 @@ public class Produto {
     public void setLinha(int linha) {
         this.linha = linha;
     }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
+    }
+    
+    
 }

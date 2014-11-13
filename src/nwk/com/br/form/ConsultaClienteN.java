@@ -174,6 +174,8 @@ public class ConsultaClienteN extends javax.swing.JDialog {
         cliente.setCep(jTableClientes.getValueAt(linhaSelecionada, 13).toString());
         cliente.setStatus(StatusRepository.getByValue(jTableClientes.getValueAt(linhaSelecionada, 14).toString()));
         
+        cliente.setInserOrUpd("update");
+        
         /*Uma vez que os campos obrigatorios podem ser nulos, 
         é necessario checar se eles são, e caso sejam é preciso dar um valor mesmo que em branco para eles*/
         

@@ -183,6 +183,8 @@ public class ConsultaSimilar extends javax.swing.JDialog {
         similar.setId(Integer.parseInt(jTableSimilar.getValueAt(linhaSelecionada, 0).toString()));
         similar.setDescricao(jTableSimilar.getValueAt(linhaSelecionada, 1).toString());
         
+        similar.setInserOrUpd("update");
+        
         cadsimilar.setFamiliaForm(similar);
         cadsimilar.setLocationRelativeTo(null);
         cadsimilar.setVisible(true);

@@ -84,6 +84,8 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
        jFieldNascFuncionario.setText(consultaDatas(funcionario.getDhNascimento()));
        jFieldContrFuncionario.setText(consultaDatas(funcionario.getDhContrato()));
        jFieldDemisFuncionario.setText(consultaDatas(funcionario.getDhDemissao()));
+       
+       this.funcionario.setInserOrUpd(funcionario.getInserOrUpd());
     }
    
    //Consulta se a data foi digitada pelo usuario ou nao
@@ -553,7 +555,7 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
         funcionario.setStatus(StatusRepository.valueOf(jComboBoxFuncionarioAtivo.getSelectedItem().toString()));
         
         if(funcionario.isValida() == true){
-            if(funcionarioDAO.existenciaFuncionario(funcionario) == false){
+            if(funcionario.getInserOrUpd() == null){
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean funcionarioresult = funcionarioDAO.inserir(funcionario);
                 if(funcionarioresult == true){
@@ -561,7 +563,7 @@ public class cadfuncionarioframe extends javax.swing.JDialog {
                     this.dispose();
                 }
                 
-            }else if(funcionarioDAO.existenciaFuncionario(funcionario) == true){
+            }else if(funcionario.getInserOrUpd().equals("update")){
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean funcionarioresult = funcionarioDAO.atualizar(funcionario);
                 if(funcionarioresult == true){

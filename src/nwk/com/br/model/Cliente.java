@@ -30,6 +30,7 @@ public class Cliente {
     private String email;
     private String observacoes;
     private String totalCompra;
+    private String inserOrUpd;
     
     private String mensagemerroCliente = new String("Campos em branco: \n");
     private boolean valida = true;
@@ -281,4 +282,14 @@ public class Cliente {
     public void setTotalCompra(String totalCompra) {
         this.totalCompra = totalCompra;
     }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
+    }
+    
+    
 }

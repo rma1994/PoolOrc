@@ -275,6 +275,8 @@ public class cadorcamentoframe extends javax.swing.JDialog {
    public void setOrcamentoForm(Orcamento orcamento){
        SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy");//formato de data
        
+       this.orcamento.setInserOrUpd(orcamento.getInserOrUpd());
+       
        //Pega os dados recebidos como parametro e seta nos campos do form.
        jComboBoxFormaPagamento.setSelectedIndex(Integer.parseInt(orcamento.getFormaPagamento()));
        jComboBoxFuncionario.setSelectedIndex(orcamento.getIdFuncionario()-1);
@@ -390,7 +392,13 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jLabel10.setText("E-Mail :");
 
+        jFieldnomecliCadOrcamento.setEditable(false);
+
         jLabel15.setText("Celular :");
+
+        jFieldcelCadOrcamento.setEditable(false);
+
+        jFieldemailCadOrcamento.setEditable(false);
 
         jLabel16.setText("Codigo do Produto :");
 
@@ -532,6 +540,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
 
         jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jFieldtelCadOrcamento.setEditable(false);
         try {
             jFieldtelCadOrcamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
@@ -790,7 +799,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
         orcamento.setResult(getTodosProdutosOrc());
         
         if(orcamento.isValida() == true){
-            if(orcamentodao.existenciaOrcamento(orcamento) == false){
+            if(orcamento.getInserOrUpd() == null){
                 
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean orcamentoresult = orcamentodao.inserir(orcamento);
@@ -802,7 +811,7 @@ public class cadorcamentoframe extends javax.swing.JDialog {
                     this.dispose();
                 }
                 
-            }else if(orcamentodao.existenciaOrcamento(orcamento) == true){
+            }else if(orcamento.getInserOrUpd().equals("update")){
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean orcamentoresult = orcamentodao.atualizar(orcamento, getTodosProdutosOrc());
                 

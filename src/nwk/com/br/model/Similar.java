@@ -13,6 +13,7 @@ package nwk.com.br.model;
 public class Similar {
     private int id;
     private String descricao;
+    private String inserOrUpd;
 
     public int getId() {
         return id;
@@ -28,6 +29,14 @@ public class Similar {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
     }
     
     

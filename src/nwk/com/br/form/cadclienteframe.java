@@ -82,6 +82,8 @@ public class cadclienteframe extends javax.swing.JDialog {
        jFieldcelCadCliente.setText(cliente.getCelular());
        jFieldemailCadCliente.setText(cliente.getEmail());
        jFieldobsCadCliente.setText(cliente.getObservacoes());
+       
+       this.cliente.setInserOrUpd(cliente.getInserOrUpd());
     }
    
     //Função para setar a mascara de cpf
@@ -568,7 +570,7 @@ public class cadclienteframe extends javax.swing.JDialog {
                 
         //Verifica se existe campos obrigatorios em branco ou nulos
         if(cliente.isValida() == true){
-            if(clienteDAO.existenciaCliente(cliente) == false){
+            if(cliente.getInserOrUpd() == null){
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean clienteresult = clienteDAO.inserir(cliente);
                 if(clienteresult == true){
@@ -576,7 +578,7 @@ public class cadclienteframe extends javax.swing.JDialog {
                     this.dispose();
                 }
                 
-            }else if(clienteDAO.existenciaCliente(cliente) == true){
+            }else if(cliente.getInserOrUpd().equals("update")){
                //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean clienteresult = clienteDAO.atualizar(cliente);
                 if(clienteresult == true){

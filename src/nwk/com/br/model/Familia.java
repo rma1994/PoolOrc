@@ -13,6 +13,7 @@ package nwk.com.br.model;
 public class Familia {
     private int id;
     private String descricao;
+    private String inserOrUpd;
     
     
     
@@ -31,5 +32,14 @@ public class Familia {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public String getInserOrUpd() {
+        return inserOrUpd;
+    }
+
+    public void setInserOrUpd(String inserOrUpd) {
+        this.inserOrUpd = inserOrUpd;
+    }
+    
     
 }

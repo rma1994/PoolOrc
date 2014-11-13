@@ -222,6 +222,8 @@ public class ConsultaFuncionario extends javax.swing.JDialog {
         funcionario.setDhDemissao(jTableFuncionarios.getValueAt(linhaSelecionada, 17).toString());
         funcionario.setStatus(StatusRepository.getByValue(jTableFuncionarios.getValueAt(linhaSelecionada, 19).toString()));
         
+        funcionario.setInserOrUpd("update");
+        
         /*Uma vez que os campos obrigatorios podem ser nulos, 
         é necessario checar se eles são, e caso sejam é preciso dar um valor mesmo que em branco para eles*/
       

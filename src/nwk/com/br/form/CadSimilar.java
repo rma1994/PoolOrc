@@ -57,6 +57,8 @@ public class CadSimilar extends javax.swing.JDialog {
     public void setFamiliaForm(Similar similar){
         jFieldId.setText(Integer.toString(similar.getId()));
         jFieldDescricao.setText(similar.getDescricao());
+        
+        this.similar.setInserOrUpd(similar.getInserOrUpd());
     }
     
     /**
@@ -184,7 +186,7 @@ public class CadSimilar extends javax.swing.JDialog {
         similar.setDescricao(descricao);
         
         if(!descricao.equals("")){
-            if(similardao.existenciaFamilia(similar) == false){
+            if(similar.getInserOrUpd() == null){
                 
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean funcionarioresult = similardao.inserir(similar);
@@ -192,7 +194,7 @@ public class CadSimilar extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Similar Inserido Com Sucesso!");
                     this.dispose();
                 }
-            }else if(similardao.existenciaFamilia(similar) == true){
+            }else if(similar.getInserOrUpd().equals("update")){
                 
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean funcionarioresult = similardao.atualizar(similar);

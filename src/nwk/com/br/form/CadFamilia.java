@@ -48,6 +48,8 @@ public class CadFamilia extends javax.swing.JDialog {
     public void setFamiliaForm(Familia familia){
         jFieldId.setText(Integer.toString(familia.getId()));
         jFieldDescricao.setText(familia.getDescricao());
+        
+        this.familia.setInserOrUpd(familia.getInserOrUpd());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,7 +173,7 @@ public class CadFamilia extends javax.swing.JDialog {
         familia.setDescricao(descricao);
         
         if(!descricao.equals("")){
-            if(familiadao.existenciaFamilia(familia) == false){
+            if(familia.getInserOrUpd() == null){
                 
                 //Tenta inserir os dados pelo formulario no banco de dados
                 boolean funcionarioresult = familiadao.inserir(familia);
@@ -179,7 +181,7 @@ public class CadFamilia extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Familia Inserido Com Sucesso!");
                     this.dispose();
                 }
-            }else if(familiadao.existenciaFamilia(familia) == true){
+            }else if(familia.getInserOrUpd().equals("update")){
                 
                 //Tenta ATUALIZAR os dados pelo formulario no banco de dados
                 boolean funcionarioresult = familiadao.atualizar(familia);
