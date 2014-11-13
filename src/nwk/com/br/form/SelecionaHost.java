@@ -14,7 +14,7 @@ import nwk.com.br.files.LerEscreverIpServer;
  *
  * @author Richard Matheus
  */
-public class SelecionaHost extends javax.swing.JDialog {
+public class SelecionaHost extends ModeloJDialog {
     LerEscreverIpServer leserver = new LerEscreverIpServer();
     /**
      * Creates new form SelecionaHost

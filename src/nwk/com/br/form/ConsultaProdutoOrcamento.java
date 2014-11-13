@@ -14,7 +14,7 @@ import nwk.com.br.structures.ProdutoStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaProdutoOrcamento extends javax.swing.JDialog {
+public class ConsultaProdutoOrcamento extends ModeloJDialog {
     //variaveis locais
     private ProdutoStru produtostru = new ProdutoStru();
     private Produto produto = new Produto();

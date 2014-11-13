@@ -17,7 +17,7 @@ import nwk.com.br.model.Familia;
  *
  * @author Richard Matheus
  */
-public class CadFamilia extends javax.swing.JDialog {
+public class CadFamilia extends ModeloJDialog {
     //Variaveis
     private Familia familia = new Familia();
     private FamiliaDAO familiadao = new FamiliaDAO();

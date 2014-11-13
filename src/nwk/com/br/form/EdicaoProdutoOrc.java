@@ -16,7 +16,7 @@ import nwk.com.br.model.Produto;
  *
  * @author Richard Matheus
  */
-public class EdicaoProdutoOrc extends javax.swing.JDialog {
+public class EdicaoProdutoOrc extends ModeloJDialog {
     Produto produto = new Produto();
     /**
      * Creates new form EdicaoProdutoOrc

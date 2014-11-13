@@ -15,7 +15,7 @@ import nwk.com.br.structures.FamiliaStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaFamilia extends javax.swing.JDialog {
+public class ConsultaFamilia extends ModeloJDialog {
     FamiliaStru familiastru = new FamiliaStru();
     Familia familia = new Familia();
     CadFamilia cadfamilia = new CadFamilia(null,true);

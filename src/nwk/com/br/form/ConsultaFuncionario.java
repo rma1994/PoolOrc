@@ -16,7 +16,7 @@ import nwk.com.br.structures.FuncionarioStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaFuncionario extends javax.swing.JDialog {
+public class ConsultaFuncionario extends ModeloJDialog {
     
     private FuncionarioStru funcionariostru = new FuncionarioStru();
     private Funcionario funcionario = new Funcionario();

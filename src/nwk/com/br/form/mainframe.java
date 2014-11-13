@@ -17,7 +17,7 @@ import nwk.com.br.dao.FuncionarioDAO;
  *
  * @author RMA
  */
-public class mainframe extends javax.swing.JFrame {
+public class mainframe extends ModeloJFrame {
     
     /*Cliente cliente = new Cliente();
     ClienteDAO clientedao = new ClienteDAO();*/

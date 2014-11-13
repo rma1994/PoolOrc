@@ -14,7 +14,7 @@ import nwk.com.br.structures.ClienteStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaClienteOrcamento extends javax.swing.JDialog {
+public class ConsultaClienteOrcamento extends ModeloJDialog {
     ClienteStru clientestru = new ClienteStru();
     Cliente cliente = new Cliente();
     cadclienteframe cadcliente = new cadclienteframe();

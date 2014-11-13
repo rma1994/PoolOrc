@@ -15,7 +15,7 @@ import nwk.com.br.structures.SimilarStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaSimilar extends javax.swing.JDialog {
+public class ConsultaSimilar extends ModeloJDialog {
     SimilarStru similarstru = new SimilarStru();
     Similar similar = new Similar();
     CadSimilar cadsimilar = new CadSimilar(null,true);

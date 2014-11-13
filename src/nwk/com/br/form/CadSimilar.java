@@ -17,7 +17,7 @@ import nwk.com.br.model.Similar;
  *
  * @author Richard Matheus
  */
-public class CadSimilar extends javax.swing.JDialog {
+public class CadSimilar extends ModeloJDialog {
     //Variaveis
     private Similar similar = new Similar();
     private SimilarDAO similardao = new SimilarDAO();

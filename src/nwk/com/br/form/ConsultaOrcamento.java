@@ -14,7 +14,7 @@ import nwk.com.br.structures.OrcamentoStru;
  *
  * @author Richard Matheus
  */
-public class ConsultaOrcamento extends javax.swing.JDialog {
+public class ConsultaOrcamento extends ModeloJDialog {
     //variaveis locais
     private OrcamentoStru orcamentostru = new OrcamentoStru();
     private Orcamento orcamento = new Orcamento();

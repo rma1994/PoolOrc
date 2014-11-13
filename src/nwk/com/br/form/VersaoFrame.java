@@ -9,7 +9,7 @@ package nwk.com.br.form;
  *
  * @author Richard Matheus
  */
-public class VersaoFrame extends javax.swing.JFrame {
+public class VersaoFrame extends ModeloJFrame {
 
     /**
      * Creates new form VersaoFrame
